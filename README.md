@@ -3,7 +3,7 @@ OKD: The Origin Community Distribution of Kubernetes
 
 [![Licensed under Apache License version 2.0](https://img.shields.io/github/license/openshift/origin.svg?maxAge=2592000)](https://www.apache.org/licenses/LICENSE-2.0)
 
-***OKD*** is the Origin community distribution of [Kubernetes](https://kubernetes.io) optimized for continuous application development and multi-tenant deployment. OKD adds developer and operations-centric tools on top of Kubernetes to enable rapid application development, easy deployment and scaling, and long-term lifecycle maintenance for small and large teams. ***OKD*** is also referred to as ***Origin*** in github and in the documentation.  ***OKD*** makes launching Kubernetes on any cloud or bare metal a snap, simplifies running and updating clusters, and provides all of the tools to make your containerized-applications suceced.
+***OKD*** is the Origin community distribution of [Kubernetes](https://kubernetes.io) optimized for continuous application development and multi-tenant deployment. OKD adds developer and operations-centric tools on top of Kubernetes to enable rapid application development, easy deployment and scaling, and long-term lifecycle maintenance for small and large teams. ***OKD*** is also referred to as ***Origin*** in github and in the documentation.  ***OKD*** makes launching Kubernetes on any cloud or bare metal a snap, simplifies running and updating clusters, and provides all of the tools to make your containerized-applications succeed.
 
 This repository covers OKD4 and newer. For older versions of OKD, see the [3.11 branch of openshift/origin](https://github.com/openshift/origin/tree/release-3.11).
 
@@ -137,4 +137,4 @@ https://access.redhat.com/security/team/contact
 License
 -------
 
-OKD is licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/). Some components may be licensed differently - consult individual repositories for moe.
+OKD is licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/). Some components may be licensed differently - consult individual repositories for more.
