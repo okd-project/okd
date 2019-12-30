@@ -5,7 +5,8 @@ This guide will explain how to install and configure a load balancer with HAProx
 ## Assumptions
 
  - This guide is based on CentOS 7;
- - The cluster example has dedicated infra nodes.
+ - The cluster example has dedicated infra nodes;
+ - Firewall rules are managed by firewalld.
 
 ## Walkthrough
 ### Install the requirements
@@ -163,5 +164,13 @@ When the cluster is correctly deployed and the bootstrap node can be turned off,
 Then restart the service to activate the new configuration:
 ```
 $ sudo systemctl restart haproxy
+```
+
+### Configure firewall
+If your server is exposed to internet, like a rented dedicated server, you can restrict the access to some ports in order to let the API, such as the Kubernetes' and the MachingConfig's, to be reachable only from the internal cluster network, through some firewall rules, like the following example:
+```
+$ sudo firewall-cmd --add-rich-rule='rule family="ipv4" source address="LIBVIRT_OKD_SUBNET" port port="6443" protocol="tcp" accept' --permanent
+$ sudo firewall-cmd --add-rich-rule='rule family="ipv4" source address="LIBVIRT_OKD_SUBNET" port port="22623" protocol="tcp" accept' --permanent
+$ sudo firewall-cmd --reload
 ```
 
