@@ -119,7 +119,7 @@ backend ocp4_https_ingress_traffic_be
 ```
 Replace `OKD4_BOOTSTRAP_SERVER_IP`, `OKD4_CONTROL_PLANE_0_IP`, `OKD4_CONTROL_PLANE_1_IP`, `OKD4_CONTROL_PLANE_2_IP`, `OKD4_INFRA_NODE_0_IP` and `OKD4_INFRA_NODE_1_IP` with the IPs of your cluster.
 
-As described [above](#assumptions) in this example the pools `ocp4_http_ingress_traffic_be` and `ocp4_https_ingress_traffic_be` will balance on the two infra nodes indentified as `infra0` and `infra1`.
+As described [above](#assumptions), in this example the pools `ocp4_http_ingress_traffic_be` and `ocp4_https_ingress_traffic_be` will balance on the two infra nodes indentified as `infra0` and `infra1`.
 If you're not going to provision two separate infra nodes, ensure that those pools will balance the compute nodes instead.
 
 ### Configure SELinux to allow non-standard port binding
