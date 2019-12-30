@@ -107,7 +107,7 @@ Here how you can configure Direct Kernel Boot in `virt-manager`:
 
 **NOTE:** CoreOS installer automatically reboot the server after installation, so when the installation of Fedora CoreOS is finished shut down the VMs, otherwise the installer will keep installing the OS.
 
-At this point you can add the VMs MAC address to the network configuration in libvirt, just like the example in the step 1 (the commented lines).
+At this point you can add the VMs MAC address to the network configuration in libvirt, just like the example [above](#configure-libvirt-network).
 
 After the installation disable the Direct Kernel Boot option, as we don't need it anymore.
 
