@@ -4,7 +4,7 @@ This guide explains how to configure libvirt+KVM to provision Fedora CoreOS and 
 
 ## Assumptions
 - The host OS is CentOS 7;
-- This guide will not configure the load balancer or the DNS server. Check for Requirements/LB_HAProxy.md and Requirements/DNS_Bind.md if you want to configure them;
+- This guide will not configure the load balancer or the DNS server. Check for [LB_HAProxy.md](../Requirements/LB_HAProxy.md) and [DNS_Bind.md](../Requirements/DNS_Bind.md) if you want to configure them;
 - Fedora CoreOS will still use DHCP for obtaining the IP, but with a MAC address-based reservation into the libvirt network configuration, and therefore there is no need for a standalone DHCP server;
 - You already downloaded the OKD installer and command line tools from the Release section of this repository, and installed them into a path added to the `PATH` environment variable.
 
