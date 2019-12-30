@@ -5,7 +5,7 @@ This guide explains how to configure libvirt+KVM to provision Fedora CoreOS and 
 ## Assumptions
 - The host OS is CentOS 7;
 - This guide will not configure the load balancer or the DNS server. Check for Requirements/LB_HAProxy.md and Requirements/DNS_Bind.md if you want to configure them;
-- Fedora CoreOS will still use DHCP for obtaining the IP, but with a MAC address-based reservation into the libvirt network configuration. So there is no need for a standalone DHCP server.
+- Fedora CoreOS will still use DHCP for obtaining the IP, but with a MAC address-based reservation into the libvirt network configuration, and therefore there is no need for a standalone DHCP server;
 - You already downloaded the OKD installer and command line tools from the Release section of this repository, and installed them into a path added to the `PATH` environment variable.
 
 
@@ -28,7 +28,6 @@ Configure a simple webserver to host the ignition configs and the raw image. The
 Create a simple NAT network. Even the "default" network created by libvirt is fine.
  
 There's no need to specify the IP reservation at this point, since the VMs don't exist yet. You can add the records in the dhcp block later.
-Just remember to stop and start the network after adding them.
 ```
 <network connections='3'>
   <name>openshift</name>
@@ -107,10 +106,13 @@ Here how you can configure Direct Kernel Boot in `virt-manager`:
 
 **NOTE:** CoreOS installer automatically reboot the server after installation, so when the installation of Fedora CoreOS is finished shut down the VMs, otherwise the installer will keep installing the OS.
 
-At this point you can add the VMs MAC address to the network configuration in libvirt, just like the example [above](#configure-libvirt-network).
-
 After the installation disable the Direct Kernel Boot option, as we don't need it anymore.
 
+At this point you can add the VMs MAC address to the network configuration in libvirt, just like the example [above](#configure-libvirt-network). Stop and start the network after that:
+```
+virsh# net-destroy openshift
+virsh# net-start openshift
+```
 
 ### Start the bootstrap server
 After every server in your cluster was provisioned, start the bootstrap server.
@@ -122,9 +124,9 @@ When the server is up again wait for the API service and the MachineConfig servi
 **NOTE:** You can start every server in the cluster in the same time of the boostrap server, as they will still waiting for the latter to expose the Kubernetes and MachineConfig API ports. These steps were separated just for convenience.
 
 Now that the bootstrap server is ready, you can start every server of your cluster.
-Just like the bootstrap server, the control planes and the workers will boot with the official Fedora CoreOS image, that does not contains hyperkube, so the kubelet service will not start and so the cluster bootstrapping.
+Just like the bootstrap server, the control planes and the workers will boot with the official Fedora CoreOS image, that does not contains hyperkube. Since hyperkube is missing the kubelet service will not start and so the cluster bootstrapping.
 Wait for the machine-config-daemon to pull the same image as the bootstrap server.
-The servers will reboot themselves and after that they will try to join the cluster.
+The servers will reboot themselves and after that they will try to join the cluster, starting the bootstrapping process.
 After reboot `rpm-ostree status` should show something like:
 ```
 [core@okd4m0 ~]$ rpm-ostree status
