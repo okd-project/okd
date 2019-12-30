@@ -16,10 +16,10 @@ This guide explains how to configure libvirt+KVM to provision Fedora CoreOS and 
     - Initramfs
     - Raw image
 
-    Despite we're not installing Fedora CoreOS from PXE, we still need to download the kernel and the initramfs, as we're going to use the Direct Kernel Boot feature of libvirt to inject kernel boot parameters.
+Despite we're not installing Fedora CoreOS from PXE, we still need to download the kernel and the initramfs, as we're going to use the Direct Kernel Boot feature of libvirt to inject kernel boot parameters.
 
 2. Configure a webserver
-    Configure a simple webserver to host the ignition configs and the raw image. These files will be downloaded by the CoreOS installer and deployed to the VMs.
+Configure a simple webserver to host the ignition configs and the raw image. These files will be downloaded by the CoreOS installer and deployed to the VMs.
 
 
 ## Walkthrough
@@ -28,7 +28,7 @@ This guide explains how to configure libvirt+KVM to provision Fedora CoreOS and 
 Create a simple NAT network. Even the "default" network created by libvirt is fine.
  
 There's no need to specify the IP reservation at this point, since the VMs don't exist yet. You can add the records in the dhcp block later.
- Just remember to stop and start the network after adding them.
+Just remember to stop and start the network after adding them.
 ```
 <network connections='3'>
   <name>openshift</name>
@@ -41,14 +41,14 @@ There's no need to specify the IP reservation at this point, since the VMs don't
   <ip address='GATEWAY' netmask='NETMASK'>
     <dhcp>
       <range start='DHCP START IP RANGE' end='DHCP END IP RANGE'/>
-      <--- Add the following lines after you'll get the MAC address of your VMs
+      <!-- Add the following lines after you'll get the MAC address of your VMs
       <host mac='BOOTSTRAP MAC ADDRESS' name='okd4bs' ip='BOOTSTRAP IP'/>
       <host mac='MASTER 0 MAC ADDRESS' name='okd4m0' ip='MASTER 0 IP'/>
       <host mac='MASTER 1 MAC ADDRESS' name='okd4m1' ip='MASTER 1 IP'/>
       <host mac='MASTER 2 MAC ADDRESS' name='okd4m2' ip='MASTER 2 IP'/>
       <host mac='WORKER 0 MAC ADDRESS' name='okd4w0' ip='WORKER 1 IP'/>
       <host mac='WORKER 1 MAC ADDRESS' name='okd4w1' ip='WORKER 2 IP'/>
-      --->
+      -->
     </dhcp>
   </ip>
 </network>
@@ -102,14 +102,14 @@ Configure the VM for booting them with the kernel and initramfs you previously d
 Replace `SERVER_ROLE` with `bootstrap` for the bootstrap server, with `master` for control plane servers, and with `worker` for worker servers.
 Replace `WEB_SERVER_IP:PORT` with the endpoint of the webserver you previously configured.
 
-Here how you can set such configuration in `virt-manager`:
-
+Here how you can configure Direct Kernel Boot in `virt-manager`:
+![Direct kernel boot](Images/direct_kernel_boot.png)
 
 **NOTE:** CoreOS installer automatically reboot the server after installation, so when the installation of Fedora CoreOS is finished shut down the VMs, otherwise the installer will keep installing the OS.
 
 At this point you can add the VMs MAC address to the network configuration in libvirt, just like the example in the step 1 (the commented lines).
 
-After the installation disable the Kernel boot arguments, as we don't need them anymore.
+After the installation disable the Direct Kernel Boot option, as we don't need it anymore.
 
 
 ### Start the bootstrap server
@@ -122,7 +122,7 @@ When the server is up again wait for the API service and the MachineConfig servi
 **NOTE:** You can start every server in the cluster in the same time of the boostrap server, as they will still waiting for the latter to expose the Kubernetes and MachineConfig API ports. These steps were separated just for convenience.
 
 Now that the bootstrap server is ready, you can start every server of your cluster.
-Just like the bootstrap server, the control planes and the workers will boot with the official Fedora CoreOS image, that does not contains hyperkube, so the kubelet service will not start and therefore the cluster bootstrapping won't start.
+Just like the bootstrap server, the control planes and the workers will boot with the official Fedora CoreOS image, that does not contains hyperkube, so the kubelet service will not start and so the cluster bootstrapping.
 Wait for the machine-config-daemon to pull the same image as the bootstrap server.
 The servers will reboot themselves and after that they will try to join the cluster.
 After reboot `rpm-ostree status` should show something like:
