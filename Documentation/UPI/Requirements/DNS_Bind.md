@@ -5,6 +5,7 @@ This guide will explain how to install and configure Bind/named as a DNS server 
 
  - This guide is based on CentOS 7;
  - Firewall rules are managed by firewalld.
+ - This guide use `example.com` as base domain. Replace it with your own.
 
 ## Walkthrough
 ### Install the requirements
