@@ -58,19 +58,19 @@ COMPUTE_NODE_0_FQDN.        IN      A      COMPUTE_NODE_0_IP
 COMPUTE_NODE_1_FQDN.        IN      A      COMPUTE_NODE_1_IP
 
 ; OpenShift internal cluster IPs - A records
-api.CLUSTER_NAME.example.com.	IN	A	BASTION_IP
-api-int.CLUSTER_NAME.example.com.	IN	A	BASTION_IP
-*.apps.CLUSTER_NAME.example.com.	IN	A	BASTION_IP
-etcd-0.CLUSTER_NAME.example.com.	IN	A 	CONTROL_PLANE_0_IP
-etcd-1.CLUSTER_NAME.example.com.	IN	A 	CONTROL_PLANE_1_IP
-etcd-2.CLUSTER_NAME.example.com.	IN	A	CONTROL_PLANE_2_IP
-console-openshift-console.apps.CLUSTER_NAME.example.com.     IN 	A 	BASTION_IP
-oauth-openshift.apps.CLUSTER_NAME.example.com.     IN 	A 	BASTION_IP
+api.CLUSTER_NAME.example.com.    IN    A    BASTION_IP
+api-int.CLUSTER_NAME.example.com.    IN    A    BASTION_IP
+*.apps.CLUSTER_NAME.example.com.    IN    A    BASTION_IP
+etcd-0.CLUSTER_NAME.example.com.    IN    A     CONTROL_PLANE_0_IP
+etcd-1.CLUSTER_NAME.example.com.    IN    A     CONTROL_PLANE_1_IP
+etcd-2.CLUSTER_NAME.example.com.    IN    A    CONTROL_PLANE_2_IP
+console-openshift-console.apps.CLUSTER_NAME.example.com.     IN     A     BASTION_IP
+oauth-openshift.apps.CLUSTER_NAME.example.com.     IN     A     BASTION_IP
 
 ; OpenShift internal cluster IPs - SRV records
-_etcd-server-ssl._tcp.CLUSTER_NAME.example.com.	86400 	IN	SRV 	0	10	2380	etcd-0.CLUSTER_NAME
-_etcd-server-ssl._tcp.CLUSTER_NAME.example.com.	86400 	IN	SRV 	0	10	2380	etcd-1.CLUSTER_NAME
-_etcd-server-ssl._tcp.CLUSTER_NAME.example.com.	86400 	IN	SRV 	0	10	2380	etcd-2.CLUSTER_NAME
+_etcd-server-ssl._tcp.CLUSTER_NAME.example.com.    86400     IN    SRV     0    10    2380    etcd-0.CLUSTER_NAME
+_etcd-server-ssl._tcp.CLUSTER_NAME.example.com.    86400     IN    SRV     0    10    2380    etcd-1.CLUSTER_NAME
+_etcd-server-ssl._tcp.CLUSTER_NAME.example.com.    86400     IN    SRV     0    10    2380    etcd-2.CLUSTER_NAME
 ```
 Replace IP and FQDN placeholders accordingly to the configuration of your cluster.
 
@@ -92,15 +92,15 @@ $TTL    604800
     IN      NS      ns1.example.com.
 
 ; name servers - PTR records
-BASTION_LAST_OCTECT_IP	IN	PTR	ns1.example.com.
+BASTION_LAST_OCTECT_IP    IN    PTR    ns1.example.com.
 
 ; OpenShift Container Platform Cluster - PTR records
-BOOTSTRAP_SERVER_LAST_OCTECT_IP	IN	PTR	BOOTSTRAP_SERVER_FQDN.
-CONTROL_PLANE_0_LAST_OCTECT_IP	IN	PTR	CONTROL_PLANE_0_FQDN.
-CONTROL_PLANE_1_LAST_OCTECT_IP	IN	PTR	CONTROL_PLANE_1_FQDN.
-CONTROL_PLANE_2_LAST_OCTECT_IP	IN	PTR	CONTROL_PLANE_2_FQDN.
-COMPUTE_NODE_0_LAST_OCTECT_IP	IN	PTR	COMPUTE_NODE_0_FQDN.
-COMPUTE_NODE_1_LAST_OCTECT_IP	IN	PTR	COMPUTE_NODE_1_FQDN.
+BOOTSTRAP_SERVER_LAST_OCTECT_IP    IN    PTR    BOOTSTRAP_SERVER_FQDN.
+CONTROL_PLANE_0_LAST_OCTECT_IP    IN    PTR    CONTROL_PLANE_0_FQDN.
+CONTROL_PLANE_1_LAST_OCTECT_IP    IN    PTR    CONTROL_PLANE_1_FQDN.
+CONTROL_PLANE_2_LAST_OCTECT_IP    IN    PTR    CONTROL_PLANE_2_FQDN.
+COMPUTE_NODE_0_LAST_OCTECT_IP    IN    PTR    COMPUTE_NODE_0_FQDN.
+COMPUTE_NODE_1_LAST_OCTECT_IP    IN    PTR    COMPUTE_NODE_1_FQDN.
 ```
 Replace every last octect and FQDN placeholders accordingly to the configuration of your cluster.
 
