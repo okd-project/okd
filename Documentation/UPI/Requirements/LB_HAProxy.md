@@ -5,7 +5,7 @@ This guide will explain how to install and configure a load balancer with HAProx
 ## Assumptions
 
  - This guide is based on CentOS 7;
- - The cluster example has dedicated infra nodes;
+ - The cluster example has two dedicated infra nodes;
  - Firewall rules are managed by firewalld.
 
 ## Walkthrough
