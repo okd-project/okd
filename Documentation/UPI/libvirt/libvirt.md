@@ -10,7 +10,7 @@ This guide explains how to configure libvirt+KVM to provision Fedora CoreOS and 
 
 
 ## Pre-tasks
-1. Download from Fedora CoreOS website:
+1. Download from [Fedora CoreOS](https://getfedora.org/en/coreos/download) website:
     - Installer ISO
     - Kernel
     - Initramfs
