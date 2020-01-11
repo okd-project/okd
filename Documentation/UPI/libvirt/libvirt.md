@@ -148,14 +148,18 @@ Deployments:
 #### Bootstrap stage
 Now that every servers is up and running, they are ready to form the cluster.
 Bootstrap will start as soon as OKD will register the master nodes.
+
 Meanwhile on the bastion host just run the OpenShift Installer in order to check the status of the installation:
+
 `$ openshift-installer wait-for bootstrap-complete --log-level debug`
+
 The installer will now check for the availability of the Kubernetes API and then for the `bootstrap-complete` event that will be spawned after the cluster has almost finished to install every cluster operator.
 OpenShift installer will wait for 30 minutes. It should be enough to complete the bootstrap process.
 
 #### Intermediate stage
 When the bootstrap is finished you have to approve the nodes CSR, configure the storage backend for the `image-registry` cluster operator, and shutting down the bootstrap node.
-Shutting down the bootstrap vm and then remove it from the pools of the load balancer. If you followed the [LB_HAProxy.md](../Requirements/LB_HAProxy.md) guide to configure HAProxy as you load balancer, just comment the two `bootstrap` records in the configuration file, and then restart its service.
+
+Shut down the bootstrap vm and then remove it from the pools of the load balancer. If you followed the [LB_HAProxy.md](../Requirements/LB_HAProxy.md) guide to configure HAProxy as you load balancer, just comment the two `bootstrap` records in the configuration file, and then restart its service.
 
 After the bootstrap vm is offline, let's authenticate as `system:admin` in OKD, by using the `kubeconfig` file, which was created when you [generated](#generate-the-ignition-configuration-files) the Ignition configs.
 Export the `KUBECONFIG` variable like the following example:
@@ -163,13 +167,16 @@ Export the `KUBECONFIG` variable like the following example:
 You should now interact with the OKD cluster by using the `oc` utility.
 
 For the certificate requests, you can approve them with:
+
 `$ oc get csr -ojson | jq -r '.items[] | select(.status == {} ) | .metadata.name' | xargs --no-run-if-empty oc adm certificate approve`.
 
 For the `image-registry` cluster operator things are getting a bit more tricky.
 By default registry would expect a storage provider to provide an RWX volume, or to be configured to be ephemeral.
+
 If you want the registry to store your container images, follow the [official OpenShift 4 documentation](https://docs.openshift.com/container-platform/4.2/registry/configuring-registry-storage/configuring-registry-storage-baremetal.html) to configure a persistent storage backend. There are many backend you can use, so just choose the more appropriate for your infrastructure.
+
 If you want instead to use an ephemeral registry, just run the following command to use `emptyDir`:  
-`oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"managementState":"Managed","storage":{"emptyDir":{}}}}'`
+`$ oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"managementState":"Managed","storage":{"emptyDir":{}}}}'`
 
 **NOTE:** While `emptyDir` is suitable for non-production or temporary cluster, it is not recommended for production environments.
 
