@@ -175,7 +175,9 @@ If you want instead to use an ephemeral registry, just run the following command
 
 #### Final stage
 Now that everything is configured run the OpenShift installer again to wait for the `install-complete` event.
+
 `$ openshift-install wait-for install-complete --log-level debug`
+
 After the installation is complete you can login into your cluster via WebUI with the `kubeadmin` credentials stored in the same path of the `kubeconfig` file, or use the `oc` utility.
 
 **NOTE:** `kubeadmin` user is a temporary user and should not be left enabled after the cluster is up and running.
