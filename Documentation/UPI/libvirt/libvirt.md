@@ -161,16 +161,20 @@ When the bootstrap is finished you have to approve the nodes CSR, configure the 
 
 Shut down the bootstrap vm and then remove it from the pools of the load balancer. If you followed the [LB_HAProxy.md](../Requirements/LB_HAProxy.md) guide to configure HAProxy as you load balancer, just comment the two `bootstrap` records in the configuration file, and then restart its service.
 
-After the bootstrap vm is offline, let's authenticate as `system:admin` in OKD, by using the `kubeconfig` file, which was created when you [generated](#generate-the-ignition-configuration-files) the Ignition configs.
+After the bootstrap vm is offline, authenticate as `system:admin` in OKD, by using the `kubeconfig` file, which was created when Ingnition configs were [generated](#generate-the-ignition-configuration-files).
+
 Export the `KUBECONFIG` variable like the following example:
+
 `$ export KUBECONFIG=$(pwd)/auth/kubeconfig`
-You should now interact with the OKD cluster by using the `oc` utility.
+
+You should now bo able to interact with the OKD cluster by using the `oc` utility.
 
 For the certificate requests, you can approve them with:
 
 `$ oc get csr -ojson | jq -r '.items[] | select(.status == {} ) | .metadata.name' | xargs --no-run-if-empty oc adm certificate approve`.
 
 For the `image-registry` cluster operator things are getting a bit more tricky.
+
 By default registry would expect a storage provider to provide an RWX volume, or to be configured to be ephemeral.
 
 If you want the registry to store your container images, follow the [official OpenShift 4 documentation](https://docs.openshift.com/container-platform/4.2/registry/configuring-registry-storage/configuring-registry-storage-baremetal.html) to configure a persistent storage backend. There are many backend you can use, so just choose the more appropriate for your infrastructure.
@@ -187,6 +191,6 @@ Now that everything is configured run the OpenShift installer again to wait for 
 
 After the installation is complete you can login into your cluster via WebUI with the `kubeadmin` credentials stored in the same path of the `kubeconfig` file, or use the `oc` utility.
 
-**NOTE:** `kubeadmin` user is a temporary user and should not be left enabled after the cluster is up and running.
+**NOTE:** `kubeadmin` is a temporary user and should not be left enabled after the cluster is up and running.
 Follow the [official OpenShift 4 documentation](https://docs.openshift.com/container-platform/4.2/authentication/understanding-authentication.html) to configure an alternative Identity Provider and to remove `kubeadmin`.
 
