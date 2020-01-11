@@ -1,3 +1,4 @@
+
 # Install OKD 4 on top of an UPI libvirt+kvm configuration
 
 This guide explains how to configure libvirt+KVM to provision Fedora CoreOS and install OKD on top of it.
@@ -143,6 +144,40 @@ Deployments:
               GPGSignature: Valid signature by 7D22D5867F2A4236474BF7B850CB390B3C3359C4
 ```
 
+### Install OKD cluster
+#### Bootstrap stage
+Now that every servers is up and running, they are ready to form the cluster.
+Bootstrap will start as soon as OKD will register the master nodes.
+Meanwhile on the bastion host just run the OpenShift Installer in order to check the status of the installation:
+`$ openshift-installer wait-for bootstrap-complete --log-level debug`
+The installer will now check for the availability of the Kubernetes API and then for the `bootstrap-complete` event that will be spawned after the cluster has almost finished to install every cluster operator.
+OpenShift installer will wait for 30 minutes. It should be enough to complete the bootstrap process.
 
-Wait for the finish of the installation and then login to the console with the kubeadmin credentials, or configure an additional identity provider.
+#### Intermediate stage
+When the bootstrap is finished you have to approve the nodes CSR, configure the storage backend for the `image-registry` cluster operator, and shutting down the bootstrap node.
+Shutting down the bootstrap vm and then remove it from the pools of the load balancer. If you followed the [LB_HAProxy.md](../Requirements/LB_HAProxy.md) guide to configure HAProxy as you load balancer, just comment the two `bootstrap` records in the configuration file, and then restart its service.
+
+After the bootstrap vm is offline, let's authenticate as `system:admin` in OKD, by using the `kubeconfig` file, which was created when you [generated](#generate-the-ignition-configuration-files) the Ignition configs.
+Export the `KUBECONFIG` variable like the following example:
+`$ export KUBECONFIG=$(pwd)/auth/kubeconfig`
+You should now interact with the OKD cluster by using the `oc` utility.
+
+For the certificate requests, you can approve them with:
+`$ oc get csr -ojson | jq -r '.items[] | select(.status == {} ) | .metadata.name' | xargs --no-run-if-empty oc adm certificate approve`.
+
+For the `image-registry` cluster operator things are getting a bit more tricky.
+By default registry would expect a storage provider to provide an RWX volume, or to be configured to be ephemeral.
+If you want the registry to store your container images, follow the [official OpenShift 4 documentation](https://docs.openshift.com/container-platform/4.2/registry/configuring-registry-storage/configuring-registry-storage-baremetal.html) to configure a persistent storage backend. There are many backend you can use, so just choose the more appropriate for your infrastructure.
+If you want instead to use an ephemeral registry, just run the following command to use `emptyDir`:  
+`oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"managementState":"Managed","storage":{"emptyDir":{}}}}'`
+
+**NOTE:** While `emptyDir` is suitable for non-production or temporary cluster, it is not recommended for production environments.
+
+#### Final stage
+Now that everything is configured run the OpenShift installer again to wait for the `install-complete` event.
+`$ openshift-install wait-for install-complete --log-level debug`
+After the installation is complete you can login into your cluster via WebUI with the `kubeadmin` credentials stored in the same path of the `kubeconfig` file, or use the `oc` utility.
+
+**NOTE:** `kubeadmin` user is a temporary user and should not be left enabled after the cluster is up and running.
+Follow the [official OpenShift 4 documentation](https://docs.openshift.com/container-platform/4.2/authentication/understanding-authentication.html) to configure an alternative Identity Provider and to remove `kubeadmin`.
 
