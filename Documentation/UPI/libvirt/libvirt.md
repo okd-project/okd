@@ -189,7 +189,7 @@ Now that everything is configured run the OpenShift installer again to wait for 
 
 `$ openshift-install wait-for install-complete --log-level debug`
 
-After the installation is complete you can login into your cluster via WebUI with the `kubeadmin` credentials stored in the same path of the `kubeconfig` file, or use the `oc` utility.
+After the installation is complete you can login into your cluster via WebUI using `kubeadmin` as login. Password for this account is auto-generated and stored in `auth/kubeadmin-password` file. If you want to use the `oc` utility, you can still use the `kubeconfig` file you used [before](#intermediate-stage).
 
 **NOTE:** `kubeadmin` is a temporary user and should not be left enabled after the cluster is up and running.
 Follow the [official OpenShift 4 documentation](https://docs.openshift.com/container-platform/4.2/authentication/understanding-authentication.html) to configure an alternative Identity Provider and to remove `kubeadmin`.
