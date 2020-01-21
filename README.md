@@ -13,7 +13,16 @@ Getting Started
 
 IMPORTANT: OKD4 is in preview - a subset of platforms and functionality will be available until we reach beta. For now, the AWS cloud provider is the best choice. To see the backlog of beta items, visit https://github.com/orgs/openshift/projects/1.
 
-Visit the [releases](https://github.com/openshift/okd/releases) page and find the appropriate openshift-installer binary for your platform.  Download and extract the binary into your PATH and then run the following from a new directory:
+In order to obtain the openshift installer and client, visit [https://origin-release.svc.ci.openshift.org/](https://origin-release.svc.ci.openshift.org/).
+Use `oc` to download and extract the tools from the image:
+
+```
+$ oc adm release extract --tools registry.svc.ci.openshift.org/origin/release:4.4.0-0.okd-2020-01-20-084618
+```
+
+**NOTE**: You need a 4.x version of `oc` to extract the installer and the latest client. You can initially use the [official Openshift client (mirror)](https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/)
+
+Copy the binaries into your PATH and then run the following from a new directory:
 
 ```
 $ openshift-install create cluster
