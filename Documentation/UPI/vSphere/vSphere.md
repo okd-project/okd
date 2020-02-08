@@ -13,7 +13,7 @@ This guide explains how to provision Fedora CoreOS on vSphere and install OKD on
 Find and download an image of FCOS for VMware vSphere from https://getfedora.org/en/coreos/download/
 
 ```
-wget https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/31.20200113.3.1/x86_64/fedora-coreos-31.20200113.3.1-vmware.x86_64.ova
+wget https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/31.20200118.3.0/x86_64/fedora-coreos-31.20200118.3.0-vmware.x86_64.ova 
 
 # Import into vSphere
 govc import.ova -ds=<datastore_name> \
