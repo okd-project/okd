@@ -1,6 +1,6 @@
 # vSphere UPI
 
-This guide explains how to provision Fedora CoreOS on vSphere and install OKD on it. It provides terraform files to create and destroy a cluster. This terraform files are based on the [CI-plattform files](https://github.com/openshift/installer/tree/fcos/upi/vsphere), but are much simpler and doesn't include communication with other infrastructure components except vSphere.
+This guide explains how to provision Fedora CoreOS on vSphere and install OKD on it. It provides terraform files to create and destroy a cluster. This terraform files are based on the [CI-platform files](https://github.com/openshift/installer/tree/fcos/upi/vsphere), but are much simpler and doesn't include communication with other infrastructure components except vSphere.
 
 ## Pre-Requisites
 
