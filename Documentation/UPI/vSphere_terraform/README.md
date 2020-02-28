@@ -1,6 +1,6 @@
 # vSphere UPI
 
-This guide explains how to provision Fedora CoreOS on vSphere and install OKD on it. It provides terraform files to create and destroy a cluster.
+This guide explains how to provision Fedora CoreOS on vSphere and install OKD on it. It provides terraform files to create and destroy a cluster. This terraform files are based on the [CI-plattform files](https://github.com/openshift/installer/tree/fcos/upi/vsphere), but are much simpler and doesn't include communication with other infrastructure components except vSphere.
 
 ## Pre-Requisites
 
@@ -10,7 +10,7 @@ This guide explains how to provision Fedora CoreOS on vSphere and install OKD on
 
 Checkout the official [Openshift 4.3 Documentation](https://docs.openshift.com/container-platform/4.3/installing/installing_vsphere/installing-vsphere.html#installation-requirements-user-infra_installing-vsphere). Add DNS and DHCP records for your virtual machines, that will be provisioned in next steps.
 
-Install a Loadbalancer in front of your API servers. Choose a high availability setup, if you need it. The Loadbalancer is only for API traffic and Kubernetes can handle an outage of the API. During an outtage the cluster is not able to change something.
+Install a loadbalancer in front of your API servers. Choose a high availability setup, if you need it. The loadbalancer is only for API traffic and Kubernetes can handle an outage of the API. During an outage the cluster is not able to change something.
 
 Find, download and upload an image of FCOS for [VMware vSphere](https://getfedora.org/en/coreos/download/).
 
@@ -50,7 +50,7 @@ This example environment includes three master and worker nodes. Etcd is running
 
 #### Loadbalancer - HAProxy configuration
 
-Note: Binding the API port also to 443 allows us to connect easyly with `oc`, no need for port number, e.g. `oc login api.okd.example.com`
+Note: Binding the API port also to 443 allows us to connect easily with `oc`, no need for port number, e.g. `oc login api.okd.example.com`
 
 ```HAProxy
 global
@@ -78,7 +78,7 @@ defaults
     timeout server          1m
 
 listen  stats
-    bind 10.20.15.2:9000
+    bind *:9000
     mode            http
     log             global
     stats enable
@@ -121,7 +121,7 @@ Download oc from  <https://mirror.openshift.com/pub/openshift-v4/clients/oc/late
 
 Choose a release ([dev-releases](https://origin-release.svc.ci.openshift.org/), ...)
 
-Extract `openshift-install` tool (e.g. `oc adm release extract --tools registry.svc.ci.openshift.org/origin/release:4.4.0-0.okd-2020-01-10-182730`)
+Extract `openshift-install` tool (e.g. `oc adm release extract --command=openshift-install registry.svc.ci.openshift.org/origin/release:4.4.0-0.okd-2020-02-28-084836`)
 
 ## Build a Cluster
 
