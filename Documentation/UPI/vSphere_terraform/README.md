@@ -18,6 +18,8 @@ Find, download and upload an image of FCOS for [VMware vSphere](https://getfedor
 
 This example environment includes three master and worker nodes. Etcd is running on master nodes.
 
+Take a look into [Configure Bind/named for DNS service](../Requirements/DNS_Bind.md), if you need help to configure your DNS.
+
 #### A-records with mac address
 
 | FQDN | A-record | MAC address |
@@ -125,7 +127,7 @@ Extract `openshift-install` tool (e.g. `oc adm release extract --command=openshi
 
 ## Build a Cluster
 
-1. Create an install-config.yaml in an empty folder.
+1. Create an `install-config.yaml` in an empty folder.
 
    ```yaml
    apiVersion: v1
@@ -157,6 +159,7 @@ Extract `openshift-install` tool (e.g. `oc adm release extract --command=openshi
    ```
 
 1. Run `openshift-install create ignition-configs`.
+   * This command consumes your `install-config.yaml`. Therefore, it's maybe worthwhile to make a copy of this file, before calling this command.
 
 1. Fill out a terraform.tfvars file with the ignition configs generated. There is an example terraform.tfvars file in this directory named terraform.tfvars.example.
     * cluster_id
