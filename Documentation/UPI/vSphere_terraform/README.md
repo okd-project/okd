@@ -182,7 +182,7 @@ Extract `openshift-install` tool (e.g. `oc adm release extract --command=openshi
     * control_plane_macs
     * compute_macs
 
-1. Copy `bootstrap.ign` to an accessable webserver. The bootstrap ignition config must be placed in a location that will be accessible by the bootstrap machine. For example, you could store the bootstrap ignition config in a gist.
+1. Copy `bootstrap.ign` to an accessible webserver. The bootstrap ignition config must be placed in a location that will be accessible by the bootstrap machine. For example, you could store the bootstrap ignition config in a gist.
 
 1. Run `terraform init`.
 

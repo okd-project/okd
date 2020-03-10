@@ -16,7 +16,7 @@ $ sudo yum install haproxy
 ```
 ### Configure the pools for bootstrapping
 After the installation you need to configure the pools it needs to balance.
-For an OKD installation, HAProxy has to provide load balacing capabilities to the following services:
+For an OKD installation, HAProxy has to provide load balancing capabilities to the following services:
 
  - OKD default route (ports 443 and 80);
  - Kubernetes API/CLI (port 6443);

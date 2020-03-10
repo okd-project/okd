@@ -27,7 +27,7 @@ Configure a simple webserver to host the ignition configs and the raw image. The
 
 ### Configure libvirt network
 Create a simple NAT network. Even the "default" network created by libvirt is fine.
- 
+
 There's no need to specify the IP reservation at this point, since the VMs don't exist yet. You can add the records in the dhcp block later.
 ```
 <network connections='3'>
@@ -63,26 +63,26 @@ Create a SSH key pair for SSH login to the cluster VMs, and then create your ins
 apiVersion: v1
 baseDomain: YOUR_DOMAIN
 compute:
-- hyperthreading: Enabled   
+- hyperthreading: Enabled
   name: worker
-  replicas: 0 
+  replicas: 0
 controlPlane:
-  hyperthreading: Enabled   
-  name: master 
-  replicas: 3 
+  hyperthreading: Enabled
+  name: master
+  replicas: 3
 metadata:
   name: CLUSTER_NAME
 networking:
   clusterNetwork:
-  - cidr: 10.100.0.0/14 
-    hostPrefix: 23 
+  - cidr: 10.100.0.0/14
+    hostPrefix: 23
   networkType: OpenShiftSDN
-  serviceNetwork: 
+  serviceNetwork:
   - 172.30.0.0/16
 platform:
-  none: {} 
+  none: {}
 pullSecret: 'SECRET FROM RED HAT CLUSTER MANAGER'
-sshKey: 'YOUR SSH PUBLIC KEY' 
+sshKey: 'YOUR SSH PUBLIC KEY'
 ```
 
 Modify it accordingly to the size and the configuration of your cluster and then remember to backup it, because the OpenShift Installer will remove it after generating the Ignition configuration files.
@@ -122,7 +122,7 @@ After the image was pulled and installed, the server will be rebooted by itself.
 When the server is up again wait for the API service and the MachineConfig service to be spawned (check for the ports 6443 and 22623). Check also for the status of the `bootkube.service`.
 
 ### Start the other servers
-**NOTE:** You can start every server in the cluster in the same time of the boostrap server, as they will still waiting for the latter to expose the Kubernetes and MachineConfig API ports. These steps were separated just for convenience.
+**NOTE:** You can start every server in the cluster in the same time of the bootstrap server, as they will still waiting for the latter to expose the Kubernetes and MachineConfig API ports. These steps were separated just for convenience.
 
 Now that the bootstrap server is ready, you can start every server of your cluster.
 Just like the bootstrap server, the control planes and the workers will boot with the official Fedora CoreOS image, that does not contains hyperkube. Since hyperkube is missing the kubelet service will not start and so the cluster bootstrapping.
@@ -179,7 +179,7 @@ By default registry would expect a storage provider to provide an RWX volume, or
 
 If you want the registry to store your container images, follow the [official OpenShift 4 documentation](https://docs.openshift.com/container-platform/4.2/registry/configuring-registry-storage/configuring-registry-storage-baremetal.html) to configure a persistent storage backend. There are many backend you can use, so just choose the more appropriate for your infrastructure.
 
-If you want instead to use an ephemeral registry, just run the following command to use `emptyDir`:  
+If you want instead to use an ephemeral registry, just run the following command to use `emptyDir`:
 `$ oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"managementState":"Managed","storage":{"emptyDir":{}}}}'`
 
 **NOTE:** While `emptyDir` is suitable for non-production or temporary cluster, it is not recommended for production environments.

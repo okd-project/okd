@@ -103,7 +103,7 @@ CONTROL_PLANE_2_LAST_OCTECT_IP    IN    PTR    CONTROL_PLANE_2_FQDN.
 COMPUTE_NODE_0_LAST_OCTECT_IP    IN    PTR    COMPUTE_NODE_0_FQDN.
 COMPUTE_NODE_1_LAST_OCTECT_IP    IN    PTR    COMPUTE_NODE_1_FQDN.
 ```
-Replace every last octect and FQDN placeholders accordingly to the configuration of your cluster.
+Replace every last octet and FQDN placeholders accordingly to the configuration of your cluster.
 
 ### Start DNS
 Now that both the main and the reverse zones are configured, you can start the `named` service with the following command:
