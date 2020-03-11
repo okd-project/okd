@@ -36,7 +36,7 @@ done
 ```
 
 ### Configure DNS, DHCP and LB
-The installation requires specific configuration of DNS and a load balancer. The requirements are listed in the official Openshift documentation: [Creating the user-provisioned infrastructure](https://docs.openshift.com/container-platform/4.2/installing/installing_vsphere/installing-vsphere.html#installation-infrastructure-user-infra_installing-vsphere). Example configurations are available at [requirements](/Guides/UPI/vSphere/Requirements)
+The installation requires specific configuration of DNS and a load balancer. The requirements are listed in the official OKD documentation: [Creating the user-provisioned infrastructure](https://docs.okd.io/latest/installing/installing_vsphere/installing-vsphere.html#installation-infrastructure-user-infra_installing-vsphere). Example configurations are available at [requirements](/Guides/UPI/vSphere/Requirements)
 
 You will also need working DHCP on the network the cluster hosts are connected to. The DHCP server should assign the hosts unique FQDNs.
 
@@ -177,7 +177,7 @@ For the `image-registry` cluster operator things are getting a bit more tricky.
 
 By default registry would expect a storage provider to provide an RWX volume, or to be configured to be ephemeral.
 
-If you want the registry to store your container images, follow the [official OpenShift 4 documentation](https://docs.openshift.com/container-platform/4.2/registry/configuring-registry-storage/configuring-registry-storage-baremetal.html) to configure a persistent storage backend. There are many backend you can use, so just choose the more appropriate for your infrastructure.
+If you want the registry to store your container images, follow the [official OKD 4 documentation](https://docs.okd.io/latest/registry/configuring-registry-storage/configuring-registry-storage-baremetal.html) to configure a persistent storage backend. There are many backend you can use, so just choose the more appropriate for your infrastructure.
 
 If you want instead to use an ephemeral registry, just run the following command to use `emptyDir`:  
 `$ oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"managementState":"Managed","storage":{"emptyDir":{}}}}'`
@@ -192,4 +192,4 @@ Now that everything is configured run the OpenShift installer again to wait for 
 After the installation is complete you can login into your cluster via WebUI using `kubeadmin` as login. Password for this account is auto-generated and stored in `auth/kubeadmin-password` file. If you want to use the `oc` utility, you can still use the `kubeconfig` file you used [before](#intermediate-stage).
 
 **NOTE:** `kubeadmin` is a temporary user and should not be left enabled after the cluster is up and running.
-Follow the [official OpenShift 4 documentation](https://docs.openshift.com/container-platform/4.2/authentication/understanding-authentication.html) to configure an alternative Identity Provider and to remove `kubeadmin`.
+Follow the [official OKD 4 documentation](https://docs.okd.io/latest/authentication/understanding-authentication.html) to configure an alternative Identity Provider and to remove `kubeadmin`.
