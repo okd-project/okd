@@ -19,7 +19,7 @@ In order to obtain the openshift installer and client, visit [https://origin-rel
 Use `oc` to download and extract the tools from the image:
 
 ```
-$ oc adm release extract --tools registry.svc.ci.openshift.org/origin/release:4.4.0-0.okd-2020-01-20-084618
+$ oc adm release extract --tools registry.svc.ci.openshift.org/origin/release:4.4.0-0.okd-2020-01-28-022517
 ```
 
 **NOTE**: You need a 4.x version of `oc` to extract the installer and the latest client. You can initially use the [official Openshift client (mirror)](https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/)
@@ -74,7 +74,7 @@ Learn More
 
 * **[Public Documentation](https://docs.okd.io/latest/welcome/)**
 
-For questions or feedback, reach us on [Kuberenetes Slack on #openshift-dev](https://kubernetes.slack.com/) or post to our [mailing list](https://lists.openshift.redhat.com/openshiftmm/listinfo/dev).
+For questions or feedback, reach us on [Kubernetes Slack on #openshift-dev](https://kubernetes.slack.com/) or post to our [mailing list](https://lists.openshift.redhat.com/openshiftmm/listinfo/dev).
 
 
 ### What can I run on OKD?
