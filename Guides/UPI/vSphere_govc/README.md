@@ -1,5 +1,5 @@
 # Install OKD 4 on top of an UPI VMware vSphere configuration
-This guide explains how to provision Fedora CoreOS on vSphere and install OKD on it.
+This guide explains how to provision Fedora CoreOS on vSphere and install OKD on it. The guide includes bash scripts to automate the gogovc command line tool for interacting with the vSphere cluster.
 
 ## Assumptions
 - You have `openshift-installer` and `oc` for the OKD version you're installing in your PATH. See [Getting Started](/README.md#getting-started)
