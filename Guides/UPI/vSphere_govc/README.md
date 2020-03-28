@@ -80,7 +80,7 @@ govc vm.disk.change -vm $vm -disk.label "Hard disk 1" -size 120G
 ```
 
 ### Configure DNS, DHCP and LB
-The installation requires specific configuration of DNS and a load balancer. The requirements are listed in the official Openshift documentation: [Creating the user-provisioned infrastructure](https://docs.okd.io/latest/installing/installing_vsphere/installing-vsphere.html#installation-infrastructure-user-infra_installing-vsphere). Example configurations are available at [requirements](Guides/UPI/vSphere_govc/Requirements)
+The installation requires specific configuration of DNS and a load balancer. The requirements are listed in the official Openshift documentation: [Creating the user-provisioned infrastructure](https://docs.okd.io/latest/installing/installing_vsphere/installing-vsphere.html#installation-infrastructure-user-infra_installing-vsphere). Example configurations are available at [requirements](/Guides/UPI/vSphere_govc/Requirements)
 
 You will also need working DHCP on the network the cluster hosts are connected to. The DHCP server should assign the hosts unique FQDNs.
 
