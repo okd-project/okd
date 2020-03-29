@@ -1,5 +1,5 @@
 # Install OKD 4 on top of an UPI VMware vSphere configuration
-This guide explains how to provision Fedora CoreOS on vSphere and install OKD on it.
+This guide explains how to provision Fedora CoreOS on vSphere and install OKD on it. The guide includes bash scripts to automate the govc command line tool for interacting with the vSphere cluster.
 
 ## Assumptions
 - You have `openshift-installer` and `oc` for the OKD version you're installing in your PATH. See [Getting Started](/README.md#getting-started)
@@ -13,7 +13,7 @@ This guide explains how to provision Fedora CoreOS on vSphere and install OKD on
 Find and download an image of FCOS for VMware vSphere from https://getfedora.org/en/coreos/download/
 
 ```
-wget https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/31.20200113.3.1/x86_64/fedora-coreos-31.20200113.3.1-vmware.x86_64.ova
+wget https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/31.20200113.3.1/x86_64/fedora-coreos-31.20200113.3.1-vmware.x86_64.ova 
 
 # Import into vSphere
 govc import.ova -ds=<datastore_name> \
@@ -23,20 +23,64 @@ govc import.ova -ds=<datastore_name> \
 
 ### Create FCOS VMs
 ```
-for vm in \
-    okd4-master-1 okd4-master-2 okd4-master-3 \
-    okd4-worker-1 okd4-worker-2 okd4-worker-3 \
-    okd4-bootstrap; do
-    govc vm.clone -vm fedora-coreos-31.20200113.3.1-vmware.x86_64 \
-        -ds <datastore_name> -folder <vm_folder> -on=false \
-        -c=4 -m=8192 -net=<network_name> $vm
+#!/bin/bash
+# Title: UPI-vSphere-GenerateVMs
+# Description: This is an example bash script to create the VMs iteratively. Set the values for cluster_name, datastore_name, vm_folder, network_name, master_node_count, and worker_node_count.
+ 
+template_name="fedora-coreos-31.20200113.3.1-vmware.x86_64"
+cluster_name=<cluster_name>
+datastore_name=<datastore_name>
+vm_folder=<folder_path>
+network_name=<network_name>
+master_node_count=<master_node_count>
+worker_node_count=<worker_node_count>
 
-    govc vm.disk.change -vm $vm -disk.label "Hard disk 1" -size 120G
+# Create the master nodes
+
+for (( i=1; i<=${master_node_count}; i++ )); do
+        vm="${cluster_name}-master-${i}"
+	govc vm.clone -vm "${template_name}" \
+		-ds "${datastore_name}" \
+		-folder "${vm_folder}" \
+		-on="false" \
+		-c="4" -m="8192" \
+		-net="${network_name}" \
+		$vm
+	govc vm.disk.change -vm $vm -disk.label "Hard disk 1" -size 120G
 done
+
+# Create the worker nodes
+
+for (( i=1; i<=${worker_node_count}; i++ )); do
+        vm="${cluster_name}-worker-${i}"
+        govc vm.clone -vm "${template_name}" \
+                -ds "${datastore_name}" \
+                -folder "${vm_folder}" \
+                -on="false" \
+                -c="4" -m="8192" \
+                -net="${network_name}" \
+                $vm
+	govc vm.disk.change -vm $vm -disk.label "Hard disk 1" -size 120G
+done
+
+
+# Create the bootstrap node
+
+vm="${cluster_name}-bootstrap"
+govc vm.clone -vm "${template_name}" \
+                -ds "${datastore_name}" \
+                -folder "${vm_folder}" \
+                -on="false" \
+                -c="4" -m="8192" \
+                -net="${network_name}" \
+                $vm
+govc vm.disk.change -vm $vm -disk.label "Hard disk 1" -size 120G
+
+
 ```
 
 ### Configure DNS, DHCP and LB
-The installation requires specific configuration of DNS and a load balancer. The requirements are listed in the official OKD documentation: [Creating the user-provisioned infrastructure](https://docs.okd.io/latest/installing/installing_vsphere/installing-vsphere.html#installation-infrastructure-user-infra_installing-vsphere). Example configurations are available at [requirements](/Guides/UPI/vSphere/Requirements)
+The installation requires specific configuration of DNS and a load balancer. The requirements are listed in the official Openshift documentation: [Creating the user-provisioned infrastructure](https://docs.okd.io/latest/installing/installing_vsphere/installing-vsphere.html#installation-infrastructure-user-infra_installing-vsphere). Example configurations are available at [requirements](/Guides/UPI/vSphere_govc/Requirements)
 
 You will also need working DHCP on the network the cluster hosts are connected to. The DHCP server should assign the hosts unique FQDNs.
 
@@ -109,24 +153,42 @@ Steps which need to be done:
 - Set the VM property `disk.EnableUUID` to `TRUE`
 
 ```
-for host in okd4-master-1 okd4-master-2 okd4-master-3; do 
-    govc vm.change -vm $host \
-        -e guestinfo.ignition.config.data="$(cat master.ign | base64 -w0)" \
-        -e guestinfo.ignition.config.data.encoding="base64" \
-        -e disk.EnableUUID="TRUE"
+#!/bin/bash
+# Title: UPI-vSphere-AddMetadata
+# Description: This is an example bash script to set the metadata on the VMs iteratively. Set the values for cluster_name, master_node_count, and worker_node_count.
+
+cluster_name=<cluster_name>
+master_node_count=<master_node_count>
+worker_node_count=<worker_node_count>
+
+# Set the metadata on the master nodes
+
+for (( i=1; i<=${master_node_count}; i++ )); do
+        vm="${cluster_name}-master-${i}"
+	govc vm.change -vm $vm \
+		-e guestinfo.ignition.config.data="$(cat master.ign | base64 -w0)" \
+		-e guestinfo.ignition.config.data.encoding="base64" \
+		-e disk.EnableUUID="TRUE"
 done
 
-for host in okd4-worker-1 okd4-worker-2 okd4-worker-3; do 
-    govc vm.change -vm $host \
-        -e guestinfo.ignition.config.data="$(cat worker.ign | base64 -w0)" \
-        -e guestinfo.ignition.config.data.encoding="base64" \
-        -e disk.EnableUUID="TRUE"
+# Set the metadata on the worker nodes
+
+for (( i=1; i<=${worker_node_count}; i++ )); do
+        vm="${cluster_name}-worker-${i}"
+	govc vm.change -vm $vm \
+                -e guestinfo.ignition.config.data="$(cat worker.ign | base64 -w0)" \
+                -e guestinfo.ignition.config.data.encoding="base64" \
+                -e disk.EnableUUID="TRUE"
 done
 
-govc vm.change -vm okd4-bootstrap \
-    -e guestinfo.ignition.config.data="$(cat append-bootstrap.ign | base64 -w0)" \
-    -e guestinfo.ignition.config.data.encoding="base64" \
-    -e disk.EnableUUID="TRUE"
+# Set the metadata on the bootstrap node
+
+vm="${cluster_name}-bootstrap"
+govc vm.change -vm $vm \
+	-e guestinfo.ignition.config.data="$(cat append-bootstrap.ign | base64 -w0)" \
+	-e guestinfo.ignition.config.data.encoding="base64" \
+	-e disk.EnableUUID="TRUE"
+
 ```
 
 ### Start the bootstrap server
@@ -149,17 +211,17 @@ For debugging you can use `sudo crictl ps` and `sudo crictl logs <container_id>`
 Now that every servers is up and running, they are ready to form the cluster.
 Bootstrap will start as soon as the master nodes finish forming the etcd cluster.
 
-Meanwhile just run the OpenShift Installer in order to check the status of the installation:
+Meanwhile just run the OKD Installer in order to check the status of the installation:
 
 `$ openshift-installer wait-for bootstrap-complete --log-level debug`
 
 The installer will now check for the availability of the Kubernetes API and then for the `bootstrap-complete` event that will be spawned after the cluster has almost finished to install every cluster operator.
-OpenShift installer will wait for 30 minutes. It should be enough to complete the bootstrap process.
+OKD installer will wait for 30 minutes. It should be enough to complete the bootstrap process.
 
 #### Intermediate stage
 When the bootstrap is finished you have to approve the nodes CSR, configure the storage backend for the `image-registry` cluster operator, and shutting down the bootstrap node.
 
-Shut down the bootstrap vm and then remove it from the pools of the load balancer. If you followed the [LB_HAProxy.md](Requirements/LB_HAProxy.md) guide to configure HAProxy as you load balancer, just comment the two `bootstrap` records in the configuration file, and then restart its service.
+Shut down the bootstrap vm and then remove it from the pools of the load balancer. If you followed the [LB_HAProxy.md](../Requirements/LB_HAProxy.md) guide to configure HAProxy as you load balancer, just comment the two `bootstrap` records in the configuration file, and then restart its service.
 
 After the bootstrap vm is offline, authenticate as `system:admin` in OKD, by using the `kubeconfig` file, which was created when Ingnition configs were [generated](#generate-the-ignition-configuration-files).
 
@@ -185,7 +247,7 @@ If you want instead to use an ephemeral registry, just run the following command
 **NOTE:** While `emptyDir` is suitable for non-production or temporary cluster, it is not recommended for production environments.
 
 #### Final stage
-Now that everything is configured run the OpenShift installer again to wait for the `install-complete` event.
+Now that everything is configured run the OKD installer again to wait for the `install-complete` event.
 
 `$ openshift-install wait-for install-complete --log-level debug`
 
