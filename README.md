@@ -145,6 +145,12 @@ please contact Red Hat's Product Security team. Details at
 https://access.redhat.com/security/team/contact
 
 
+Frequently asked questions
+--------------------------
+We collect frequently asked questions and their answers on this page:
+[Frequently Asked Questions](./FAQ.md)
+
+
 License
 -------
 
