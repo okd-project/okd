@@ -13,8 +13,6 @@ The [OKD Working Group](https://github.com/openshift/community#okd-working-group
 Getting Started
 ---------------
 
-IMPORTANT: OKD4 is in preview - a subset of platforms and functionality will be available until we reach beta. For now, the AWS cloud provider is the best choice. To see the backlog of beta items, visit https://github.com/orgs/openshift/projects/1.
-
 In order to obtain the openshift installer and client, visit [https://origin-release.svc.ci.openshift.org/](https://origin-release.svc.ci.openshift.org/).
 Use `oc` to download and extract the tools from the image:
 
