@@ -28,11 +28,11 @@ Copy the binaries into your PATH and then run the following from a new directory
 $ openshift-install create cluster
 ```
 
-You'll be prompted to choose a platform to install to - AWS is currently the best place to start with the OKD4 preview while we get Fedora CoreOS machine images set up in the other clouds.
+You'll be prompted to choose a platform to install to - AWS is currently the best place to start with the OKD4 Beta while we get Fedora CoreOS machine images set up in the other clouds.
 
 You will need to have cloud credentials set in your shell properly before installation. You must have permission to configure the appropriate cloud resources from that account (such as VPCs, instances, and DNS records). You must have already configured a public DNS zone on your chosen cloud before the install starts.
 
-You will also be prompted for a pull-secret that will be made available to all of of your machines - for the OKD4 preview you should either paste the pull-secret you use for your registry, or paste `{"auths":{"fake":{"auth": "bar"}}}` to bypass the (fix coming soon) required value check.
+You will also be prompted for a pull-secret that will be made available to all of of your machines - for the OKD4 Beta you should either paste the pull-secret you use for your registry, or paste `{"auths":{"fake":{"auth": "bar"}}}` to bypass the (fix coming soon) required value check.
 
 Once the install completes successfully (usually 30m on AWS) the console URL and an admin username and password will be printed. If your DNS records were correct, you should be able to log in to your new OKD4 cluster!
 
