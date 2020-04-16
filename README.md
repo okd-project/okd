@@ -13,13 +13,11 @@ The [OKD Working Group](https://github.com/openshift/community#okd-working-group
 Getting Started
 ---------------
 
-IMPORTANT: OKD4 is in preview - a subset of platforms and functionality will be available until we reach beta. For now, the AWS cloud provider is the best choice. To see the backlog of beta items, visit https://github.com/orgs/openshift/projects/1.
-
 In order to obtain the openshift installer and client, visit [https://origin-release.svc.ci.openshift.org/](https://origin-release.svc.ci.openshift.org/).
 Use `oc` to download and extract the tools from the image:
 
 ```
-$ oc adm release extract --tools registry.svc.ci.openshift.org/origin/release:4.4.0-0.okd-2020-01-28-022517
+$ oc adm release extract --tools quay.io/openshift/okd:4.4.0-0.okd-2020-04-16-074048-beta3
 ```
 
 **NOTE**: You need a 4.x version of `oc` to extract the installer and the latest client. You can initially use the [official Openshift client (mirror)](https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/)
@@ -30,11 +28,11 @@ Copy the binaries into your PATH and then run the following from a new directory
 $ openshift-install create cluster
 ```
 
-You'll be prompted to choose a platform to install to - AWS is currently the best place to start with the OKD4 preview while we get Fedora CoreOS machine images set up in the other clouds.
+You'll be prompted to choose a platform to install to - AWS is currently the best place to start with the OKD4 Beta while we get Fedora CoreOS machine images set up in the other clouds.
 
 You will need to have cloud credentials set in your shell properly before installation. You must have permission to configure the appropriate cloud resources from that account (such as VPCs, instances, and DNS records). You must have already configured a public DNS zone on your chosen cloud before the install starts.
 
-You will also be prompted for a pull-secret that will be made available to all of of your machines - for the OKD4 preview you should either paste the pull-secret you use for your registry, or paste `{"auths":{"fake":{"auth": "bar"}}}` to bypass the (fix coming soon) required value check.
+You will also be prompted for a pull-secret that will be made available to all of of your machines - for the OKD4 Beta you should either paste the pull-secret you use for your registry, or paste `{"auths":{"fake":{"auth": "bar"}}}` to bypass the (fix coming soon) required value check.
 
 Once the install completes successfully (usually 30m on AWS) the console URL and an admin username and password will be printed. If your DNS records were correct, you should be able to log in to your new OKD4 cluster!
 
