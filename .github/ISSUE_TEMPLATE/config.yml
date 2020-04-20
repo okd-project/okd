@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Openshift Enhancements
+    url: https://github.com/openshift/enhancements/
+    about: Please request new features here.
+  - name: Security Team
+    url: https://access.redhat.com/site/security/team/contact/
+    about: Please report security vulnerabilities here.
+  - name: Slack chat
+    url: https://app.slack.com/client/T09NY5SBT/C6AD6JM17
+    about: openshift-users chat room
