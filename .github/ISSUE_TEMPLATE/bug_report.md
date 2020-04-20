@@ -1,0 +1,36 @@
+---
+name: Bug report
+about: Create a report to help us improve
+title: ''
+labels: ''
+assignees: ''
+
+---
+
+<!--
+Before reporting an issue, check our backlog of
+[open issues](https://github.com/openshift/okd/issues)
+to see if someone else has already reported it. If so, feel free to add
+your scenario, or additional information, to the discussion. Or simply
+"subscribe" to it to be notified when it is updated.
+
+If you suspect your issue is a bug, please edit your issue description to
+include the BUG REPORT INFORMATION shown below. If you fail to provide this
+information within 14 days, we cannot debug your issue and will close it. We
+will, however, reopen it if you later provide the information.
+-->
+
+**Describe the bug**
+<!--
+Briefly describe the problem you are having in a few paragraphs.
+-->
+
+**Version**
+<!-- Please specify OKD version release: e.g. 4.4.0-0.okd-2020-04-17-201241
+Please specify if its IPI or UPI install method and the cloud platform (if applicable) used -->
+
+**How reproducible**
+<!-- Please specify how often the issue is reproducible - 100%, rare, 50% of requests etc. -->
+
+**Log bundle**
+<!-- A link to bootstrap log bundle or `oc adm must-gather` archive -->
