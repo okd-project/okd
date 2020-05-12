@@ -8,7 +8,7 @@ This guide describes a workaround to get OKD 4 installed on Azure. It will not b
 ## Assumptions
 - You have access to an [Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/overview). This guide assumes that you chose Linux for your Cloud Shell.
 - You have created a [Service Principle for OKD 4 in Azure](https://docs.openshift.com/container-platform/4.4/installing/installing_azure/installing-azure-account.html)
-- You downloaded the openshift-installer and oc`for the OKD version you're installing in your PATH. See [Getting Started](/README.md#getting-started)
+- You downloaded the openshift-installer and oc for the OKD version you're installing in your PATH. See [Getting Started](/README.md#getting-started)
 - The openshift-installer should be either from [Beta5](https://origin-release.svc.ci.openshift.org/) or higher or a nightly build newer than 2020-05-11
 
 ## Procedure
