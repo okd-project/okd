@@ -42,7 +42,7 @@ openshift-install create cluster
 ```
 
 ### Prevent the Azure Cloud Shell session from being automatically closed
-There is a timeout for Azure Cloud Shells of ~ 10-20 minutes. You have to press ENTER in the Cloud Shell regularly to prevent your session from being automatically closed.
+There is a timeout for Azure Cloud Shells of ~ 10-20 minutes. You have to press ENTER in the Cloud Shell regularly to prevent your session from being automatically closed. Alternatively you could use tmux or screen (but haven't tried them out yet on my own).
 
 
 ### Watch the installation procedure
@@ -51,7 +51,7 @@ It will take a few minutes until the bootstrap and master VMs are in running sta
 
 ```
 export KUBECONFIG=auth/kubeconfig
-watch -n 1 oc get pods --all-namespaces
+watch -n 1 oc get clusterversion/version
 ```
 ### Login to the OKD console
 
