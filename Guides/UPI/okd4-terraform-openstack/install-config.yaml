@@ -1,0 +1,27 @@
+apiVersion: v1
+## The base domain of the cluster. All DNS records will be sub-domains of this base and will also include the cluster name.
+## This must bee the same as in terraform.tfvars
+baseDomain: dns-domain-name-in-openstack-project
+compute:
+- name: worker
+  replicas: 0
+controlPlane:
+  name: master
+  replicas: 3
+metadata:
+  ## The name for the cluster
+  name: same-name-as-in-terraform.tfvars
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14 
+    hostPrefix: 23 
+  networkType: OpenShiftSDN
+  serviceNetwork: 
+  - 172.30.0.0/16
+platform:
+  none: {}
+## The pull secret that provides components in the cluster access to images for OpenShift components.
+# a fake value to satisfy the installer. Images for okd need no subscription
+pullSecret: '{"auths":{"fake":{"auth": "bar"}}}'
+## The default SSH key that will be programmed for `core` user.
+sshKey: 'ssh-pubkey-for-instance-access'

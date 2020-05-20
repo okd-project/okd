@@ -1,0 +1,93 @@
+# Global settings
+#---------------------------------------------------------------------
+global
+    maxconn     20000
+    log         /dev/log local0 info
+    chroot      /var/lib/haproxy
+    pidfile     /var/run/haproxy.pid
+    user        haproxy
+    group       haproxy
+    daemon
+
+    # turn on stats unix socket
+    stats socket /var/lib/haproxy/stats
+
+#---------------------------------------------------------------------
+# common defaults that all the 'listen' and 'backend' sections will
+# use if not designated in their block
+#---------------------------------------------------------------------
+defaults
+    mode                    http
+    log                     global
+    option                  httplog
+    option                  dontlognull
+    option http-server-close
+    option forwardfor       except 127.0.0.0/8
+    option                  redispatch
+    retries                 3
+    timeout http-request    10s
+    timeout queue           1m
+    timeout connect         10s
+    timeout client          300s
+    timeout server          300s
+    timeout http-keep-alive 10s
+    timeout check           10s
+    maxconn                 20000
+
+listen stats
+    bind :9000
+    mode http
+    stats enable
+    stats uri /
+
+frontend okd4_k8s_api_fe
+    bind :6443
+    default_backend okd4_k8s_api_be
+    mode tcp
+    option tcplog
+
+backend okd4_k8s_api_be
+    balance source
+    mode tcp
+{% for be_host in  lb_be_control_plane_servers %}
+    server {{ hostvars[be_host].inventory_hostname }} {{ hostvars[be_host].access_ip_v4 }}:6443 check 
+{% endfor %}
+
+frontend okd4_machine_config_server_fe
+    bind :22623
+    default_backend okd4_machine_config_server_be
+    mode tcp
+    option tcplog
+
+backend okd4_machine_config_server_be
+    balance source
+    mode tcp
+{% for be_host in  lb_be_control_plane_servers %}
+    server {{ hostvars[be_host].inventory_hostname }} {{ hostvars[be_host].access_ip_v4 }}:22623 check 
+{% endfor %}
+
+frontend okd4_http_ingress_traffic_fe
+    bind :80
+    default_backend okd4_http_ingress_traffic_be
+    mode tcp
+    option tcplog
+
+backend okd4_http_ingress_traffic_be
+    balance source
+    mode tcp
+{% for be_host in  lb_be_app_servers %}
+    server {{ hostvars[be_host].inventory_hostname }} {{ hostvars[be_host].access_ip_v4 }}:80 check 
+{% endfor %}
+
+frontend okd4_https_ingress_traffic_fe
+    bind :443
+    default_backend okd4_https_ingress_traffic_be
+    mode tcp
+    option tcplog
+
+backend okd4_https_ingress_traffic_be
+    balance source
+    mode tcp
+{% for be_host in  lb_be_app_servers %}
+    server {{ hostvars[be_host].inventory_hostname }} {{ hostvars[be_host].access_ip_v4 }}:443 check 
+{% endfor %}

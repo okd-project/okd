@@ -1,0 +1,29 @@
+- hosts: role=lb
+  become: True
+  remote_user: "{{ cloud_user | default('centos') }}"
+  vars:
+    lb_be_control_plane_servers: "{{ groups['role=master'] }} + {{groups['role=boot'] | default([])}}"
+    lb_be_app_servers: "{{ groups['role=worker'] | default([]) }}"
+
+  tasks:
+  - name: Put SELinux in permissive mode, logging actions that would be blocked.
+    selinux:
+      policy: targeted
+      state: permissive
+
+  - name: "Make sure haproxy is installed"
+    yum:
+      name: haproxy
+      state: latest
+
+  - name: "Dynamic haproxy config based on inventory from terraform state"
+    template:
+      src: haproxy.cfg.j2
+      dest: /etc/haproxy/haproxy.cfg 
+    notify:
+      - restart haproxy
+  handlers:
+    - name: restart haproxy
+      service:
+        name: haproxy
+        state: restarted
