@@ -17,7 +17,7 @@ In order to obtain the openshift installer and client, visit [https://origin-rel
 Use `oc` to download and extract the tools from the image:
 
 ```
-$ oc adm release extract --tools quay.io/openshift/okd:4.4.0-0.okd-2020-04-21-163702-beta4
+$ oc adm release extract --tools quay.io/openshift/okd:4.4.0-0.okd-2020-05-23-055148-beta5
 ```
 
 **NOTE**: You need a 4.x version of `oc` to extract the installer and the latest client. You can initially use the [official Openshift client (mirror)](https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/)
