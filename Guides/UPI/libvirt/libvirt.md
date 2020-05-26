@@ -5,7 +5,7 @@ This guide explains how to configure libvirt+KVM to provision Fedora CoreOS and 
 
 ## Assumptions
 - The host OS is CentOS 7;
-- This guide will not configure the load balancer or the DNS server. Check for [LB_HAProxy.md](../Requirements/LB_HAProxy.md) and [DNS_Bind.md](../Requirements/DNS_Bind.md) if you want to configure them;
+- This guide will not configure the load balancer or the DNS server. Check for [LB_HAProxy.md](../vSphere/Requirements/LB_HAProxy.md) and [DNS_Bind.md](../vSphere/Requirements/DNS_Bind.md) if you want to configure them;
 - Fedora CoreOS will still use DHCP for obtaining the IP, but with a MAC address-based reservation into the libvirt network configuration, and therefore there is no need for a standalone DHCP server;
 - You already downloaded the OKD installer and command line tools from the Release section of this repository, and installed them into a path added to the `PATH` environment variable.
 
@@ -159,7 +159,7 @@ OpenShift installer will wait for 30 minutes. It should be enough to complete th
 #### Intermediate stage
 When the bootstrap is finished you have to approve the nodes CSR, configure the storage backend for the `image-registry` cluster operator, and shutting down the bootstrap node.
 
-Shut down the bootstrap vm and then remove it from the pools of the load balancer. If you followed the [LB_HAProxy.md](../Requirements/LB_HAProxy.md) guide to configure HAProxy as you load balancer, just comment the two `bootstrap` records in the configuration file, and then restart its service.
+Shut down the bootstrap vm and then remove it from the pools of the load balancer. If you followed the [LB_HAProxy.md](../vSphere/Requirements/LB_HAProxy.md) guide to configure HAProxy as you load balancer, just comment the two `bootstrap` records in the configuration file, and then restart its service.
 
 After the bootstrap vm is offline, authenticate as `system:admin` in OKD, by using the `kubeconfig` file, which was created when Ingnition configs were [generated](#generate-the-ignition-configuration-files).
 
