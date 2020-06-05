@@ -107,7 +107,7 @@ OKD runs with the following security policy by default:
     * By default, Docker builds can (and often do) run as root. You can control who can create Docker builds through the `builds/docker` and `builds/custom` policy resource.
   * Regular users and project admins cannot change their security quotas.
 
-Many containers expect to run as root (and therefore edit all the contents of the filesystem). The [Image Author's guide](https://docs.okd.io/latest/creating_images/guidelines.html#openshift-specific-guidelines) gives recommendations on making your image more secure by default:
+Many containers expect to run as root (and therefore edit all the contents of the filesystem). The [Image Author's guide](https://docs.okd.io/latest/openshift_images/create-images.html#images-create-guide-openshift_create-images) gives recommendations on making your image more secure by default:
 
     * Don't run as root
     * Make directories you want to write to group-writable and owned by group id 0
