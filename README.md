@@ -118,7 +118,7 @@ If you are running your own cluster and want to run a container as root, you can
     # Gives the default service account in the current project access to run as UID 0 (root)
     oc adm add-scc-to-user anyuid -z default
 
-See the [security documentation](https://docs.okd.io/latest/admin_guide/manage_scc.html) more on confining applications.
+See the [security documentation](https://docs.okd.io/latest/authentication/managing-security-context-constraints.html) more on confining applications.
 
 
 Contributing
