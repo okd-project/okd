@@ -132,6 +132,7 @@ Our unified continuous integration system tests pull requests to the ecosystem a
 
 All contributions are welcome - OKD uses the Apache 2 license and does not require any contributor agreement to submit patches.  Please open issues for any bugs or problems you encounter, ask questions on the OpenShift IRC channel (#openshift-dev on freenode), or get involved in the [Kubernetes project](https://github.com/kubernetes/kubernetes) at the container runtime layer.
 
+See [Contributing Guide](./CONTRIBUTING.md) for more technical examples.
 
 Security Response
 -----------------
