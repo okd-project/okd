@@ -81,7 +81,7 @@ OKD is designed to run any Kubernetes workload. It also assists in building and 
 
 For an easier experience running your source code, [Source-to-Image (S2I)](https://github.com/openshift/source-to-image) allows developers to simply provide an application source repository containing code to build and run.  It works by combining an existing S2I-enabled container image with application source to produce a new runnable image for your application.
 
-You can see the [full list of Source-to-Image builder images](https://docs.okd.io/latest/using_images/s2i_images/overview.html) and it's straightforward to [create your own](https://blog.openshift.com/create-s2i-builder-image/).  Some of our available images include:
+You can see the [full list of Source-to-Image builder images](https://github.com/openshift/library/tree/master/official) and it's straightforward to [create your own](https://blog.openshift.com/create-s2i-builder-image/).  Some of our available images include:
 
   * [Ruby](https://github.com/sclorg/s2i-ruby-container)
   * [Python](https://github.com/sclorg/s2i-python-container)
@@ -89,9 +89,6 @@ You can see the [full list of Source-to-Image builder images](https://docs.okd.i
   * [PHP](https://github.com/sclorg/s2i-php-container)
   * [Perl](https://github.com/sclorg/s2i-perl-container)
   * [WildFly](https://github.com/openshift-s2i/s2i-wildfly)
-
-Your application image can be easily extended with a database service with our [database images](https://docs.okd.io/latest/using_images/db_images/overview.html):
-
   * [MySQL](https://github.com/sclorg/mysql-container)
   * [MongoDB](https://github.com/sclorg/mongodb-container)
   * [PostgreSQL](https://github.com/sclorg/postgresql-container)
