@@ -81,7 +81,7 @@ OKD is designed to run any Kubernetes workload. It also assists in building and 
 
 For an easier experience running your source code, [Source-to-Image (S2I)](https://github.com/openshift/source-to-image) allows developers to simply provide an application source repository containing code to build and run.  It works by combining an existing S2I-enabled container image with application source to produce a new runnable image for your application.
 
-You can see the [full list of Source-to-Image builder images](https://docs.okd.io/latest/using_images/s2i_images/overview.html) and it's straightforward to [create your own](https://blog.openshift.com/create-s2i-builder-image/).  Some of our available images include:
+You can see the [full list of Source-to-Image builder images](https://github.com/openshift/library/tree/master/official) and it's straightforward to [create your own](https://blog.openshift.com/create-s2i-builder-image/).  Some of our available images include:
 
   * [Ruby](https://github.com/sclorg/s2i-ruby-container)
   * [Python](https://github.com/sclorg/s2i-python-container)
@@ -89,9 +89,6 @@ You can see the [full list of Source-to-Image builder images](https://docs.okd.i
   * [PHP](https://github.com/sclorg/s2i-php-container)
   * [Perl](https://github.com/sclorg/s2i-perl-container)
   * [WildFly](https://github.com/openshift-s2i/s2i-wildfly)
-
-Your application image can be easily extended with a database service with our [database images](https://docs.okd.io/latest/using_images/db_images/overview.html):
-
   * [MySQL](https://github.com/sclorg/mysql-container)
   * [MongoDB](https://github.com/sclorg/mongodb-container)
   * [PostgreSQL](https://github.com/sclorg/postgresql-container)
@@ -110,7 +107,7 @@ OKD runs with the following security policy by default:
     * By default, Docker builds can (and often do) run as root. You can control who can create Docker builds through the `builds/docker` and `builds/custom` policy resource.
   * Regular users and project admins cannot change their security quotas.
 
-Many containers expect to run as root (and therefore edit all the contents of the filesystem). The [Image Author's guide](https://docs.okd.io/latest/creating_images/guidelines.html#openshift-specific-guidelines) gives recommendations on making your image more secure by default:
+Many containers expect to run as root (and therefore edit all the contents of the filesystem). The [Image Author's guide](https://docs.okd.io/latest/openshift_images/create-images.html#images-create-guide-openshift_create-images) gives recommendations on making your image more secure by default:
 
     * Don't run as root
     * Make directories you want to write to group-writable and owned by group id 0
@@ -121,7 +118,7 @@ If you are running your own cluster and want to run a container as root, you can
     # Gives the default service account in the current project access to run as UID 0 (root)
     oc adm add-scc-to-user anyuid -z default
 
-See the [security documentation](https://docs.okd.io/latest/admin_guide/manage_scc.html) more on confining applications.
+See the [security documentation](https://docs.okd.io/latest/authentication/managing-security-context-constraints.html) more on confining applications.
 
 
 Contributing
@@ -135,6 +132,7 @@ Our unified continuous integration system tests pull requests to the ecosystem a
 
 All contributions are welcome - OKD uses the Apache 2 license and does not require any contributor agreement to submit patches.  Please open issues for any bugs or problems you encounter, ask questions on the OpenShift IRC channel (#openshift-dev on freenode), or get involved in the [Kubernetes project](https://github.com/kubernetes/kubernetes) at the container runtime layer.
 
+See [Contributing Guide](./CONTRIBUTING.md) for more technical examples.
 
 Security Response
 -----------------
