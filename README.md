@@ -13,7 +13,7 @@ The [OKD Working Group](https://github.com/openshift/community#okd-working-group
 Getting Started
 ---------------
 
-In order to obtain the openshift installer and client, visit [https://origin-release.svc.ci.openshift.org/](https://origin-release.svc.ci.openshift.org/).
+In order to obtain the openshift installer and client, visit [/releases](releases) for stable versions or [https://origin-release.svc.ci.openshift.org/](https://origin-release.svc.ci.openshift.org/) for nightlies. See [https://okd.io/keys.html](a list of public keys) to verify tools signature.
 Use `oc` to download and extract the tools from the image:
 
 ```
