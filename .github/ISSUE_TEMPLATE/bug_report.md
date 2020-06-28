@@ -8,6 +8,10 @@ assignees: ''
 ---
 
 <!--
+This repository tracks OKD4 issues only. OKD 3.11 installations issues should be
+reported at https://github.com/openshift/openshift-ansible/issues/new. Other
+OKD 3.11 issues should be reported at https://github.com/openshift/origin/issues/new.
+
 Before reporting an issue, check our backlog of
 [open issues](https://github.com/openshift/okd/issues)
 to see if someone else has already reported it. If so, feel free to add
@@ -33,4 +37,7 @@ Please specify if its IPI or UPI install method and the cloud platform (if appli
 <!-- Please specify how often the issue is reproducible - 100%, rare, 50% of requests etc. -->
 
 **Log bundle**
-<!-- A link to bootstrap log bundle or `oc adm must-gather` archive -->
+<!-- A link to bootstrap log bundle or `oc adm must-gather` archive.
+See https://docs.okd.io/latest/installing/installing-troubleshooting.html for installation
+issues and https://docs.okd.io/latest/support/gathering-cluster-data.html to gather info
+about installed cluster. -->
