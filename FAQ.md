@@ -90,6 +90,36 @@ This one is very helpful if you want to know, if a certain commit has landed in 
 
   ```
 
+## How can I enable the (non-community) Red Hat Operators?
+If you have installed OKD with an "official" pull secret which contains ```registry.redhat.io```,
+such as that with which you can install OpenShift, you are entitled to enable the Red Hat operators
+alongside the default community operators.
+
+One reason for doing so, is to enable the "metering-ocp" operator, as the community operators ships
+with a deprecated "metering" operator.
+
+Firstly, ensure that you do have a pull secret which contains ```registry.redhat.io```
+
+Then, update the OperatorHub CR:
+
+```bash
+(
+cat <<EOF
+apiVersion: config.openshift.io/v1
+kind: OperatorHub
+metadata:
+  name: cluster
+spec:
+  disableAllDefaultSources: true
+  sources:
+  - disabled: false
+    name: redhat-operators
+  - disabled: false
+    name: community-operators
+EOF
+ ) | oc apply -f -
+```
+
 ## What to do in case of errors ?
 If you experience problems during the installation or afterwards, collect data of your cluster with:
 
