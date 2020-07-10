@@ -1,5 +1,22 @@
 # Frequently Asked Questions
 
+## Can I ran a single node cluster?
+
+Yes.
+
+Set the following in install config:
+```
+compute:
+- name: worker
+  replicas: 0
+controlPlane:
+  name: master
+  replicas: 1
+```
+This would inject nonHA manifest for etcd and run a single ingress pod.
+
+WARNING: this cluster cannot be upgraded or adjusted via MachineConfigs. Adding more masters is not yet supported.
+
 ## Where can I find upgrades?
 https://origin-release.svc.ci.openshift.org/
 
