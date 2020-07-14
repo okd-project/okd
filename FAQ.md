@@ -62,6 +62,11 @@ accessible and user workloads would be evicted and rescheduled if node requires 
 
 ## Interesting commands while an upgrade runs
 
+Check overall upgrade status:
+```
+oc get clusterversion
+```
+
 Check the status of your cluster operators:
 ```
 oc get co
