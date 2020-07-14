@@ -6,7 +6,7 @@ Frequently Asked Questions
 - [Interesting commands while an upgrade runs](#interesting-commands-while-an-upgrade-runs)
 - [How can I find out what's inside of a (CI) release and which commit id each component has?](#how-can-i-find-out-whats-inside-of-a-ci-release-and-which-commit-id-each-component-has)
 - [How can I enable the (non-community) Red Hat Operators?](#how-can-i-enable-the-non-community-red-hat-operators)
-- [What to do in case of errors ?](#what-to-do-in-case-of-errors-)
+- [What to do in case of errors?](#what-to-do-in-case-of-errors)
 - [External tips for OKD 4](#external-tips-for-okd-4)
 
 
@@ -147,16 +147,16 @@ EOF
  ) | oc apply -f -
 ```
 
-## What to do in case of errors ?
-If you experience problems during the installation or afterwards, collect data of your cluster with:
+## What to do in case of errors?
+If you experience problems during installation you *must* collect bootstrap log bundle, see [instructions](https://docs.okd.io/latest/installing/installing-troubleshooting.html)
+
+If you experience problems post installation, collect data of your cluster with:
 
 ```
 oc adm must-gather
 ```
 
-A directory with lots of information will be created. Tar zip it and and it to the developers.
-
-Cloud provider secrets, ... will not be included.
+See [documentation](https://docs.okd.io/latest/support/gathering-cluster-data.html) for more information.
 
 Upload it to a file hoster and send the link to the developers (Slack channel, ...)
 
