@@ -1,6 +1,7 @@
 Frequently Asked Questions
 
 - [What are the relations with OCP project? Is OKD4 being upstream for OCP?](#what-are-the-relations-with-ocp-project-is-okd4-being-upstream-for-ocp)
+- [How stable is OKD4?](#how-stable-is-okd4)
 - [Can I ran a single node cluster?](#can-i-ran-a-single-node-cluster)
 - [Where can I find upgrades?](#where-can-i-find-upgrades)
 - [How can I upgrade my cluster to a new version?](#how-can-i-upgrade-my-cluster-to-a-new-version)
@@ -22,6 +23,11 @@ Note, that OKD4 is being automatically built from OCP [ci stream](https://github
 
 These relationships are more complex than "upstream-downstream", so we use "sibling distributions" to describe its state.
 
+## How stable is OKD4?
+
+OKD4 builds are being automatically tested by [release-controller](https://origin-release.svc.ci.openshift.org/). Release is rejected if either installation, upgrade from previous version or conformance test fails.
+
+Biweekly OKD stable version is released, following Fedora CoreOS schedule, client tools are uploaded to Github and images are mirrored to Quay.
 
 ## Can I ran a single node cluster?
 
