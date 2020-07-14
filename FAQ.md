@@ -30,12 +30,8 @@ WARNING: this cluster cannot be upgraded or adjusted via MachineConfigs. Adding 
 ## Where can I find upgrades?
 https://origin-release.svc.ci.openshift.org/
 
-> Bug: Take care that if you upgraded to a version which is a nightly, that they get   
- deleted automatically after 48 hours from the CI registry. You could come 
- into a situation where there is no tested upgrade path to a newer version. The removed images may result in pods stuck in ImagePullBackoff (because the pod tries to download an image from the CI registry which isn't available anymore).
-
-> Builds marked with an asterisk won't be pruned
-
+Note that nightly builds (from `4.x.0-0.okd`) are pruned every 72 hours. If your cluster uses these images
+consider [mirroring](https://docs.okd.io/latest/installing/install_config/installing-restricted-networks-preparations.html#installing-restricted-networks-preparations) these files to a local registry. Builds from `stable-4` stream are not removed
 
 ## How can I upgrade my cluster to a new version?
 Find a version where a tested upgrade path is available from your version for on 
