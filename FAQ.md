@@ -25,7 +25,7 @@ These relationships are more complex than "upstream-downstream", so we use "sibl
 
 ## How stable is OKD4?
 
-OKD4 builds are being automatically tested by [release-controller](https://origin-release.svc.ci.openshift.org/). Release is rejected if either installation, upgrade from previous version or conformance test fails.
+OKD4 builds are being automatically tested by [release-controller](https://origin-release.svc.ci.openshift.org/). Release is rejected if either installation, upgrade from previous version or conformance test fails. Test results determine the upgrade graph, so, for instance, if upgrade tests passed for beta5->rc edge, clusters on beta5 can be directly updated to rc release, bypassing beta6.
 
 Biweekly OKD stable version is released, following Fedora CoreOS schedule, client tools are uploaded to Github and images are mirrored to Quay.
 
