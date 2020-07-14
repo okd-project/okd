@@ -1,4 +1,14 @@
-# Frequently Asked Questions
+Frequently Asked Questions
+
+- [Can I ran a single node cluster?](#can-i-ran-a-single-node-cluster)
+- [Where can I find upgrades?](#where-can-i-find-upgrades)
+- [How can I upgrade my cluster to a new version?](#how-can-i-upgrade-my-cluster-to-a-new-version)
+- [Interesting commands while an upgrade runs](#interesting-commands-while-an-upgrade-runs)
+- [How can I find out what's inside of a (CI) release and which commit id each component has?](#how-can-i-find-out-whats-inside-of-a-ci-release-and-which-commit-id-each-component-has)
+- [How can I enable the (non-community) Red Hat Operators?](#how-can-i-enable-the-non-community-red-hat-operators)
+- [What to do in case of errors ?](#what-to-do-in-case-of-errors-)
+- [External tips for OKD 4](#external-tips-for-okd-4)
+
 
 ## Can I ran a single node cluster?
 
@@ -150,12 +160,12 @@ Cloud provider secrets, ... will not be included.
 
 Upload it to a file hoster and send the link to the developers (Slack channel, ...)
 
-# External tips for OKD 4
+## External tips for OKD 4
 
 * slack:
 
   Workspace: Kubernetes, Channel: **#openshift-dev** (for **developer** communication)
 
   Workspace: Kubernetes, Channel: **#openshift-user** (for **users**)
-  
+
 * https://openshift.tips/
