@@ -43,8 +43,6 @@ Upgrade options:
 **Preferred** ways:
 * Web Console: Home -> Overview -> Tab: Cluster, Card: Overview -> View settings -> Update Status
 
-  Currently (as of 2020-04-10) this doesn't work because the nightly builds are not signed. Will be resolved soon as of https://github.com/openshift/okd/issues/138) !
-
 * Shell:
   Upgrades to latest available version
   ```
@@ -56,10 +54,11 @@ Upgrade options:
 Upgrade to a certain version (will ignore the update graph!)
 
   ```
-  oc adm upgrade --force --allow-explicit-upgrade=true --to-image=registry.svc.ci.openshift.org/origin/release:4.4.0-0.okd-2020-03-16-105308  
+  oc adm upgrade --force --allow-explicit-upgrade=true --to-image=registry.svc.ci.openshift.org/origin/release:4.4.0-0.okd-2020-03-16-105308
   ```
 
-This will take a while ...
+This will take a while, the upgrade may take several hours. Throughout the upgrade kubernetes API would still be 
+accessible and user workloads would be evicted and rescheduled if node requires to be updated.
 
 ## Interesting commands while an upgrade runs
 
