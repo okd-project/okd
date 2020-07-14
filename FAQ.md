@@ -160,6 +160,8 @@ See [documentation](https://docs.okd.io/latest/support/gathering-cluster-data.ht
 
 Upload it to a file hoster and send the link to the developers (Slack channel, ...)
 
+During installation SSH key is required. It can be used to ssh on the nodes later on - `ssh core@<node ip>`
+
 ## External tips for OKD 4
 
 * slack:
