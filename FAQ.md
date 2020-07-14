@@ -9,7 +9,7 @@ Frequently Asked Questions
 - [How can I find out what's inside of a (CI) release and which commit id each component has?](#how-can-i-find-out-whats-inside-of-a-ci-release-and-which-commit-id-each-component-has)
 - [How can I enable the (non-community) Red Hat Operators?](#how-can-i-enable-the-non-community-red-hat-operators)
 - [What to do in case of errors?](#what-to-do-in-case-of-errors)
-- [External tips for OKD 4](#external-tips-for-okd-4)
+- [Where do I seek support?](#where-do-i-seek-support)
 
 ## What are the relations with OCP project? Is OKD4 being upstream for OCP?
 
@@ -181,12 +181,14 @@ Upload it to a file hoster and send the link to the developers (Slack channel, .
 
 During installation SSH key is required. It can be used to ssh on the nodes later on - `ssh core@<node ip>`
 
-## External tips for OKD 4
+## Where do I seek support?
 
-* slack:
+OKD is a community-supported distribution, Red Hat does not provide commercial support of OKD installations.
 
-  Workspace: Kubernetes, Channel: **#openshift-dev** (for **developer** communication)
+Contact us at slack:
 
-  Workspace: Kubernetes, Channel: **#openshift-user** (for **users**)
+*  Workspace: Kubernetes, Channel: **#openshift-dev** (for **developer** communication)
 
-* https://openshift.tips/
+*  Workspace: Kubernetes, Channel: **#openshift-user** (for **users**)
+
+See https://openshift.tips/ for useful Openshift tips
