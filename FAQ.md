@@ -1,5 +1,6 @@
 Frequently Asked Questions
 
+- [What are the relations with OCP project? Is OKD4 being upstream for OCP?](#what-are-the-relations-with-ocp-project-is-okd4-being-upstream-for-ocp)
 - [Can I ran a single node cluster?](#can-i-ran-a-single-node-cluster)
 - [Where can I find upgrades?](#where-can-i-find-upgrades)
 - [How can I upgrade my cluster to a new version?](#how-can-i-upgrade-my-cluster-to-a-new-version)
@@ -8,6 +9,18 @@ Frequently Asked Questions
 - [How can I enable the (non-community) Red Hat Operators?](#how-can-i-enable-the-non-community-red-hat-operators)
 - [What to do in case of errors?](#what-to-do-in-case-of-errors)
 - [External tips for OKD 4](#external-tips-for-okd-4)
+
+## What are the relations with OCP project? Is OKD4 being upstream for OCP?
+
+In 3.x release time OKD was used as an upstream project for Openshift Container Platform. OKD could be installed on 
+Fedora/CentOS/RHEL and used CentOS based images to install the cluster. However OCP could be installed on RHEL only and it rebuilt all the images so that these would be RHEL-based.
+
+[Universal Base Image project](https://www.redhat.com/en/blog/introducing-red-hat-universal-base-image) has enabled us to run RHEL-based images on any platform, so the full image rebuilt is no longer necessary. This allows OKD4 project to reuse most images from OCP4. However OCP also has another critical part - Red Hat RHEL CoreOS. Although its an opensource project (since its essentially RHEL8) its not a community-driven project. As a result OKD workgroup has 
+made a decision to use Fedora CoreOS - opensource and community-driven project - as a base for OKD4. This decisions allows end-user modify all parts of the cluster using prepared instructions.
+
+Note, that OKD4 is being automatically built from OCP [ci stream](https://github.com/openshift/release/blob/1b5147b525b60b9e402a480db6aaf0b8f12960de/core-services/release-controller/_releases/release-ocp-4.5-ci.json#L10-L36), so most of the tests are happening in OCP CI and being mirrored to OKD. As a result, OKD CI doesn't have to run a lot of tests to ensure the release is valid.
+
+These relationships are more complex than "upstream-downstream", so we use "sibling distributions" to describe its state.
 
 
 ## Can I ran a single node cluster?
