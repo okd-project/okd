@@ -189,6 +189,6 @@ Contact us at slack:
 
 *  Workspace: Kubernetes, Channel: **#openshift-dev** (for **developer** communication)
 
-*  Workspace: Kubernetes, Channel: **#openshift-user** (for **users**)
+*  Workspace: Kubernetes, Channel: **#openshift-users** (for **users**)
 
 See https://openshift.tips/ for useful Openshift tips
