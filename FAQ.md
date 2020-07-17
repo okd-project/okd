@@ -93,7 +93,7 @@ Check the status of your cluster operators:
 oc get co
 ```
 
-Check the status of your nodes (upgrades may include an upgrade for Fedora CoreOS):
+Check the status of your nodes (cluster upgrades may include base OS updates):
 ```
 oc get nodes
 ```
