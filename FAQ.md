@@ -1,9 +1,9 @@
 Frequently Asked Questions
 ==========================
 
-- [What are the relations with OCP project? Is OKD4 being upstream for OCP?](#what-are-the-relations-with-ocp-project-is-okd4-being-upstream-for-ocp)
+- [What are the relations with OCP project? Is OKD4 an upstream of OCP?](#what-are-the-relations-with-ocp-project-is-okd4-an-upstream-of-ocp)
 - [How stable is OKD4?](#how-stable-is-okd4)
-- [Can I ran a single node cluster?](#can-i-ran-a-single-node-cluster)
+- [Can I run a single node cluster?](#can-i-run-a-single-node-cluster)
 - [Where can I find upgrades?](#where-can-i-find-upgrades)
 - [How can I upgrade my cluster to a new version?](#how-can-i-upgrade-my-cluster-to-a-new-version)
 - [Interesting commands while an upgrade runs](#interesting-commands-while-an-upgrade-runs)
@@ -12,29 +12,29 @@ Frequently Asked Questions
 - [What to do in case of errors?](#what-to-do-in-case-of-errors)
 - [Where do I seek support?](#where-do-i-seek-support)
 
-## What are the relations with OCP project? Is OKD4 being upstream for OCP?
+## What are the relations with OCP project? Is OKD4 an upstream of OCP?
 
 In 3.x release time OKD was used as an upstream project for Openshift Container Platform. OKD could be installed on 
-Fedora/CentOS/RHEL and used CentOS based images to install the cluster. However OCP could be installed on RHEL only and it rebuilt all the images so that these would be RHEL-based.
+Fedora/CentOS/RHEL and used CentOS based images to install the cluster. OCP, however, could be installed only on RHEL and its images were rebuilt to be RHEL-based.
 
-[Universal Base Image project](https://www.redhat.com/en/blog/introducing-red-hat-universal-base-image) has enabled us to run RHEL-based images on any platform, so the full image rebuilt is no longer necessary. This allows OKD4 project to reuse most images from OCP4. However OCP also has another critical part - Red Hat RHEL CoreOS. Although its an opensource project (since its essentially RHEL8) its not a community-driven project. As a result OKD workgroup has 
-made a decision to use Fedora CoreOS - opensource and community-driven project - as a base for OKD4. This decisions allows end-user modify all parts of the cluster using prepared instructions.
+[Universal Base Image project](https://www.redhat.com/en/blog/introducing-red-hat-universal-base-image) has enabled us to run RHEL-based images on any platform, so the full image rebuild is no longer necessary, allowing OKD4 project to reuse most images from OCP4. There is another critical part of OCP - Red Hat Enterprise Linux CoreOS. Although RHCOS is an open source project (much like RHEL8) it's not a community-driven project. As a result, OKD workgroup has 
+made a decision to use Fedora CoreOS - open source and community-driven project - as a base for OKD4. This decision allows end-users to modify all parts of the cluster using prepared instructions.
 
-Note, that OKD4 is being automatically built from OCP [ci stream](https://github.com/openshift/release/blob/1b5147b525b60b9e402a480db6aaf0b8f12960de/core-services/release-controller/_releases/release-ocp-4.5-ci.json#L10-L36), so most of the tests are happening in OCP CI and being mirrored to OKD. As a result, OKD CI doesn't have to run a lot of tests to ensure the release is valid.
+It should be noted that OKD4 is being automatically built from OCP4 [ci stream](https://github.com/openshift/release/blob/1b5147b525b60b9e402a480db6aaf0b8f12960de/core-services/release-controller/_releases/release-ocp-4.5-ci.json#L10-L36), so most of the tests are happening in OCP CI and being mirrored to OKD. As a result, OKD4 CI doesn't have to run a lot of tests to ensure the release is valid.
 
-These relationships are more complex than "upstream-downstream", so we use "sibling distributions" to describe its state.
+These relationships are more complex than "upstream/downstream", so we use "sibling distributions" to describe its state.
 
 ## How stable is OKD4?
 
-OKD4 builds are being automatically tested by [release-controller](https://origin-release.svc.ci.openshift.org/). Release is rejected if either installation, upgrade from previous version or conformance test fails. Test results determine the upgrade graph, so, for instance, if upgrade tests passed for beta5->rc edge, clusters on beta5 can be directly updated to rc release, bypassing beta6.
+OKD4 builds are being automatically tested by [release-controller](https://origin-release.svc.ci.openshift.org/). Release is rejected if either installation, upgrade from previous version or conformance test fails. Test results determine the upgrade graph, so for instance, if upgrade tests passed for beta5->rc edge, clusters on beta5 can be directly updated to rc release, bypassing beta6.
 
-Biweekly OKD stable version is released, following Fedora CoreOS schedule, client tools are uploaded to Github and images are mirrored to Quay.
+The OKD stable version is released bi-weekly, following Fedora CoreOS schedule, client tools are uploaded to Github and images are mirrored to Quay.
 
-## Can I ran a single node cluster?
+## Can I run a single node cluster?
 
 Yes.
 
-Set the following in install config:
+Set the following in install config, which renders 0 worker nodes and 1 control-plane node:
 ```
 compute:
 - name: worker
@@ -43,15 +43,16 @@ controlPlane:
   name: master
   replicas: 1
 ```
-This would inject nonHA manifest for etcd and run a single ingress pod.
+This would inject a non-HA manifest for etcd and run a single ingress pod.
 
 WARNING: this cluster cannot be upgraded or adjusted via MachineConfigs. Adding more masters is not yet supported.
 
 ## Where can I find upgrades?
 https://origin-release.svc.ci.openshift.org/
 
-Note that nightly builds (from `4.x.0-0.okd`) are pruned every 72 hours. If your cluster uses these images
-consider [mirroring](https://docs.okd.io/latest/installing/install_config/installing-restricted-networks-preparations.html#installing-restricted-networks-preparations) these files to a local registry. Builds from `stable-4` stream are not removed
+Note that nightly builds (from `4.x.0-0.okd`) are pruned every 72 hours. 
+If your cluster uses these images, consider [mirroring](https://docs.okd.io/latest/installing/install_config/installing-restricted-networks-preparations.html#installing-restricted-networks-preparations) these files to a local registry. 
+Builds from the `stable-4` stream are not removed.
 
 ## How can I upgrade my cluster to a new version?
 Find a version where a tested upgrade path is available from your version for on 
@@ -77,8 +78,8 @@ Upgrade to a certain version (will ignore the update graph!)
   oc adm upgrade --force --allow-explicit-upgrade=true --to-image=registry.svc.ci.openshift.org/origin/release:4.4.0-0.okd-2020-03-16-105308
   ```
 
-This will take a while, the upgrade may take several hours. Throughout the upgrade kubernetes API would still be 
-accessible and user workloads would be evicted and rescheduled if node requires to be updated.
+This will take a while; the upgrade may take several hours. Throughout the upgrade, kubernetes API would still be 
+accessible and user workloads would be evicted and rescheduled as nodes are updated.
 
 ## Interesting commands while an upgrade runs
 
@@ -92,13 +93,13 @@ Check the status of your cluster operators:
 oc get co
 ```
 
-Check the status of your nodes (upgrade may include an upgrade to Fedora CoreOS):
+Check the status of your nodes (cluster upgrades may include base OS updates):
 ```
 oc get nodes
 ```
 
 ## How can I find out what's inside of a (CI) release and which commit id each component has?
-This one is very helpful if you want to know, if a certain commit has landed in your current version:
+This one is very helpful if you want to know if a certain commit has landed in your current version:
 
   ```
   oc adm release info registry.svc.ci.openshift.org/origin/release:4.4  --commit-urls
@@ -168,7 +169,7 @@ EOF
 ```
 
 ## What to do in case of errors?
-If you experience problems during installation you *must* collect bootstrap log bundle, see [instructions](https://docs.okd.io/latest/installing/installing-troubleshooting.html)
+If you experience problems during installation you *must* collect the bootstrap log bundle, see [instructions](https://docs.okd.io/latest/installing/installing-troubleshooting.html)
 
 If you experience problems post installation, collect data of your cluster with:
 
@@ -180,13 +181,13 @@ See [documentation](https://docs.okd.io/latest/support/gathering-cluster-data.ht
 
 Upload it to a file hoster and send the link to the developers (Slack channel, ...)
 
-During installation SSH key is required. It can be used to ssh on the nodes later on - `ssh core@<node ip>`
+During installation the SSH key is required. It can be used to SSH onto the nodes later on - `ssh core@<node ip>`
 
 ## Where do I seek support?
 
 OKD is a community-supported distribution, Red Hat does not provide commercial support of OKD installations.
 
-Contact us at slack:
+Contact us on Slack:
 
 *  Workspace: Kubernetes, Channel: **#openshift-dev** (for **developer** communication)
 
