@@ -111,9 +111,9 @@ OKD runs with the following security policy by default:
 
 Many containers expect to run as root (and therefore edit all the contents of the filesystem). The [Image Author's guide](https://docs.okd.io/latest/openshift_images/create-images.html#images-create-guide-openshift_create-images) gives recommendations on making your image more secure by default:
 
-    * Don't run as root
-    * Make directories you want to write to group-writable and owned by group id 0
-    * Set the net-bind capability on your executables if they need to bind to ports < 1024
+* Don't run as root
+* Make directories you want to write to group-writable and owned by group id 0
+* Set the net-bind capability on your executables if they need to bind to ports < 1024
 
 If you are running your own cluster and want to run a container as root, you can grant that permission to the containers in your current project with the following command:
 
