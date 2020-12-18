@@ -5,3 +5,6 @@
 
 ## [Invalid signature store used](https://github.com/openshift/okd/issues/426)
   Upgrades to latest stable version require `--force` when `oc adm upgrade` call
+
+## [OpenshiftSDN: install or upgrade to 4.6 fails](https://github.com/openshift/okd/issues/430)
+  Workaround: avoid upgrading clusters using OpenshiftSDN and/or update to OVNKubernetes
