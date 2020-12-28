@@ -1,16 +1,27 @@
 Frequently Asked Questions
 ==========================
+Below are answers to common questions regarding OKD installation and administration. If you have a suggested question or a suggested improvement to an answer, please feel free to reach out.  
 
+# General #
 - [What are the relations with OCP project? Is OKD4 an upstream of OCP?](#what-are-the-relations-with-ocp-project-is-okd4-an-upstream-of-ocp)
 - [How stable is OKD4?](#how-stable-is-okd4)
 - [Can I run a single node cluster?](#can-i-run-a-single-node-cluster)
-- [Where can I find upgrades?](#where-can-i-find-upgrades)
-- [How can I upgrade my cluster to a new version?](#how-can-i-upgrade-my-cluster-to-a-new-version)
-- [Interesting commands while an upgrade runs](#interesting-commands-while-an-upgrade-runs)
-- [How can I find out what's inside of a (CI) release and which commit id each component has?](#how-can-i-find-out-whats-inside-of-a-ci-release-and-which-commit-id-each-component-has)
-- [How can I enable the (non-community) Red Hat Operators?](#how-can-i-enable-the-non-community-red-hat-operators)
 - [What to do in case of errors?](#what-to-do-in-case-of-errors)
 - [Where do I seek support?](#where-do-i-seek-support)
+
+# Installation #
+- [Should I use Fedora CoreOS 32 or 33 for installing on User Provisioned Infrastructure?](#Should-I-use-Fedora-CoreOS-32-or-33-for-installing-on-User-Provisioned-Infrastructure)  
+
+# Post-Installation Configuration #
+- [How can I enable the (non-community) Red Hat Operators?](#how-can-i-enable-the-non-community-red-hat-operators)
+
+# Upgrades #
+- [Where can I find upgrades?](#where-can-i-find-upgrades)
+- [How can I upgrade my cluster to a new version?](#how-can-i-upgrade-my-cluster-to-a-new-version)
+
+# Misc #
+- [Interesting commands while an upgrade runs](#interesting-commands-while-an-upgrade-runs)
+- [How can I find out what's inside of a (CI) release and which commit id each component has?](#how-can-i-find-out-whats-inside-of-a-ci-release-and-which-commit-id-each-component-has)
 
 ## What are the relations with OCP project? Is OKD4 an upstream of OCP?
 
@@ -47,6 +58,33 @@ This would inject a non-HA manifest for etcd and run a single ingress pod.
 
 WARNING: this cluster cannot be upgraded or adjusted via MachineConfigs. Adding more masters is not yet supported.
 
+## What to do in case of errors?
+If you experience problems during installation you *must* collect the bootstrap log bundle, see [instructions](https://docs.okd.io/latest/installing/installing-troubleshooting.html)
+
+If you experience problems post installation, collect data of your cluster with:
+
+```
+oc adm must-gather
+```
+
+See [documentation](https://docs.okd.io/latest/support/gathering-cluster-data.html) for more information.
+
+Upload it to a file hoster and send the link to the developers (Slack channel, ...)
+
+During installation the SSH key is required. It can be used to SSH onto the nodes later on - `ssh core@<node ip>`
+
+## Where do I seek support?
+
+OKD is a community-supported distribution, Red Hat does not provide commercial support of OKD installations.
+
+Contact us on Slack:
+
+*  Workspace: Kubernetes, Channel: **#openshift-dev** (for **developer** communication)
+
+*  Workspace: Kubernetes, Channel: **#openshift-users** (for **users**)
+
+See https://openshift.tips/ for useful Openshift tips
+
 ## Where can I find upgrades?
 https://origin-release.svc.ci.openshift.org/
 
@@ -80,6 +118,11 @@ Upgrade to a certain version (will ignore the update graph!)
 
 This will take a while; the upgrade may take several hours. Throughout the upgrade, kubernetes API would still be 
 accessible and user workloads would be evicted and rescheduled as nodes are updated.
+
+## Should I use Fedora CoreOS 32 or 33 for installing on User Provisioned Infrastructure?
+
+There is currently an issue with using Fedora CoreOS 33 for UPI installations. Please use the FCOS 32 image. After installation, the nodes will have rebooted and updated to the latest stable FCOS 33. 
+
 
 ## Interesting commands while an upgrade runs
 
@@ -167,30 +210,3 @@ spec:
 EOF
  ) | oc apply -f -
 ```
-
-## What to do in case of errors?
-If you experience problems during installation you *must* collect the bootstrap log bundle, see [instructions](https://docs.okd.io/latest/installing/installing-troubleshooting.html)
-
-If you experience problems post installation, collect data of your cluster with:
-
-```
-oc adm must-gather
-```
-
-See [documentation](https://docs.okd.io/latest/support/gathering-cluster-data.html) for more information.
-
-Upload it to a file hoster and send the link to the developers (Slack channel, ...)
-
-During installation the SSH key is required. It can be used to SSH onto the nodes later on - `ssh core@<node ip>`
-
-## Where do I seek support?
-
-OKD is a community-supported distribution, Red Hat does not provide commercial support of OKD installations.
-
-Contact us on Slack:
-
-*  Workspace: Kubernetes, Channel: **#openshift-dev** (for **developer** communication)
-
-*  Workspace: Kubernetes, Channel: **#openshift-users** (for **users**)
-
-See https://openshift.tips/ for useful Openshift tips
