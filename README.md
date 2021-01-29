@@ -149,6 +149,11 @@ We collect frequently asked questions and their answers on this page:
 [Frequently Asked Questions](./FAQ.md)
 
 
+Known Issues
+--------------------------
+Known issues and possible workarounds are documented on this page:
+[Known Issues](./KNOWN_ISSUES.md)
+
 License
 -------
 

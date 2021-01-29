@@ -9,9 +9,6 @@ Below are answers to common questions regarding OKD installation and administrat
 - [What to do in case of errors?](#what-to-do-in-case-of-errors)
 - [Where do I seek support?](#where-do-i-seek-support)
 
-# Installation #
-- [Should I use Fedora CoreOS 32 or 33 for installing on User Provisioned Infrastructure?](#Should-I-use-Fedora-CoreOS-32-or-33-for-installing-on-User-Provisioned-Infrastructure)  
-
 # Post-Installation Configuration #
 - [How can I enable the (non-community) Red Hat Operators?](#how-can-i-enable-the-non-community-red-hat-operators)
 
@@ -118,11 +115,6 @@ Upgrade to a certain version (will ignore the update graph!)
 
 This will take a while; the upgrade may take several hours. Throughout the upgrade, kubernetes API would still be 
 accessible and user workloads would be evicted and rescheduled as nodes are updated.
-
-## Should I use Fedora CoreOS 32 or 33 for installing on User Provisioned Infrastructure?
-
-There is currently an issue with using Fedora CoreOS 33 for UPI installations. Please use the FCOS 32 image. After installation, the nodes will have rebooted and updated to the latest stable FCOS 33. 
-
 
 ## Interesting commands while an upgrade runs
 
