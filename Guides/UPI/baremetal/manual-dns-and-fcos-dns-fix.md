@@ -146,3 +146,4 @@ You need to "merge" the following JSON with the JSON within `bootstrap.ign`. You
   }
 }
 ```
+Here again the `75-static-dns-servers` is optional. You may choose to delete it. If you retain it you will need to provide the base64 encoded string of your resolv file.
