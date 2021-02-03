@@ -36,9 +36,9 @@ This requires manual editing of the OKD manifest files and the generated ignitio
 ### Step 1: Inject DNS MachineConfig
 Assuming you are following the docs guide this step occurs in the "Creating the Kubernetes manifest and Ignition config files". You need to do this step after running `openshift-install create manifests` but prior to running `openshift-install create ignition-configs`
 
-Your installer directory should have the folders `manifest` and `openshift` present.
+Your installer directory should have the folders `manifests` and `openshift` present.
 
-Create a new file called `okd-configure-master-node-dns.yaml`:
+Create a new file called `okd-configure-master-node-dns.yaml` in the `manifests` folder:
 
 ```yaml
 apiVersion: machineconfiguration.openshift.io/v1
