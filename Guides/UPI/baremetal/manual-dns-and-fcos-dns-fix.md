@@ -104,6 +104,10 @@ spec: ...
 ### Step 2: Inject DNS Configuration into the bootstrap
 The MachineConfig yaml files will only effect the master and worker nodes. The bootstrap is a snow flake and so you need to manually inject the DNS configuration into the rendered ignition.
 
+
+> Editing the `bootstrap.ign` file is generally not recommended. Depending on your setup you may find it safer and easier to use `ignition.config.merge` as documented in the [Ignition specification](https://github.com/coreos/ignition/blob/master/docs/configuration-v3_2.md).
+
+
 This step occurs after you have run `openshift-install create ignition-configs`.
 
 You need to "merge" the following JSON with the JSON within `bootstrap.ign`. You can do this by hand or by using a tool like `jq` or `yq` as in the [installer workspace](installer-workspace.md).

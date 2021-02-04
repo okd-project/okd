@@ -4,7 +4,7 @@ Resolving the Node Hostname
 # Background
 Nodes require a correctly configured hostname in order to join and remain a fully functional cluster member. The hostname is used to generate certificates and also figure out what to call itself.
 
-The OKD installation docs mention that setting valid PTR records will allow the system to automatically detect the hostname. This does not seem to conistently be the case. In addition you may be in an environment where you are unable to edit PTR records.
+The OKD installation docs mention that setting valid PTR records will allow the system to automatically detect the hostname. This does not seem to consistently be the case. In addition you may be in an environment where you are unable to edit PTR records.
 
 You may find that although initially when nodes boot the hostname is resolved correctly (e.g via PTR), at some point during the installation process this ability is lost and the node reverts to the `fedora` hostname.
 
@@ -104,6 +104,9 @@ spec: ...
 ```
 
 ## Edit `bootstrap.ign`
+
+> Editing the `bootstrap.ign` file is generally not recommended. Depending on your setup you may find it safer and easier to use `ignition.config.merge` as documented in the [Ignition specification](https://github.com/coreos/ignition/blob/master/docs/configuration-v3_2.md).
+
 The MachineConfig yaml files will only effect the master and worker nodes. The bootstrap is a snow flake and so you need to manually inject the DNS configuration into the rendered ignition.
 
 This step occurs after you have run `openshift-install create ignition-configs`.
