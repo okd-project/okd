@@ -15,8 +15,8 @@ The [OKD Working Group](https://github.com/openshift/community#okd-working-group
 Getting Started
 ---------------
 
-In order to obtain the openshift installer and client, visit [/releases](https://github.com/openshift/okd/releases) for stable versions or [https://origin-release.svc.ci.openshift.org/](https://origin-release.svc.ci.openshift.org/) for nightlies. See [a list of public keys](https://okd.io/keys.html) to verify tools signature.
-Use `oc` to download and extract the tools from the image:
+To obtain the openshift installer and client, visit [/releases](https://github.com/openshift/okd/releases) for stable versions or [https://origin-release.svc.ci.openshift.org/](https://origin-release.svc.ci.openshift.org/) for nightlies. See [a list of public keys](https://okd.io/keys.html) to verify tools signature.
+Alternatively, you can use `oc` to download and extract the openshift installer and client from the image:
 
 ```
 $ oc adm release extract --tools quay.io/openshift/okd:4.5.0-0.okd-2020-07-14-153706-ga
@@ -24,7 +24,7 @@ $ oc adm release extract --tools quay.io/openshift/okd:4.5.0-0.okd-2020-07-14-15
 
 **NOTE**: You need a 4.x version of `oc` to extract the installer and the latest client. You can initially use the [official Openshift client (mirror)](https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/)
 
-Copy the binaries into your PATH and then run the following from a new directory:
+Extract the downloaded tarballs and copy the binaries into your PATH. Then run the following from an empty directory:
 
 ```
 $ openshift-install create cluster
