@@ -1,0 +1,37 @@
+users:
+  - name: Wolters Kluwer
+    link: https://wolterskluwer.com/
+    logo: wk_logo.png
+  - name: Duke University
+    link: https://www.duke.edu/
+    logo: duke.svg
+  - name: Harrisburg University
+    link: http://harrisburgu.edu/
+    logo: harrisburguniversity.png
+  - name: Bluescape
+    link: https://bluescape.com/
+    logo: bluescape.png
+  - name: ICE InsureTech
+    link: http://www.iceinsuretech.com/
+    logo: iceinsuretech.svg
+  - name: Market America
+    link: http://www.marketamerica.com/
+    logo: marketamerica.png
+  - name: Getupcloud
+    link: https://getupcloud.com/index_en.html
+    logo: getupcloud.png
+  - name: McMaster University
+    link: https://www.mcmaster.ca/
+    logo: mcmaster.png
+  - name: ING
+    link: https://kubernetes.io/case-studies/ing/
+    logo: ing.png
+  - name: ARRIS
+    link: https://www.arris.com/
+    logo: arris.png
+  - name: Rackspace
+    link: https://www.rackspace.com/
+    logo: rackspace.png
+  - name: Datto
+    link: https://www.datto.com/
+    logo: datto-logo.png
