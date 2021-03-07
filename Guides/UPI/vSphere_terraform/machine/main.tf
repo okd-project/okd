@@ -37,7 +37,7 @@ resource "vsphere_virtual_machine" "vm" {
 
   disk {
     label            = "disk0"
-    size             = 60
+    size             = var.disk_size
     thin_provisioned = data.vsphere_virtual_machine.template.disks.0.thin_provisioned
   }
 

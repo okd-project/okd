@@ -41,7 +41,7 @@ module "bootstrap" {
   memory               = "8192"
   num_cpu              = "4"
   num_cores_per_socket = "4"
-  disk_size            = "60"
+  disk_size            = "120"
 }
 
 module "master" {
@@ -61,7 +61,7 @@ module "master" {
   memory               = "16384"
   num_cpu              = "4"
   num_cores_per_socket = "4"
-  disk_size            = "60"
+  disk_size            = "120"
 }
 
 module "compute" {
@@ -81,5 +81,5 @@ module "compute" {
   memory               = "8192"
   num_cpu              = "4"
   num_cores_per_socket = "4"
-  disk_size            = "60"
+  disk_size            = "120"
 }
