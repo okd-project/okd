@@ -127,7 +127,7 @@ Extract `openshift-install` tool (e.g. `oc adm release extract --command=openshi
 
 ## Build a Cluster
 
-1. Create an `install-config.yaml`. Copy it in the folder `install-dir`. Create a backup of it because it gets deleted in the next step.
+1. Create an `install-config.yaml`. Copy it in the folder `./install-dir`. Create a backup of it because it gets deleted in the next step.
 
    ```yaml
    apiVersion: v1
@@ -158,8 +158,9 @@ Extract `openshift-install` tool (e.g. `oc adm release extract --command=openshi
    sshKey: 'YOUR_SSH_KEY'
    ```
 
-1. Run `openshift-install create ignition-configs` in the folder `install-dir`
+1. Run `openshift-install create ignition-configs` in the folder `./install-dir`
    * This command consumes your `install-config.yaml`. Therefore, it's maybe worthwhile to make a copy of this file, before calling this command.
+   * WARNING: The directory `./install-dir` should not be reused across installs as it contains hidden files
 
 1. Fill out a terraform.tfvars file. There is an example terraform.tfvars file in this directory named terraform.tfvars.example.
     * cluster_id
