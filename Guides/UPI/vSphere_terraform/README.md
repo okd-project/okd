@@ -127,7 +127,7 @@ Extract `openshift-install` tool (e.g. `oc adm release extract --command=openshi
 
 ## Build a Cluster
 
-1. Create an `install-config.yaml` in an empty folder.
+1. Create an `install-config.yaml`. Copy it in the folder `./install-dir`. Create a backup of it because it gets deleted in the next step.
 
    ```yaml
    apiVersion: v1
@@ -158,10 +158,11 @@ Extract `openshift-install` tool (e.g. `oc adm release extract --command=openshi
    sshKey: 'YOUR_SSH_KEY'
    ```
 
-1. Run `openshift-install create ignition-configs`.
+1. Run `openshift-install create ignition-configs` in the folder `./install-dir`
    * This command consumes your `install-config.yaml`. Therefore, it's maybe worthwhile to make a copy of this file, before calling this command.
+   * WARNING: The directory `./install-dir` should not be reused across installs as it contains hidden files
 
-1. Fill out a terraform.tfvars file with the ignition configs generated. There is an example terraform.tfvars file in this directory named terraform.tfvars.example.
+1. Fill out a terraform.tfvars file. There is an example terraform.tfvars file in this directory named terraform.tfvars.example.
     * cluster_id
     * cluster_domain
     * base_domain
@@ -175,22 +176,20 @@ Extract `openshift-install` tool (e.g. `oc adm release extract --command=openshi
     * vm_network
     * control_plane_count
     * compute_count
-    * bootstrap_ignition
-    * control_plane_ignition
-    * compute_ignition
+    * bootstrap_ignition_url
     * bootstrap_mac
     * control_plane_macs
     * compute_macs
 
-1. Copy `bootstrap.ign` to an accessible webserver. The bootstrap ignition config must be placed in a location that will be accessible by the bootstrap machine. For example, you could store the bootstrap ignition config in a gist.
+1. Copy the file `install-dir/bootstrap.ign` to an accessible webserver. The bootstrap ignition config must be placed in a location that will be accessible by the bootstrap machine. For example, you could store the bootstrap ignition config in a gist.
 
 1. Run `terraform init`.
 
-1. Run `terraform apply -auto-approve`.
+1. Run `terraform apply -auto-approve -var-file terraform.tfvars`.
 
 1. Run `openshift-install wait-for bootstrap-complete`. Wait for the bootstrapping to complete.
 
-1. Run `terraform apply -auto-approve -var 'bootstrap_complete=true'`.
+1. Run `terraform apply -auto-approve -var 'bootstrap_complete=true' -var-file terraform.tfvars`.
 This will destroy the bootstrap VM.
 
 1. Run `openshift-install wait-for install-complete`. Wait for the cluster install to finish.
@@ -202,3 +201,4 @@ This will destroy the bootstrap VM.
 1. Run `terraform destroy -auto-approve`.
 
 1. Remove all files, created by last installation (e.g `*.ign`, `metadata.json`, auth-folder, `.openshift_install*`)
+

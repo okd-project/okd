@@ -66,14 +66,19 @@ variable "cluster_domain" {
 // Bootstrap machine variables
 /////////
 
+variable "bootstrap_ignition_url" {
+  type    = string
+  description = "http://<URL>/bootstrap.ign"
+}
+
 variable "bootstrap_complete" {
   type    = string
   default = "false"
 }
 
-variable "bootstrap_ignition" {
-  type = string
-}
+//variable "bootstrap_ignition" {
+//  type = string
+//}
 
 variable "bootstrap_mac" {
   type    = string

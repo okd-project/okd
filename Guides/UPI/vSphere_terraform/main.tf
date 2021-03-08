@@ -29,7 +29,7 @@ module "bootstrap" {
 
   name                 = "bootstrap"
   instance_count       = var.bootstrap_complete ? 0 : 1
-  ignition             = var.bootstrap_ignition
+  ignition             = templatefile("append_bootstrap.tpl", { bootstrap_ignition_url = var.bootstrap_ignition_url })
   resource_pool_id     = module.resource_pool.pool_id
   datastore            = var.vsphere_datastore
   folder               = module.folder.path
@@ -49,7 +49,7 @@ module "master" {
 
   name                 = "master"
   instance_count       = var.control_plane_count
-  ignition             = var.control_plane_ignition
+  ignition             = file(var.control_plane_ignition)
   resource_pool_id     = module.resource_pool.pool_id
   folder               = module.folder.path
   datastore            = var.vsphere_datastore
@@ -69,7 +69,7 @@ module "compute" {
 
   name                 = "worker"
   instance_count       = var.compute_count
-  ignition             = var.compute_ignition
+  ignition             = file(var.compute_ignition)
   resource_pool_id     = module.resource_pool.pool_id
   folder               = module.folder.path
   datastore            = var.vsphere_datastore
