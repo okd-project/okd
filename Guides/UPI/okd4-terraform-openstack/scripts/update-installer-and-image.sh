@@ -9,7 +9,7 @@ function openstack-image-create {
   /home/jb/virtualenv/bin/openstack image create --disk-format qcow2 --min-disk 9 --min-ram 768 --private --file "$file" "$name"
 }
 
-repo="registry.svc.ci.openshift.org/origin/release"
+repo="registry.ci.openshift.org/origin/release"
 if  [[ -z $2 ]]
 then
   echo "Usage: $0 <okd-release> <fcos-image-version>"
@@ -40,4 +40,3 @@ oc4 adm release extract --tools ${repo}:${release}
 tar zxvf "openshift-install-linux-${release}.tar.gz" 
 tar zxvf "openshift-client-linux-${release}.tar.gz" 
 cp README.md.orig README.md
-

@@ -123,7 +123,7 @@ Download oc from  <https://mirror.openshift.com/pub/openshift-v4/clients/oc/late
 
 Choose a release ([dev-releases](https://origin-release.svc.ci.openshift.org/), ...)
 
-Extract `openshift-install` tool (e.g. `oc adm release extract --command=openshift-install registry.svc.ci.openshift.org/origin/release:4.4.0-0.okd-2020-02-28-084836`)
+Extract `openshift-install` tool (e.g. `oc adm release extract --command=openshift-install registry.ci.openshift.org/origin/release:4.4.0-0.okd-2020-02-28-084836`)
 
 ## Build a Cluster
 
@@ -201,4 +201,3 @@ This will destroy the bootstrap VM.
 1. Run `terraform destroy -auto-approve`.
 
 1. Remove all files, created by last installation (e.g `*.ign`, `metadata.json`, auth-folder, `.openshift_install*`)
-
