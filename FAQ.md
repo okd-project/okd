@@ -107,7 +107,7 @@ Upgrade options:
 Upgrade to a certain version (will ignore the update graph!)
 
   ```
-  oc adm upgrade --force --allow-explicit-upgrade=true --to-image=registry.svc.ci.openshift.org/origin/release:4.4.0-0.okd-2020-03-16-105308
+  oc adm upgrade --force --allow-explicit-upgrade=true --to-image=registry.ci.openshift.org/origin/release:4.4.0-0.okd-2020-03-16-105308
   ```
 
 This will take a while; the upgrade may take several hours. Throughout the upgrade, kubernetes API would still be 
@@ -134,7 +134,7 @@ oc get nodes
 This one is very helpful if you want to know if a certain commit has landed in your current version:
 
   ```
-  oc adm release info registry.svc.ci.openshift.org/origin/release:4.4  --commit-urls
+  oc adm release info registry.ci.openshift.org/origin/release:4.4  --commit-urls
   ```
 
   ```
@@ -144,7 +144,7 @@ This one is very helpful if you want to know if a certain commit has landed in y
   OS/Arch:   linux/amd64
   Manifests: 413
 
-  Pull From: registry.svc.ci.openshift.org/origin/release@sha256:79b82f237aad0c38b5cdaf386ce893ff86060a476a39a067b5178bb6451e713c
+  Pull From: registry.ci.openshift.org/origin/release@sha256:79b82f237aad0c38b5cdaf386ce893ff86060a476a39a067b5178bb6451e713c
 
   Release Metadata:
     Version:  4.4.0-0.okd-2020-04-10-020541

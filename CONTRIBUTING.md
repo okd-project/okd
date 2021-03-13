@@ -13,14 +13,14 @@ _**"release payload"**_. It contains an operator (Cluster Version Operator), a l
 apply and a reference file. Its contents can be conveniently viewed using `oc` utility:
 
 ```
-$ oc adm release info registry.svc.ci.openshift.org/origin/release:4.4
+$ oc adm release info registry.ci.openshift.org/origin/release:4.4
 Name:      4.4.0-0.okd-2020-04-14-172428
 Digest:    sha256:54446b5bcbd5ec702cfa659230d2228932dfca37bd1cb5fe49cdd9ba869f9329
 Created:   2020-04-14T17:27:12Z
 OS/Arch:   linux/amd64
 Manifests: 413
 
-Pull From: registry.svc.ci.openshift.org/origin/release@sha256:54446b5bcbd5ec702cfa659230d2228932dfca37bd1cb5fe49cdd9ba869f9329
+Pull From: registry.ci.openshift.org/origin/release@sha256:54446b5bcbd5ec702cfa659230d2228932dfca37bd1cb5fe49cdd9ba869f9329
 
 Release Metadata:
   Version:  4.4.0-0.okd-2020-04-14-172428
@@ -38,7 +38,7 @@ Images:
 ```
 
 The release payload contains references to all the images required to setup a cluster, including `oc` and 
-`openshift-install`. These tools can be extracted from the release payload using `oc adm release extract '--command-os=*' --tools --to=/path/to/destination registry.svc.ci.openshift.org/origin/release:4.4` command. Make sure you're using `oc` version 4 to perform this. [Github releases](https://github.com/openshift/okd/releases) or [OCP mirrors](https://mirror.openshift.com/pub/openshift-v4/clients/oc/) have `oc` archives for your platform.
+`openshift-install`. These tools can be extracted from the release payload using `oc adm release extract '--command-os=*' --tools --to=/path/to/destination registry.ci.openshift.org/origin/release:4.4` command. Make sure you're using `oc` version 4 to perform this. [Github releases](https://github.com/openshift/okd/releases) or [OCP mirrors](https://mirror.openshift.com/pub/openshift-v4/clients/oc/) have `oc` archives for your platform.
 
 Release payloads are used during updates too - updating OKD4 means pulling a new release payload, running CVO and applying the new manifests, which causes operators to be updated etc.
 
@@ -49,11 +49,11 @@ to a different registry using the `mirror` subcommand:
 ```
 oc adm -a /path/to/pull-secret.json \
   release mirror \
-  --from "registry.svc.ci.openshift.org/origin/release:4.4.0-0.okd-2020-03-13-053843" \
+  --from "registry.ci.openshift.org/origin/release:4.4.0-0.okd-2020-03-13-053843" \
   --to quay.io/vrutkovs/okd-content \
   --to-release-image quay.io/vrutkovs/okd-release:4.4
 ```
-This command would copy images, referenced in `registry.svc.ci.openshift.org/origin/release:4.4.0-0.okd-2020-03-13-053843` image to `quay.io/vrutkovs/okd-content` and create a new release image `quay.io/vrutkovs/okd-release:4.4`. The new release image would use `quay.io/vrutkovs/okd-content` as an additional source of images.
+This command would copy images, referenced in `registry.ci.openshift.org/origin/release:4.4.0-0.okd-2020-03-13-053843` image to `quay.io/vrutkovs/okd-content` and create a new release image `quay.io/vrutkovs/okd-release:4.4`. The new release image would use `quay.io/vrutkovs/okd-content` as an additional source of images.
 
 `release mirror` command would also print out the mirroring configuration for the installer.
 
@@ -67,20 +67,20 @@ needs to be updated use `release new` subcommand.
 For example, lets create a new release with updated Prometheus image. Use `release info` command 
 to print the pullspec used in the existing image:
 ```
-$ oc adm release info registry.svc.ci.openshift.org/origin/release:4.4 --pullspecs | grep prometheus
-  k8s-prometheus-adapter                         registry.svc.ci.openshift.org/origin/4.4-2020-04-14-172428@sha256:12bac47c71cb7ef36b6ee7b78e0476fbfb8a67bbf61ac42c461c17c98ac850a6
-  prometheus                                     registry.svc.ci.openshift.org/origin/4.4-2020-04-14-172428@sha256:5af0373659974782379d90d9a174352dd8f85cb7327cc48ef36cae4e8ba5903f
-  prometheus-alertmanager                        registry.svc.ci.openshift.org/origin/4.4-2020-04-14-172428@sha256:25bed531ccb0ff16ce19b927265f03cb9b2d572caa224ef302002269e925d83c
-  prometheus-config-reloader                     registry.svc.ci.openshift.org/origin/4.4-2020-04-14-172428@sha256:deacbd618b3c037cc8c99a83db2c2a1053db517b0a0bfdfdeb309591559c3eea
-  prometheus-node-exporter                       registry.svc.ci.openshift.org/origin/4.4-2020-04-14-172428@sha256:c199e7353642ed1a4237416055a75b0e415034c7ec48bbc8ae8d12b72552f819
-  prometheus-operator                            registry.svc.ci.openshift.org/origin/4.4-2020-04-14-172428@sha256:ec28b9dc5ad9184d0d70b85e5bc618c809084b293cbc57c215bf845bf7147b2b
+$ oc adm release info registry.ci.openshift.org/origin/release:4.4 --pullspecs | grep prometheus
+  k8s-prometheus-adapter                         registry.ci.openshift.org/origin/4.4-2020-04-14-172428@sha256:12bac47c71cb7ef36b6ee7b78e0476fbfb8a67bbf61ac42c461c17c98ac850a6
+  prometheus                                     registry.ci.openshift.org/origin/4.4-2020-04-14-172428@sha256:5af0373659974782379d90d9a174352dd8f85cb7327cc48ef36cae4e8ba5903f
+  prometheus-alertmanager                        registry.ci.openshift.org/origin/4.4-2020-04-14-172428@sha256:25bed531ccb0ff16ce19b927265f03cb9b2d572caa224ef302002269e925d83c
+  prometheus-config-reloader                     registry.ci.openshift.org/origin/4.4-2020-04-14-172428@sha256:deacbd618b3c037cc8c99a83db2c2a1053db517b0a0bfdfdeb309591559c3eea
+  prometheus-node-exporter                       registry.ci.openshift.org/origin/4.4-2020-04-14-172428@sha256:c199e7353642ed1a4237416055a75b0e415034c7ec48bbc8ae8d12b72552f819
+  prometheus-operator                            registry.ci.openshift.org/origin/4.4-2020-04-14-172428@sha256:ec28b9dc5ad9184d0d70b85e5bc618c809084b293cbc57c215bf845bf7147b2b
 ```
 
 With the `release new` command a list of replaced images can be specified:
 ```
 $ oc adm -a /path/to/pull_secret.json \
   release new \
-  --from-release registry.svc.ci.openshift.org/origin/release:4.4 \
+  --from-release registry.ci.openshift.org/origin/release:4.4 \
   --to-image quay.io/vrutkovs/okd-release:4.4-updated-prometheus \
   prometheus=docker.io/prom/prometheus:v2.17.1
 ```
@@ -104,7 +104,7 @@ This installer would now use this release as a source of truth - and use Prometh
 Images referenced in the release payload are prepared on CI using Openshift builds from git repos (with one exception - `machine-os-content`, see below). In order to find out details about a particular 
 image use `--commit-urls`:
 ```
-$ oc adm release info registry.svc.ci.openshift.org/origin/release:4.4 --commit-urls
+$ oc adm release info registry.ci.openshift.org/origin/release:4.4 --commit-urls
 ...
 Images:
   NAME                                           URL 
