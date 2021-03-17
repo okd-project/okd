@@ -16,7 +16,7 @@ Getting Started
 ---------------
 
 To obtain the openshift installer and client, visit [/releases](https://github.com/openshift/okd/releases) for stable versions or [https://origin-release.svc.ci.openshift.org/](https://origin-release.svc.ci.openshift.org/) for nightlies. See [a list of public keys](https://okd.io/keys.html) to verify tools signature.
-Alternatively, if you have the openshift client `oc` already installed, you can use it to download and extract the openshift installer and client from our Docker image:
+Alternatively, if you have the openshift client `oc` already installed, you can use it to download and extract the openshift installer and client from our container image:
 
 ```
 $ oc adm release extract --tools quay.io/openshift/okd:4.5.0-0.okd-2020-07-14-153706-ga
