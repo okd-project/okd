@@ -154,7 +154,7 @@ Extract `openshift-install` tool (e.g. `oc adm release extract --command=openshi
        password: 'YOUR_VSPHERE_PASSWORD'
        datacenter: 'OCP-Datacenter'
        defaultDatastore: 'iscsi-hdd'
-   pullSecret: '{"auths":{"fake":{"auth": "bar"}}}'
+   pullSecret: '{"auths":{"fake":{"auth":"aWQ6cGFzcwo="}}}'
    sshKey: 'YOUR_SSH_KEY'
    ```
 
