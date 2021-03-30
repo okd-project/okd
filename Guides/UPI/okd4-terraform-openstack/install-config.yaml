@@ -13,15 +13,15 @@ metadata:
   name: same-name-as-in-terraform.tfvars
 networking:
   clusterNetwork:
-  - cidr: 10.128.0.0/14 
-    hostPrefix: 23 
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
   networkType: OpenShiftSDN
-  serviceNetwork: 
+  serviceNetwork:
   - 172.30.0.0/16
 platform:
   none: {}
 ## The pull secret that provides components in the cluster access to images for OpenShift components.
 # a fake value to satisfy the installer. Images for okd need no subscription
-pullSecret: '{"auths":{"fake":{"auth": "bar"}}}'
+pullSecret: '{"auths":{"fake":{"auth":"aWQ6cGFzcwo="}}}'
 ## The default SSH key that will be programmed for `core` user.
 sshKey: 'ssh-pubkey-for-instance-access'
