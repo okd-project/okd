@@ -1,6 +1,6 @@
 Frequently Asked Questions
 ==========================
-Below are answers to common questions regarding OKD installation and administration. If you have a suggested question or a suggested improvement to an answer, please feel free to reach out.  
+Below are answers to common questions regarding OKD installation and administration. If you have a suggested question or a suggested improvement to an answer, please feel free to reach out.
 
 # General #
 - [What are the relations with OCP project? Is OKD4 an upstream of OCP?](#what-are-the-relations-with-ocp-project-is-okd4-an-upstream-of-ocp)
@@ -16,13 +16,14 @@ Below are answers to common questions regarding OKD installation and administrat
 # Misc #
 - [Interesting commands while an upgrade runs](#interesting-commands-while-an-upgrade-runs)
 - [How can I find out what's inside of a (CI) release and which commit id each component has?](#how-can-i-find-out-whats-inside-of-a-ci-release-and-which-commit-id-each-component-has)
+- [How to use the official installation container?](#how-to-use-the-official-installation-container)
 
 ## What are the relations with OCP project? Is OKD4 an upstream of OCP?
 
-In 3.x release time OKD was used as an upstream project for Openshift Container Platform. OKD could be installed on 
+In 3.x release time OKD was used as an upstream project for Openshift Container Platform. OKD could be installed on
 Fedora/CentOS/RHEL and used CentOS based images to install the cluster. OCP, however, could be installed only on RHEL and its images were rebuilt to be RHEL-based.
 
-[Universal Base Image project](https://www.redhat.com/en/blog/introducing-red-hat-universal-base-image) has enabled us to run RHEL-based images on any platform, so the full image rebuild is no longer necessary, allowing OKD4 project to reuse most images from OCP4. There is another critical part of OCP - Red Hat Enterprise Linux CoreOS. Although RHCOS is an open source project (much like RHEL8) it's not a community-driven project. As a result, OKD workgroup has 
+[Universal Base Image project](https://www.redhat.com/en/blog/introducing-red-hat-universal-base-image) has enabled us to run RHEL-based images on any platform, so the full image rebuild is no longer necessary, allowing OKD4 project to reuse most images from OCP4. There is another critical part of OCP - Red Hat Enterprise Linux CoreOS. Although RHCOS is an open source project (much like RHEL8) it's not a community-driven project. As a result, OKD workgroup has
 made a decision to use Fedora CoreOS - open source and community-driven project - as a base for OKD4. This decision allows end-users to modify all parts of the cluster using prepared instructions.
 
 It should be noted that OKD4 is being automatically built from OCP4 [ci stream](https://github.com/openshift/release/blob/1b5147b525b60b9e402a480db6aaf0b8f12960de/core-services/release-controller/_releases/release-ocp-4.5-ci.json#L10-L36), so most of the tests are happening in OCP CI and being mirrored to OKD. As a result, OKD4 CI doesn't have to run a lot of tests to ensure the release is valid.
@@ -82,12 +83,12 @@ See https://openshift.tips/ for useful Openshift tips
 ## Where can I find upgrades?
 https://origin-release.svc.ci.openshift.org/
 
-Note that nightly builds (from `4.x.0-0.okd`) are pruned every 72 hours. 
-If your cluster uses these images, consider [mirroring](https://docs.okd.io/latest/installing/install_config/installing-restricted-networks-preparations.html#installing-restricted-networks-preparations) these files to a local registry. 
+Note that nightly builds (from `4.x.0-0.okd`) are pruned every 72 hours.
+If your cluster uses these images, consider [mirroring](https://docs.okd.io/latest/installing/install_config/installing-restricted-networks-preparations.html#installing-restricted-networks-preparations) these files to a local registry.
 Builds from the `stable-4` stream are not removed.
 
 ## How can I upgrade my cluster to a new version?
-Find a version where a tested upgrade path is available from your version for on 
+Find a version where a tested upgrade path is available from your version for on
 
 https://origin-release.svc.ci.openshift.org
 
@@ -110,7 +111,7 @@ Upgrade to a certain version (will ignore the update graph!)
   oc adm upgrade --force --allow-explicit-upgrade=true --to-image=registry.ci.openshift.org/origin/release:4.4.0-0.okd-2020-03-16-105308
   ```
 
-This will take a while; the upgrade may take several hours. Throughout the upgrade, kubernetes API would still be 
+This will take a while; the upgrade may take several hours. Throughout the upgrade, kubernetes API would still be
 accessible and user workloads would be evicted and rescheduled as nodes are updated.
 
 ## Interesting commands while an upgrade runs
@@ -169,3 +170,14 @@ This one is very helpful if you want to know if a certain commit has landed in y
     ...
 
   ```
+## How to use the official installation container?
+
+The official installer container is part of every release.
+```bash
+# Find out the installer image.
+oc adm release info quay.io/openshift/okd:4.7.0-0.okd-2021-04-24-103438 --image-for=installer
+# Example output
+# quay.io/openshift/okd-content@sha256:521cd3ac7d826749a085418f753f1f909579e1aedfda704dca939c5ea7e5b105
+# Run the container via Podman or Docker to perform tasks. e.g. create ignition configurations
+docker run -v $(pwd):/output -ti quay.io/openshift/okd-content@sha256:521cd3ac7d826749a085418f753f1f909579e1aedfda704dca939c5ea7e5b105 create ignition-configs
+```
