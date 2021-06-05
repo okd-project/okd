@@ -1,11 +1,5 @@
 # Frequent issues in latest releases
 
-## [Unable to mirror images from CI registry](https://github.com/openshift/okd/issues/402)
-  **Effected Versions:** Nightlies
-  **Description:**  Attempts to mirror content on the CI registry fails. This blocks air-gapped installs on restricted networks. The fix needs to land in our buildfarms and all images rebuilt.
-    Stable releases to quay are being fixed manually and not affected.
-  **Workaround**: None available at this time.
-
 ## [Provision node fails with fcos image 33.20210301.3.1 and later](https://github.com/openshift/okd/issues/566)
   **Effected Versions:** 4.7.0-0.okd-2021-02-25-144700 and greater
   **Description:** Update Fedora CoreOS images are using a new method of extended attributes check, breaking extraction of embedded OS extensions RPMs.
