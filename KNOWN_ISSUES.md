@@ -1,5 +1,14 @@
 # Frequent issues in latest releases
 
+## CannotRetrieveUpdates alert
+
+  **Effected Versions:** All
+
+  **Description:** Installed clusters throw `CannotRetrieveUpdates` alert, origin-release.svc.ci.openshift.org is unreachable.
+  This domain was deprecated during CI Infra cleanup. Unfortunately we didn't rollout the fix to change this URL in OKD.
+
+  **Workaround:** `oc patch clusterversion/version --patch '{"spec":{"upstream":"https://amd64.origin.releases.ci.openshift.org/graph"}}' --type=merge`
+
 ## [Provision node fails with fcos image 33.20210301.3.1 and later](https://github.com/openshift/okd/issues/566)
   **Effected Versions:** 4.7.0-0.okd-2021-02-25-144700 and greater
 
