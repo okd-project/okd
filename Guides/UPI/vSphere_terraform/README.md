@@ -121,7 +121,7 @@ backend machine-config-server
 
 Download oc from  <https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/>
 
-Choose a release ([dev-releases](https://origin-release.svc.ci.openshift.org/), ...)
+Choose a release ([dev-releases](https://amd64.origin.releases.ci.openshift.org/), ...)
 
 Extract `openshift-install` tool (e.g. `oc adm release extract --command=openshift-install registry.ci.openshift.org/origin/release:4.4.0-0.okd-2020-02-28-084836`)
 

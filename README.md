@@ -15,7 +15,7 @@ The [OKD Working Group](https://github.com/openshift/community#okd-working-group
 Getting Started
 ---------------
 
-To obtain the openshift installer and client, visit [/releases](https://github.com/openshift/okd/releases) for stable versions or [https://origin-release.svc.ci.openshift.org/](https://origin-release.svc.ci.openshift.org/) for nightlies. See [a list of public keys](https://okd.io/keys.html) to verify tools signature. Please note that each nightly release is pruned after 72 hours. If the nightly that you installed was pruned, the cluster may be unable to pull necessary images and may show errors for various functionality (including updates).
+To obtain the openshift installer and client, visit [/releases](https://github.com/openshift/okd/releases) for stable versions or [https://amd64.origin.releases.ci.openshift.org/](https://amd64.origin.releases.ci.openshift.org/) for nightlies. See [a list of public keys](https://okd.io/keys.html) to verify tools signature. Please note that each nightly release is pruned after 72 hours. If the nightly that you installed was pruned, the cluster may be unable to pull necessary images and may show errors for various functionality (including updates).
 Alternatively, if you have the openshift client `oc` already installed, you can use it to download and extract the openshift installer and client from our container image:
 
 ```
@@ -130,7 +130,7 @@ OKD is built from many different open source projects - Fedora CoreOS, the CentO
 
 Community process and questions can be raised in our [community repo](https://github.com/openshift/community) and issues [opened in this repository](https://github.com/openshift/okd/issues) (Bugzilla locations coming soon).
 
-Our unified continuous integration system tests pull requests to the ecosystem and core images, then builds and promotes them after merge. To see the latest development releases of OKD visit [our continuous release page](https://origin-release.svc.ci.openshift.org). These releases are built continuously and expire after a few days. Long lived versions are pinned and then listed on our [stable release page](https://github.com/openshift/okd/releases).
+Our unified continuous integration system tests pull requests to the ecosystem and core images, then builds and promotes them after merge. To see the latest development releases of OKD visit [our continuous release page](https://amd64.origin.releases.ci.openshift.org/). These releases are built continuously and expire after a few days. Long lived versions are pinned and then listed on our [stable release page](https://github.com/openshift/okd/releases).
 
 All contributions are welcome - OKD uses the Apache 2 license and does not require any contributor agreement to submit patches.  Please open issues for any bugs or problems you encounter, ask questions on the OpenShift IRC channel (#openshift-dev on freenode), or get involved in the [Kubernetes project](https://github.com/kubernetes/kubernetes) at the container runtime layer.
 

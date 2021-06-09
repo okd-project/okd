@@ -3,20 +3,40 @@ Frequently Asked Questions
 Below are answers to common questions regarding OKD installation and administration. If you have a suggested question or a suggested improvement to an answer, please feel free to reach out.
 
 # General #
-- [What are the relations with OCP project? Is OKD4 an upstream of OCP?](#what-are-the-relations-with-ocp-project-is-okd4-an-upstream-of-ocp)
-- [How stable is OKD4?](#how-stable-is-okd4)
-- [Can I run a single node cluster?](#can-i-run-a-single-node-cluster)
-- [What to do in case of errors?](#what-to-do-in-case-of-errors)
-- [Where do I seek support?](#where-do-i-seek-support)
+- [Frequently Asked Questions](#frequently-asked-questions)
+- [General](#general)
+- [Upgrades](#upgrades)
+- [Misc](#misc)
+  - [What are the relations with OCP project? Is OKD4 an upstream of OCP?](#what-are-the-relations-with-ocp-project-is-okd4-an-upstream-of-ocp)
+  - [How stable is OKD4?](#how-stable-is-okd4)
+  - [Can I run a single node cluster?](#can-i-run-a-single-node-cluster)
+  - [What to do in case of errors?](#what-to-do-in-case-of-errors)
+  - [Where do I seek support?](#where-do-i-seek-support)
+  - [Where can I find upgrades?](#where-can-i-find-upgrades)
+  - [How can I upgrade my cluster to a new version?](#how-can-i-upgrade-my-cluster-to-a-new-version)
+  - [Interesting commands while an upgrade runs](#interesting-commands-while-an-upgrade-runs)
+  - [How can I find out what's inside of a (CI) release and which commit id each component has?](#how-can-i-find-out-whats-inside-of-a-ci-release-and-which-commit-id-each-component-has)
+  - [How to use the official installation container?](#how-to-use-the-official-installation-container)
 
 # Upgrades #
 - [Where can I find upgrades?](#where-can-i-find-upgrades)
 - [How can I upgrade my cluster to a new version?](#how-can-i-upgrade-my-cluster-to-a-new-version)
 
 # Misc #
-- [Interesting commands while an upgrade runs](#interesting-commands-while-an-upgrade-runs)
-- [How can I find out what's inside of a (CI) release and which commit id each component has?](#how-can-i-find-out-whats-inside-of-a-ci-release-and-which-commit-id-each-component-has)
-- [How to use the official installation container?](#how-to-use-the-official-installation-container)
+- [Frequently Asked Questions](#frequently-asked-questions)
+- [General](#general)
+- [Upgrades](#upgrades)
+- [Misc](#misc)
+  - [What are the relations with OCP project? Is OKD4 an upstream of OCP?](#what-are-the-relations-with-ocp-project-is-okd4-an-upstream-of-ocp)
+  - [How stable is OKD4?](#how-stable-is-okd4)
+  - [Can I run a single node cluster?](#can-i-run-a-single-node-cluster)
+  - [What to do in case of errors?](#what-to-do-in-case-of-errors)
+  - [Where do I seek support?](#where-do-i-seek-support)
+  - [Where can I find upgrades?](#where-can-i-find-upgrades)
+  - [How can I upgrade my cluster to a new version?](#how-can-i-upgrade-my-cluster-to-a-new-version)
+  - [Interesting commands while an upgrade runs](#interesting-commands-while-an-upgrade-runs)
+  - [How can I find out what's inside of a (CI) release and which commit id each component has?](#how-can-i-find-out-whats-inside-of-a-ci-release-and-which-commit-id-each-component-has)
+  - [How to use the official installation container?](#how-to-use-the-official-installation-container)
 
 ## What are the relations with OCP project? Is OKD4 an upstream of OCP?
 
@@ -32,7 +52,7 @@ These relationships are more complex than "upstream/downstream", so we use "sibl
 
 ## How stable is OKD4?
 
-OKD4 builds are being automatically tested by [release-controller](https://origin-release.svc.ci.openshift.org/). Release is rejected if either installation, upgrade from previous version or conformance test fails. Test results determine the upgrade graph, so for instance, if upgrade tests passed for beta5->rc edge, clusters on beta5 can be directly updated to rc release, bypassing beta6.
+OKD4 builds are being automatically tested by [release-controller](https://amd64.origin.releases.ci.openshift.org/). Release is rejected if either installation, upgrade from previous version or conformance test fails. Test results determine the upgrade graph, so for instance, if upgrade tests passed for beta5->rc edge, clusters on beta5 can be directly updated to rc release, bypassing beta6.
 
 The OKD stable version is released bi-weekly, following Fedora CoreOS schedule, client tools are uploaded to Github and images are mirrored to Quay.
 
@@ -81,7 +101,7 @@ Contact us on Slack:
 See https://openshift.tips/ for useful Openshift tips
 
 ## Where can I find upgrades?
-https://origin-release.svc.ci.openshift.org/
+https://amd64.origin.releases.ci.openshift.org/
 
 Note that nightly builds (from `4.x.0-0.okd`) are pruned every 72 hours.
 If your cluster uses these images, consider [mirroring](https://docs.okd.io/latest/installing/install_config/installing-restricted-networks-preparations.html#installing-restricted-networks-preparations) these files to a local registry.
@@ -90,7 +110,7 @@ Builds from the `stable-4` stream are not removed.
 ## How can I upgrade my cluster to a new version?
 Find a version where a tested upgrade path is available from your version for on
 
-https://origin-release.svc.ci.openshift.org
+https://amd64.origin.releases.ci.openshift.org/
 
 Upgrade options:
 

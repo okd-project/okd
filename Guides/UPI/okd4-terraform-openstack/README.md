@@ -51,7 +51,7 @@ may not be available on quay.io.
 Ref:
 
 * https://builds.coreos.fedoraproject.org/browser
-* https://origin-release.svc.ci.openshift.org/
+* https://amd64.origin.releases.ci.openshift.org/
 
 ## Configuring the deployment
 
