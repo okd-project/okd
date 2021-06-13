@@ -10,11 +10,13 @@
   **Workaround:** `oc patch clusterversion/version --patch '{"spec":{"upstream":"https://amd64.origin.releases.ci.openshift.org/graph"}}' --type=merge`
 
 ## [Provision node fails with fcos image 33.20210301.3.1 and later](https://github.com/openshift/okd/issues/566)
-  **Effected Versions:** 4.7.0-0.okd-2021-02-25-144700 and greater
+  **Effected Versions:** 4.7.0-0.okd-2021-02-25-144700 - 4.7.0-0.okd-2021-06-04-191031
 
   **Description:** Update Fedora CoreOS images are using a new method of extended attributes check, breaking extraction of embedded OS extensions RPMs.
 
   **Workaround:** Use FCOS 33.20210217.3.0 - [ISO](https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/33.20210217.3.0/x86_64/fedora-coreos-33.20210217.3.0-live.x86_64.iso)
+
+  Resolved in 4.7.0-0.okd-2021-06-13-090745 - latest stable FCOS can be used to create a cluster.
 
 ## [Invalid signature error when attempting cluster updates](https://github.com/openshift/okd/issues/605)
   **Effected Versions:** 4.7.0-0.okd-2021-04-11-124433 and 4.7.0-0.okd-2021-05-22-050008
