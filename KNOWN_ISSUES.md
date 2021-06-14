@@ -45,9 +45,12 @@
   OKD-specific catalog with community versions of mentioned operators is in progress.
 
 ## [Systemd-resolved is not configured properly during install](https://github.com/openshift/okd/issues/690)
-  **Effected Versions:**  4.7.0-0.okd-2021-06-13-090745+
+  **Effected Versions:**  4.7.0-0.okd-2021-06-13-090745 - 4.7.0-0.okd-2021-06-13-090745
 
   **Description:** With the newest stable release, systemd-resolved is misconfigured due to a missing directory.  This prevents nodes from installing properly.
   
-  **Workaround** None at this time
+  **Workaround** from each affected node do the following
+* sudo su -
+* mkdir /etc/systemd/resolved.conf.d
+* reboot
 
