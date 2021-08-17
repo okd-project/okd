@@ -54,3 +54,19 @@
 * mkdir /etc/systemd/resolved.conf.d
 * reboot
 
+## [systemd crash with CoreOS stable 34.20210711.3.0](https://github.com/coreos/fedora-coreos-tracker/issues/912)
+
+  **Affected Versions:**  4.7.0-0.okd-2021-08-07-063045 - 4.7.0-0.okd-2021-08-07-063045
+
+  **Description:** Systemd version systemd-248.5-1.fc34.x86_64 may core dump with this message:
+
+  ```
+systemd[1]: Caught <ABRT>, dumped core as pid 3444.
+systemd[1]: Freezing execution.
+  ```
+  As an initial symptom, the node may have slowness and timeouts for interactive ssh and sudo. From the perspective of the Kubernetes scheduler, the nodes are available but pods created after ABRT report when using "get pod" ContainerCreating and when using "describe pod" a Status of Pending.
+
+  Because of [two CVEs](https://github.com/coreos/fedora-coreos-tracker/issues/904) package updates were fast-tracked. Afterwards, as noted in [an issue](https://github.com/coreos/fedora-coreos-tracker/issues/912) and [Bugzilla](https://bugzilla.redhat.com/show_bug.cgi?id=1984651), systemd may respond as if sent an ABRT signal and crash. Differences between systemd-248.5 and 248.6 are listed at [Bodhi](https://bodhi.fedoraproject.org/updates/FEDORA-2021-3141f0eff1). A [commit](https://github.com/openshift/okd-machine-os/pull/181) to remove the package exceptions from okd-machine-os was made in mid-August 2021.
+
+  **Workaround:** Reboot the machine when systemd crashes.
+
