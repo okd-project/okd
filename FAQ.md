@@ -58,20 +58,9 @@ The OKD stable version is released bi-weekly, following Fedora CoreOS schedule, 
 
 ## Can I run a single node cluster?
 
-Yes.
+Currently, single-node cluster installations cannot be deployed directly by the 4.7 installer. This is a [known issue](https://github.com/openshift/okd/blob/master/KNOWN_ISSUES.md). Single-node cluster installations do work with the 4.8 nightly installer builds. 
 
-Set the following in install config, which renders 0 worker nodes and 1 control-plane node:
-```
-compute:
-- name: worker
-  replicas: 0
-controlPlane:
-  name: master
-  replicas: 1
-```
-This would inject a non-HA manifest for etcd and run a single ingress pod.
-
-WARNING: this cluster cannot be upgraded or adjusted via MachineConfigs. Adding more masters is not yet supported.
+As an alternative, if OKD version 4.7 is needed, you may have luck with Charo Gruver's [OKD 4 Single Node Cluster instructions](https://cgruver.github.io/okd4-single-node-cluster/). You can also use [Code Ready Containers (CRC)](https://www.okd.io/crc.html) to run a single-node cluster on your desktop.
 
 ## What to do in case of errors?
 If you experience problems during installation you *must* collect the bootstrap log bundle, see [instructions](https://docs.okd.io/latest/installing/installing-troubleshooting.html)

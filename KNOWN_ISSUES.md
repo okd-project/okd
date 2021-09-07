@@ -1,5 +1,13 @@
 # Frequent issues in latest releases
 
+## [Single-node Cluster Installations Fails on AWS (IPI)](https://github.com/openshift/okd/issues/862)
+
+  **Effected Versions:** 4.7
+
+  **Description:** Attempting to deploy a single-node cluster to AWS with Installer Provisioned Infrastructure (IPI) fails.
+
+  **Workaround:** None at this time. 
+
 ## CannotRetrieveUpdates alert
 
   **Effected Versions:** All
