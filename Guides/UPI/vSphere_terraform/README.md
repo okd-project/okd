@@ -78,6 +78,8 @@ defaults
     timeout connect         10s
     timeout client          1m
     timeout server          1m
+    timeout tunnel          5m
+    timeout client-fin      5s
 
 listen  stats
     bind *:9000
