@@ -6,6 +6,7 @@ Below are answers to common questions regarding OKD installation and administrat
 - [General](#general)
   - [What are the relations with OCP project? Is OKD4 an upstream of OCP?](#what-are-the-relations-with-ocp-project-is-okd4-an-upstream-of-ocp)
   - [How stable is OKD4?](#how-stable-is-okd4)
+  - [Which Fedora CoreOS should I use?](#which-fedora-coreos-should-i-use)
   - [Can I run a single node cluster?](#can-i-run-a-single-node-cluster)
   - [What to do in case of errors?](#what-to-do-in-case-of-errors)
   - [Where do I seek support?](#where-do-i-seek-support)
@@ -35,6 +36,32 @@ These relationships are more complex than "upstream/downstream", so we use "sibl
 OKD4 builds are being automatically tested by [release-controller](https://amd64.origin.releases.ci.openshift.org/). Release is rejected if either installation, upgrade from previous version or conformance test fails. Test results determine the upgrade graph, so for instance, if upgrade tests passed for beta5->rc edge, clusters on beta5 can be directly updated to rc release, bypassing beta6.
 
 The OKD stable version is released bi-weekly, following Fedora CoreOS schedule, client tools are uploaded to Github and images are mirrored to Quay.
+
+## Which Fedora CoreOS should I use?
+
+In OKD 4.8 and further installer has references to tested Fedora CoreOS artifacts:
+```
+$ openshift-installer coreos print-stream-json
+{
+    "stream": "stable",
+    "metadata": {
+        "last-modified": "2021-07-14T21:50:43Z"
+    },
+    "architectures": {
+        "x86_64": {
+...
+$ openshift-installer coreos print-stream-json | jq -r '.architectures.x86_64.artifacts.openstack.formats["qcow2.xz"]'
+{
+  "disk": {
+    "location": "https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/34.20210626.3.1/x86_64/fedora-coreos-34.20210626.3.1-openstack.x86_64.qcow2.xz",
+    "signature": "https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/34.20210626.3.1/x86_64/fedora-coreos-34.20210626.3.1-openstack.x86_64.qcow2.xz.sig",
+    "sha256": "65706172925a57dbd3fd9dc63b846ce41c83aa0ae34159701d2050faba4921ca",
+    "uncompressed-sha256": "c2364a4ddb747d23263dec398d956799d2362983fb8fc257a5ab1d87b604683d"
+  }
+}
+```
+
+Use other initial Fedora CoreOS artifacts with caution - these might have [known issues](./KNOWN_ISSUES.md)
 
 ## Can I run a single node cluster?
 
