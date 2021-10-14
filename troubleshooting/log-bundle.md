@@ -67,9 +67,41 @@ does after release image has been downloaded is updating plain FCOS to OKD conte
 This is done in `release-image-download.service` by pulling `machine-os-content` image from 
 the payload, extracting ostree commit and pivoting bootstrap into it.
 TODO: fix installer to include log from this service.
-TODO: find an easy way to identify initial FCOS image used (extract it from the boot log)?
 
 Other nodes are instructed to run `machine-config-firstboot.service` early, which does the same for control plane / workers.
 TODO: fix installer to include log from this service in log bundles
 
 TODO: Describe most important containers here - `etcd`, `kube-api`, `machine-config-server` etc.
+
+### Fedora CoreOS Image 
+
+To verify the intended Fedora CoreOS image is used, check:
+ - Bootstrap nodes: `bootstrap/rpm-ostree/status`
+ - For control plane nodes: `control-plane/<node ip>/rpm-ostree/status`
+ 
+~~~
+$ cat bootstrap/rpm-ostree/status 
+State: idle
+Deployments:
+* pivot://registry.ci.openshift.org/origin/4.6-2021-08-04-030013@sha256:9f512c61f4077be799a6d7ec2d01aea503cb2ab0c5a93a6e9fc51b5d2bbccb44
+              CustomOrigin: Managed by machine-config-operator
+                 Timestamp: 2021-05-07T07:33:09Z
+
+  ostree://fedora:fedora/x86_64/coreos/stable
+                   Version: 33.20210117.3.2 (2021-02-03T18:13:41Z)
+                    Commit: 20de1953c18bd432a8ed4e19b91c64978100dba7d1c4813f91f8cf4d4d2411b4
+              GPGSignature: Valid signature by 963A2BEB02009608FE67EA4249FD77499570FF31
+
+$ cat control-plane/10.0.0.7/rpm-ostree/status 
+State: idle
+Deployments:
+* pivot://registry.ci.openshift.org/origin/4.6-2021-08-04-030013@sha256:9f512c61f4077be799a6d7ec2d01aea503cb2ab0c5a93a6e9fc51b5d2bbccb44
+              CustomOrigin: Managed by machine-config-operator
+                 Timestamp: 2021-05-07T07:33:09Z
+           LayeredPackages: NetworkManager-ovs glusterfs glusterfs-fuse qemu-guest-agent
+
+  ostree://fedora:fedora/x86_64/coreos/stable
+                   Version: 33.20210117.3.2 (2021-02-03T18:13:41Z)
+                    Commit: 20de1953c18bd432a8ed4e19b91c64978100dba7d1c4813f91f8cf4d4d2411b4
+              GPGSignature: Valid signature by 963A2BEB02009608FE67EA4249FD77499570FF31
+~~~
