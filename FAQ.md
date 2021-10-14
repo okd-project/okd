@@ -2,42 +2,22 @@ Frequently Asked Questions
 ==========================
 Below are answers to common questions regarding OKD installation and administration. If you have a suggested question or a suggested improvement to an answer, please feel free to reach out.
 
+- [Frequently Asked Questions](#frequently-asked-questions)
+- [General](#general)
+  - [What are the relations with OCP project? Is OKD4 an upstream of OCP?](#what-are-the-relations-with-ocp-project-is-okd4-an-upstream-of-ocp)
+  - [How stable is OKD4?](#how-stable-is-okd4)
+  - [Can I run a single node cluster?](#can-i-run-a-single-node-cluster)
+  - [What to do in case of errors?](#what-to-do-in-case-of-errors)
+  - [Where do I seek support?](#where-do-i-seek-support)
+- [Upgrades](#upgrades)
+  - [Where can I find upgrades?](#where-can-i-find-upgrades)
+  - [How can I upgrade my cluster to a new version?](#how-can-i-upgrade-my-cluster-to-a-new-version)
+  - [Interesting commands while an upgrade runs](#interesting-commands-while-an-upgrade-runs)
+- [Misc](#misc)
+  - [How can I find out what's inside of a (CI) release and which commit id each component has?](#how-can-i-find-out-whats-inside-of-a-ci-release-and-which-commit-id-each-component-has)
+  - [How to use the official installation container?](#how-to-use-the-official-installation-container)
+
 # General #
-- [Frequently Asked Questions](#frequently-asked-questions)
-- [General](#general)
-- [Upgrades](#upgrades)
-- [Misc](#misc)
-  - [What are the relations with OCP project? Is OKD4 an upstream of OCP?](#what-are-the-relations-with-ocp-project-is-okd4-an-upstream-of-ocp)
-  - [How stable is OKD4?](#how-stable-is-okd4)
-  - [Can I run a single node cluster?](#can-i-run-a-single-node-cluster)
-  - [What to do in case of errors?](#what-to-do-in-case-of-errors)
-  - [Where do I seek support?](#where-do-i-seek-support)
-  - [Where can I find upgrades?](#where-can-i-find-upgrades)
-  - [How can I upgrade my cluster to a new version?](#how-can-i-upgrade-my-cluster-to-a-new-version)
-  - [Interesting commands while an upgrade runs](#interesting-commands-while-an-upgrade-runs)
-  - [How can I find out what's inside of a (CI) release and which commit id each component has?](#how-can-i-find-out-whats-inside-of-a-ci-release-and-which-commit-id-each-component-has)
-  - [How to use the official installation container?](#how-to-use-the-official-installation-container)
-
-# Upgrades #
-- [Where can I find upgrades?](#where-can-i-find-upgrades)
-- [How can I upgrade my cluster to a new version?](#how-can-i-upgrade-my-cluster-to-a-new-version)
-
-# Misc #
-- [Frequently Asked Questions](#frequently-asked-questions)
-- [General](#general)
-- [Upgrades](#upgrades)
-- [Misc](#misc)
-  - [What are the relations with OCP project? Is OKD4 an upstream of OCP?](#what-are-the-relations-with-ocp-project-is-okd4-an-upstream-of-ocp)
-  - [How stable is OKD4?](#how-stable-is-okd4)
-  - [Can I run a single node cluster?](#can-i-run-a-single-node-cluster)
-  - [What to do in case of errors?](#what-to-do-in-case-of-errors)
-  - [Where do I seek support?](#where-do-i-seek-support)
-  - [Where can I find upgrades?](#where-can-i-find-upgrades)
-  - [How can I upgrade my cluster to a new version?](#how-can-i-upgrade-my-cluster-to-a-new-version)
-  - [Interesting commands while an upgrade runs](#interesting-commands-while-an-upgrade-runs)
-  - [How can I find out what's inside of a (CI) release and which commit id each component has?](#how-can-i-find-out-whats-inside-of-a-ci-release-and-which-commit-id-each-component-has)
-  - [How to use the official installation container?](#how-to-use-the-official-installation-container)
-
 ## What are the relations with OCP project? Is OKD4 an upstream of OCP?
 
 In 3.x release time OKD was used as an upstream project for Openshift Container Platform. OKD could be installed on
@@ -89,6 +69,7 @@ Contact us on Slack:
 
 See https://openshift.tips/ for useful Openshift tips
 
+# Upgrades
 ## Where can I find upgrades?
 https://amd64.origin.releases.ci.openshift.org/
 
@@ -140,6 +121,7 @@ Check the status of your nodes (cluster upgrades may include base OS updates):
 oc get nodes
 ```
 
+# Misc
 ## How can I find out what's inside of a (CI) release and which commit id each component has?
 This one is very helpful if you want to know if a certain commit has landed in your current version:
 
