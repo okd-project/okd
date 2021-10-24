@@ -2,42 +2,23 @@ Frequently Asked Questions
 ==========================
 Below are answers to common questions regarding OKD installation and administration. If you have a suggested question or a suggested improvement to an answer, please feel free to reach out.
 
+- [Frequently Asked Questions](#frequently-asked-questions)
+- [General](#general)
+  - [What are the relations with OCP project? Is OKD4 an upstream of OCP?](#what-are-the-relations-with-ocp-project-is-okd4-an-upstream-of-ocp)
+  - [How stable is OKD4?](#how-stable-is-okd4)
+  - [Which Fedora CoreOS should I use?](#which-fedora-coreos-should-i-use)
+  - [Can I run a single node cluster?](#can-i-run-a-single-node-cluster)
+  - [What to do in case of errors?](#what-to-do-in-case-of-errors)
+  - [Where do I seek support?](#where-do-i-seek-support)
+- [Upgrades](#upgrades)
+  - [Where can I find upgrades?](#where-can-i-find-upgrades)
+  - [How can I upgrade my cluster to a new version?](#how-can-i-upgrade-my-cluster-to-a-new-version)
+  - [Interesting commands while an upgrade runs](#interesting-commands-while-an-upgrade-runs)
+- [Misc](#misc)
+  - [How can I find out what's inside of a (CI) release and which commit id each component has?](#how-can-i-find-out-whats-inside-of-a-ci-release-and-which-commit-id-each-component-has)
+  - [How to use the official installation container?](#how-to-use-the-official-installation-container)
+
 # General #
-- [Frequently Asked Questions](#frequently-asked-questions)
-- [General](#general)
-- [Upgrades](#upgrades)
-- [Misc](#misc)
-  - [What are the relations with OCP project? Is OKD4 an upstream of OCP?](#what-are-the-relations-with-ocp-project-is-okd4-an-upstream-of-ocp)
-  - [How stable is OKD4?](#how-stable-is-okd4)
-  - [Can I run a single node cluster?](#can-i-run-a-single-node-cluster)
-  - [What to do in case of errors?](#what-to-do-in-case-of-errors)
-  - [Where do I seek support?](#where-do-i-seek-support)
-  - [Where can I find upgrades?](#where-can-i-find-upgrades)
-  - [How can I upgrade my cluster to a new version?](#how-can-i-upgrade-my-cluster-to-a-new-version)
-  - [Interesting commands while an upgrade runs](#interesting-commands-while-an-upgrade-runs)
-  - [How can I find out what's inside of a (CI) release and which commit id each component has?](#how-can-i-find-out-whats-inside-of-a-ci-release-and-which-commit-id-each-component-has)
-  - [How to use the official installation container?](#how-to-use-the-official-installation-container)
-
-# Upgrades #
-- [Where can I find upgrades?](#where-can-i-find-upgrades)
-- [How can I upgrade my cluster to a new version?](#how-can-i-upgrade-my-cluster-to-a-new-version)
-
-# Misc #
-- [Frequently Asked Questions](#frequently-asked-questions)
-- [General](#general)
-- [Upgrades](#upgrades)
-- [Misc](#misc)
-  - [What are the relations with OCP project? Is OKD4 an upstream of OCP?](#what-are-the-relations-with-ocp-project-is-okd4-an-upstream-of-ocp)
-  - [How stable is OKD4?](#how-stable-is-okd4)
-  - [Can I run a single node cluster?](#can-i-run-a-single-node-cluster)
-  - [What to do in case of errors?](#what-to-do-in-case-of-errors)
-  - [Where do I seek support?](#where-do-i-seek-support)
-  - [Where can I find upgrades?](#where-can-i-find-upgrades)
-  - [How can I upgrade my cluster to a new version?](#how-can-i-upgrade-my-cluster-to-a-new-version)
-  - [Interesting commands while an upgrade runs](#interesting-commands-while-an-upgrade-runs)
-  - [How can I find out what's inside of a (CI) release and which commit id each component has?](#how-can-i-find-out-whats-inside-of-a-ci-release-and-which-commit-id-each-component-has)
-  - [How to use the official installation container?](#how-to-use-the-official-installation-container)
-
 ## What are the relations with OCP project? Is OKD4 an upstream of OCP?
 
 In 3.x release time OKD was used as an upstream project for Openshift Container Platform. OKD could be installed on
@@ -55,6 +36,32 @@ These relationships are more complex than "upstream/downstream", so we use "sibl
 OKD4 builds are being automatically tested by [release-controller](https://amd64.origin.releases.ci.openshift.org/). Release is rejected if either installation, upgrade from previous version or conformance test fails. Test results determine the upgrade graph, so for instance, if upgrade tests passed for beta5->rc edge, clusters on beta5 can be directly updated to rc release, bypassing beta6.
 
 The OKD stable version is released bi-weekly, following Fedora CoreOS schedule, client tools are uploaded to Github and images are mirrored to Quay.
+
+## Which Fedora CoreOS should I use?
+
+In OKD 4.8 and further installer has references to tested Fedora CoreOS artifacts:
+```
+$ openshift-installer coreos print-stream-json
+{
+    "stream": "stable",
+    "metadata": {
+        "last-modified": "2021-07-14T21:50:43Z"
+    },
+    "architectures": {
+        "x86_64": {
+...
+$ openshift-installer coreos print-stream-json | jq -r '.architectures.x86_64.artifacts.openstack.formats["qcow2.xz"]'
+{
+  "disk": {
+    "location": "https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/34.20210626.3.1/x86_64/fedora-coreos-34.20210626.3.1-openstack.x86_64.qcow2.xz",
+    "signature": "https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/34.20210626.3.1/x86_64/fedora-coreos-34.20210626.3.1-openstack.x86_64.qcow2.xz.sig",
+    "sha256": "65706172925a57dbd3fd9dc63b846ce41c83aa0ae34159701d2050faba4921ca",
+    "uncompressed-sha256": "c2364a4ddb747d23263dec398d956799d2362983fb8fc257a5ab1d87b604683d"
+  }
+}
+```
+
+Use other initial Fedora CoreOS artifacts with caution - these might have [known issues](./KNOWN_ISSUES.md)
 
 ## Can I run a single node cluster?
 
@@ -89,6 +96,7 @@ Contact us on Slack:
 
 See https://openshift.tips/ for useful Openshift tips
 
+# Upgrades
 ## Where can I find upgrades?
 https://amd64.origin.releases.ci.openshift.org/
 
@@ -140,6 +148,7 @@ Check the status of your nodes (cluster upgrades may include base OS updates):
 oc get nodes
 ```
 
+# Misc
 ## How can I find out what's inside of a (CI) release and which commit id each component has?
 This one is very helpful if you want to know if a certain commit has landed in your current version:
 
