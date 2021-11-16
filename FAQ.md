@@ -41,7 +41,7 @@ The OKD stable version is released bi-weekly, following Fedora CoreOS schedule, 
 
 In OKD 4.8 and further installer has references to tested Fedora CoreOS artifacts:
 ```
-$ openshift-installer coreos print-stream-json
+$ openshift-install coreos print-stream-json
 {
     "stream": "stable",
     "metadata": {
@@ -50,7 +50,7 @@ $ openshift-installer coreos print-stream-json
     "architectures": {
         "x86_64": {
 ...
-$ openshift-installer coreos print-stream-json | jq -r '.architectures.x86_64.artifacts.openstack.formats["qcow2.xz"]'
+$ openshift-install coreos print-stream-json | jq -r '.architectures.x86_64.artifacts.openstack.formats["qcow2.xz"]'
 {
   "disk": {
     "location": "https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/34.20210626.3.1/x86_64/fedora-coreos-34.20210626.3.1-openstack.x86_64.qcow2.xz",
