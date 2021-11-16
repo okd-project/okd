@@ -159,7 +159,7 @@ OpenShift installer will wait for 30 minutes. It should be enough to complete th
 #### Intermediate stage
 When the bootstrap is finished you have to approve the nodes CSR, configure the storage backend for the `image-registry` cluster operator, and shutting down the bootstrap node.
 
-Shut down the bootstrap vm and then remove it from the pools of the load balancer. If you followed the [LB_HAProxy.md](../vSphere/Requirements/LB_HAProxy.md) guide to configure HAProxy as you load balancer, just comment the two `bootstrap` records in the configuration file, and then restart its service.
+Shut down the bootstrap vm and then remove it from the pools of the load balancer. If you followed the [LB_HAProxy.md](../vSphere_govc/Requirements/LB_HAProxy.md) guide to configure HAProxy as you load balancer, just comment the two `bootstrap` records in the configuration file, and then restart its service.
 
 After the bootstrap vm is offline, authenticate as `system:admin` in OKD, by using the `kubeconfig` file, which was created when Ingnition configs were [generated](#generate-the-ignition-configuration-files).
 
