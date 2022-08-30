@@ -15,7 +15,7 @@ The [OKD Working Group](https://github.com/openshift/community#okd-working-group
 Getting Started
 ---------------
 
-To obtain the openshift installer and client, visit [/releases](https://github.com/openshift/okd/releases) for stable versions or [https://amd64.origin.releases.ci.openshift.org/](https://amd64.origin.releases.ci.openshift.org/) for nightlies. See [a list of public keys](https://okd.io/keys.html) to verify tools signature. Please note that each nightly release is pruned after 72 hours. If the nightly that you installed was pruned, the cluster may be unable to pull necessary images and may show errors for various functionality (including updates).
+To obtain the openshift installer and client, visit [/releases](https://github.com/openshift/okd/releases) for stable versions or [https://amd64.origin.releases.ci.openshift.org/](https://amd64.origin.releases.ci.openshift.org/) for nightlies. Use [this public key](https://www.okd.io/vrutkovs.pub) to verify tools signature. Please note that each nightly release is pruned after 72 hours. If the nightly that you installed was pruned, the cluster may be unable to pull necessary images and may show errors for various functionality (including updates).
 Alternatively, if you have the openshift client `oc` already installed, you can use it to download and extract the openshift installer and client from our container image:
 
 ```
