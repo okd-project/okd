@@ -23,7 +23,7 @@ There is two scripts, `update-installer-and-image.sh` and
 `deploy.sh`, for getting dependencies and deploying the
 cluster respectively.
 
-You need access to an openstack project with enoght resources to accomodate nodes according to
+You need access to an openstack project with enough resources to accomodate nodes according to
 https://docs.okd.io/latest/installing/installing_bare_metal/installing-bare-metal.html#minimum-resource-requirements_installing-bare-metal , a DNS subdomain that can be controlled with the Openstack API. Also, this terraform
 code assumes that instances automatically get a NIC with public IPv4
 address assigned to it.
