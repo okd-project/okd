@@ -74,7 +74,7 @@ Learn More
 
 * **[Public Documentation](https://docs.okd.io/latest/welcome/)**
 
-For questions or feedback, reach us on [Kubernetes Slack on #openshift-dev](https://kubernetes.slack.com/) or post to our [mailing list](https://lists.openshift.redhat.com/openshiftmm/listinfo/dev).
+For questions or feedback, reach us on [Kubernetes Slack on #openshift-users](https://kubernetes.slack.com/archives/C6AD6JM17) or post to our [mailing list](https://lists.openshift.redhat.com/openshiftmm/listinfo/dev).
 
 
 ### What can I run on OKD?
