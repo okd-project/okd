@@ -29,8 +29,8 @@ apiVersion: machineconfiguration.openshift.io/v1
 kind: MachineConfig
 metadata:
   labels:
-    machineconfiguration.openshift.io/role: worker
-  name: okd-configure-worker-node-hostname
+    machineconfiguration.openshift.io/role: master
+  name: okd-configure-master-node-hostname
 spec:
   config:
     ignition:
