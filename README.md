@@ -9,7 +9,7 @@ OKD: The Community Distribution of Kubernetes that powers Red Hat's OpenShift
 
 This repository covers OKD4 and newer. For older versions of OKD, see the [3.11 branch of openshift/origin](https://github.com/openshift/origin/tree/release-3.11).
 
-The [OKD Working Group](https://github.com/openshift/community#okd-working-group-meetings) meets bi-weekly to discuss development and next steps.  Meeting schedule and location are tracked in the [openshift/community repo](https://github.com/openshift/community/projects/1#card-28309038).
+Open issues and ideas are tracked in the [okd/community repo](https://github.com/orgs/okd-project/projects/1).
 
 
 Getting Started
