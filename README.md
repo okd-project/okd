@@ -12,6 +12,9 @@ This repository covers OKD4 and newer. For older versions of OKD, see the [3.11 
 Open issues and ideas are tracked in the [okd/community repo](https://github.com/orgs/okd-project/projects/1).
 
 
+The [meeting calendar]( https://calendar.fedoraproject.org/okd/ ) shows regular working group meetings, currently on Tuesdays.
+
+
 Getting Started
 ---------------
 
