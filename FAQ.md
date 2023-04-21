@@ -122,6 +122,12 @@ Upgrade options:
 
 **Last resort**:
 
+Change the stable channel
+
+```
+oc patch clusterversion version --type json -p '[{"op": "add", "path": "/spec/channel", "value": "stable-4.4"}]'
+```
+
 Upgrade to a certain version (will ignore the update graph!)
 
   ```
