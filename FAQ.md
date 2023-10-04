@@ -12,7 +12,7 @@ Below are answers to common questions regarding OKD installation and administrat
   - [Where do I seek support?](#where-do-i-seek-support)
 - [Upgrades](#upgrades)
   - [Where can I find upgrades?](#where-can-i-find-upgrades)
-  - [Why are no upgrade edges available?](#why-no-upgrade-edges-are-available)
+  - [Why are no upgrade edges available?](#why-are-no-upgrade-edges-available)
   - [How can I upgrade my cluster to a new version?](#how-can-i-upgrade-my-cluster-to-a-new-version)
   - [Interesting commands while an upgrade runs](#interesting-commands-while-an-upgrade-runs)
 - [Misc](#misc)
