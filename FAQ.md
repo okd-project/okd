@@ -12,6 +12,7 @@ Below are answers to common questions regarding OKD installation and administrat
   - [Where do I seek support?](#where-do-i-seek-support)
 - [Upgrades](#upgrades)
   - [Where can I find upgrades?](#where-can-i-find-upgrades)
+  - [Why are no upgrade edges available?](#why-no-upgrade-edges-are-available)
   - [How can I upgrade my cluster to a new version?](#how-can-i-upgrade-my-cluster-to-a-new-version)
   - [Interesting commands while an upgrade runs](#interesting-commands-while-an-upgrade-runs)
 - [Misc](#misc)
@@ -103,6 +104,12 @@ https://amd64.origin.releases.ci.openshift.org/
 Note that nightly builds (from `4.x.0-0.okd`) are pruned every 72 hours.
 If your cluster uses these images, consider [mirroring](https://docs.okd.io/latest/installing/install_config/installing-restricted-networks-preparations.html#installing-restricted-networks-preparations) these files to a local registry.
 Builds from the `stable-4` stream are not removed.
+
+## Why are no upgrade edges available?
+
+* Check that the cluster has correct upstream server - it should be https://amd64.origin.releases.ci.openshift.org/graph
+* Check that correct channel is set - so far OKD has only `stable-4`. Unlike OCP `stable-4.10` and similar are not available
+* Check that [release controller](https://amd64.origin.releases.ci.openshift.org/) page for selected releases has a passing test between two edges. See [full release upgrade graph](https://amd64.origin.releases.ci.openshift.org/graph?format=png)
 
 ## How can I upgrade my cluster to a new version?
 Find a version where a tested upgrade path is available from your version for on
