@@ -15,6 +15,7 @@ Below are answers to common questions regarding OKD installation and administrat
   - [Why are no upgrade edges available?](#why-are-no-upgrade-edges-available)
   - [How can I upgrade my cluster to a new version?](#how-can-i-upgrade-my-cluster-to-a-new-version)
   - [Interesting commands while an upgrade runs](#interesting-commands-while-an-upgrade-runs)
+  - [How do I find a valid upgrade path?](#how-do-i-find-a-valid-upgrade-path)
 - [Misc](#misc)
   - [How can I find out what's inside of a (CI) release and which commit id each component has?](#how-can-i-find-out-whats-inside-of-a-ci-release-and-which-commit-id-each-component-has)
   - [How to use the official installation container?](#how-to-use-the-official-installation-container)
@@ -154,6 +155,75 @@ Check the status of your nodes (cluster upgrades may include base OS updates):
 ```
 oc get nodes
 ```
+
+## How do I find a valid upgrade path?
+
+OKD uses an Cincinnati Graph Data endpoint to determine valid upgrade edges, in order to find a
+valid upgrade path. The following curl request can be used to determine valid upgrade paths one
+version forward.
+
+```sh
+upstream="https://amd64.origin.releases.ci.openshift.org/graph"
+channel="stable-4"
+version="4.11.0-0.okd-2023-01-14-152430"
+curl --silent --header 'Accept:application/json' "${upstream}?arch=amd64&channel=${channel}" | jq ". as \$graph | \$graph.nodes | map(.version == \"${version}\") | index(true) as \$orig | \$graph.edges | map(select(.[0] == \$orig)[1]) | map(\$graph.nodes[.])"
+
+[
+  {
+    "version": "4.12.0-0.okd-2023-04-16-041331",
+    "payload": "registry.ci.openshift.org/origin/release@sha256:2b3d90157565bb1e227c1cd182154b498c4cf76360d8a57cc5d6d5a4a63794cb"
+  },
+  {
+    "version": "4.12.0-0.okd-2023-02-18-033438",
+    "payload": "registry.ci.openshift.org/origin/release@sha256:fd08a1dae13a434729451cdb6edd969714a4329904e8d27eb45d94e96021dff4"
+  },
+  {
+    "version": "4.12.0-0.okd-2023-03-05-022504",
+    "payload": "registry.ci.openshift.org/origin/release@sha256:fef2d0803e6ee6ec36d1979a0b847441580fbd9ee3ad583c97edb7ff811ee3b6"
+  },
+  {
+    "version": "4.12.0-0.okd-2023-04-01-051724",
+    "payload": "registry.ci.openshift.org/origin/release@sha256:a8272e9992eee6b9c9dfa1b44e7348e5f979c0de96ad60d6235477a1aa0d7897"
+  },
+  {
+    "version": "4.12.0-0.okd-2023-02-04-212953",
+    "payload": "registry.ci.openshift.org/origin/release@sha256:3c14b3cc66310aede5086fabbbff81848956b690a695abeef2ba38bee5a03145"
+  },
+  {
+    "version": "4.12.0-0.okd-2023-03-18-084815",
+    "payload": "registry.ci.openshift.org/origin/release@sha256:7153ed89133eeaca94b5fda702c5709b9ad199ce4ff9ad1a0f01678d6ecc720f"
+  },
+  {
+    "version": "4.12.0-0.okd-2023-01-21-055900",
+    "payload": "registry.ci.openshift.org/origin/release@sha256:8c5e4d3a76aba995c005fa7f732d68658cc67d6f11da853360871012160b2ebf"
+  }
+]
+```
+
+In case you are on a older version where multiple jumps may be required to get to a desired version,
+then the following command can be used.
+
+```sh
+wget -q https://gist.githubusercontent.com/Goose29/ca7debd6aec7d1a4959faa2d1b661d93/raw/4584d89c49d4af197480539bdd873f6d9ca2dd83/upgrade-path.py && (curl -sH 'Accept:application/json' 'https://amd64.origin.releases.ci.openshift.org/graph?channel=stable-4' | python ./upgrade-path.py 4.7.0-0.okd-2021-03-28-152009 4.13.0-0.okd-2023-09-30-084937)
+
+Shortest path:
+ - 4.7.0-0.okd-2021-03-28-152009
+ - 4.7.0-0.okd-2021-05-22-050008
+ - 4.7.0-0.okd-2021-06-13-090745
+ - 4.7.0-0.okd-2021-07-03-190901
+ - 4.8.0-0.okd-2021-10-24-061736
+ - 4.8.0-0.okd-2021-11-14-052418
+ - 4.9.0-0.okd-2022-02-12-140851
+ - 4.10.0-0.okd-2022-06-10-131327
+ - 4.10.0-0.okd-2022-07-09-073606
+ - 4.11.0-0.okd-2023-01-14-152430
+ - 4.12.0-0.okd-2023-03-18-084815
+ - 4.13.0-0.okd-2023-05-22-052007
+ - 4.13.0-0.okd-2023-07-23-051208
+ - 4.13.0-0.okd-2023-09-30-084937
+```
+
+This can be used to generate a complete upgrade path, based off known good edges.
 
 # Misc
 ## How can I find out what's inside of a (CI) release and which commit id each component has?
