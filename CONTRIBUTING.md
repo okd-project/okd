@@ -95,7 +95,7 @@ This command would do the following:
 
 Installer in the new image would also be updated - it would point to the new release:
 ```
-$ oc adm release extract '--command-os=/usr/bin/openshift-install' --to=quay.io/vrutkovs/okd-release:4.4-updated-prometheus
+$ oc adm release extract --command='/usr/bin/openshift-install' --command-os=linux/arm64 quay.io/vrutkovs/okd-release:4.4-updated-prometheus
 ```
 This installer would now use this release as a source of truth - and use Prometheus v2.17.1 pulling it from Dockerhub.
 
