@@ -92,7 +92,7 @@ OKD is a community-supported distribution, Red Hat does not provide commercial s
 
 Contact us on Slack:
 
-*  Workspace: Kubernetes, Channel: **#openshift-dev** (for **developer** communication)
+*  Workspace: Kubernetes, Channel: **#okd-dev** (for **developer** communication)
 
 *  Workspace: Kubernetes, Channel: **#openshift-users** (for **users**)
 
