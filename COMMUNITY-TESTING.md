@@ -8,6 +8,12 @@ There are currently no new releases of OKD while we ramp up our build and testin
 
 ## Nightly Builds 
 
+Real world tests of the nightly builds are a key component to the success of OKD. We encourage testing of all your desired use cases, and also these particular areas of focus:
+
+* Samples Operator
+* Any community operators
+* Drivers
+* Branding (Please keep any eye out for anything with Red Hat/OCP branding)
 
 ### Getting Started
 
