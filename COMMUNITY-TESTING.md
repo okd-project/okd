@@ -42,6 +42,6 @@ To undo the installation and delete any cloud resources created by the installer
 $ openshift-install destroy cluster
 ```
 
-[Learn more about the installer](https://github.com/openshift/installer/blob/master/docs/user/overview.md)
+### Submitting Testing Results
 
-The OpenShift client tools for your cluster can be downloaded from the web console.
+Please submit bugs and other testing result information to the [Pre-release Testing Discussion Category of the OKD repo](https://github.com/okd-project/okd/discussions/categories/pre-release-testing). Please use the labels "OKD SCOS 4.16" or "OKD SCOS 4.17" to help us categorize discussions further. Many thanks!
