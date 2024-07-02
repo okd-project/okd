@@ -4,7 +4,7 @@
 
 There are currently no new releases of OKD while we ramp up our build and testing process for OKD SCOS. You can [read more about this effort on the OKD website](https://www.okd.io/blog/2024/06/01/okd_future_statement/#okd-working-group-statement-june-1-2024)
 
-
+**We currently only need testing of the OKD SCOS builds.** 
 
 ## Pre-release Builds 
 
