@@ -19,7 +19,7 @@ Real world tests of the pre-release builds are a key component to the success of
 
 Pre-release builds of OKD SCOS are currently available for [4.16](https://amd64.origin.releases.ci.openshift.org/#4.16.0-0.okd-scos) and [4.17](https://amd64.origin.releases.ci.openshift.org/#4.17.0-0.okd-scos). Please note that each pre-release build is pruned after 72 hours. If the build that you installed was pruned, the cluster may be unable to pull necessary images and may show errors for various functionality (including updates).
 
-To pull a release, use an existing oc v4.x cli binary to pull the installer materials. You can find the latest release of the oc binary on the [OpenShfit client mirror page](https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/).
+To pull a release, use an existing oc v4.x cli binary to pull the installer materials. You can find the latest release of the oc binary on the [OpenShfit client mirror page](https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/stable/).
 
 ```
 oc adm release extract --tools registry.ci.openshift.org/origin/release-scos:4.16.0-0.okd-scos-2024-06-26-093335

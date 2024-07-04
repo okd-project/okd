@@ -7,7 +7,7 @@ OKD: The Community Distribution of Kubernetes that powers Red Hat's OpenShift
 
 ***OKD*** is the community distribution of [Kubernetes](https://kubernetes.io) optimized for continuous application development and multi-tenant deployment. OKD adds developer and operations-centric tools on top of Kubernetes to enable rapid application development, easy deployment and scaling, and long-term lifecycle maintenance for small and large teams. ***OKD*** is also referred to as ***Origin*** in github and in the documentation.  ***OKD*** makes launching Kubernetes on any cloud or bare metal a snap, simplifies running and updating clusters, and provides all of the tools to make your containerized-applications succeed.
 
-This repository covers OKD4 and newer. For older versions of OKD, see the [3.11 branch of openshift/origin](https://github.com/openshift/origin/tree/release-3.11).
+This repository covers OKD4 and newer. 
 
 Open issues and ideas are tracked in the [okd/community repo](https://github.com/orgs/okd-project/projects/1).
 
@@ -18,14 +18,7 @@ The [meeting calendar]( https://calendar.fedoraproject.org/okd/ ) shows regular 
 Getting Started
 ---------------
 
-To obtain the openshift installer and client, visit [/releases](https://github.com/openshift/okd/releases) for stable versions or [https://amd64.origin.releases.ci.openshift.org/](https://amd64.origin.releases.ci.openshift.org/) for nightlies. Use [this public key](https://www.okd.io/vrutkovs.pub) to verify tools signature. Please note that each nightly release is pruned after 72 hours. If the nightly that you installed was pruned, the cluster may be unable to pull necessary images and may show errors for various functionality (including updates).
-Alternatively, if you have the openshift client `oc` already installed, you can use it to download and extract the openshift installer and client from our container image:
-
-```
-$ oc adm release extract --tools quay.io/openshift/okd:4.5.0-0.okd-2020-07-14-153706-ga
-```
-
-**NOTE**: You need a 4.x version of `oc` to extract the installer and the latest client. You can initially use the [official Openshift client (mirror)](https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/)
+To obtain the openshift installer and client, visit [/releases](https://github.com/openshift/okd/releases) for stable versions. For information on testing pre-release builds, please see the [community testing page](https://github.com/okd-project/okd/blob/master/COMMUNITY-TESTING.md)
 
 Extract the downloaded tarballs and copy the binaries into your PATH. Then run the following from an empty directory:
 
