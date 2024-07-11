@@ -4,7 +4,7 @@
 This guide explains how to configure libvirt+KVM to provision Fedora CoreOS and install OKD on top of it.
 
 ## Assumptions
-- The host OS is CentOS 7;
+- The host OS is CentOS 9;
 - This guide will not configure the load balancer or the DNS server. Check for [LB_HAProxy.md](../vSphere_govc/Requirements/LB_HAProxy.md) and [DNS_Bind.md](../vSphere_govc/Requirements/DNS_Bind.md) if you want to configure them;
 - Fedora CoreOS will still use DHCP for obtaining the IP, but with a MAC address-based reservation into the libvirt network configuration, and therefore there is no need for a standalone DHCP server;
 - You already downloaded the OKD installer and command line tools from the Release section of this repository, and installed them into a path added to the `PATH` environment variable.
@@ -17,7 +17,7 @@ This guide explains how to configure libvirt+KVM to provision Fedora CoreOS and 
     - Initramfs
     - Raw image
 
-Despite we're not installing Fedora CoreOS from PXE, we still need to download the kernel and the initramfs, as we're going to use the Direct Kernel Boot feature of libvirt to inject kernel boot parameters.
+We're not installing Fedora CoreOS from PXE, we still need to download the kernel and the initramfs, as we're going to use the Direct Kernel Boot feature of libvirt to inject kernel boot parameters.
 
 2. Configure a webserver
 Configure a simple webserver to host the ignition configs and the raw image. These files will be downloaded by the CoreOS installer and deployed to the VMs.
@@ -96,9 +96,9 @@ $ openshift-install create ignition-configs
 ### Provision the VMs
 A simple high-available OKD cluster would include 3 control planes and 2 workers. So for such configuration you need for 5 VMs + 1 for boostrapping.
 Configure the VM for booting them with the kernel and initramfs you previously downloaded, with the following parameters:
-- KERNEL: `/path/of/fedora-coreos-31.20191217.2.0-installer-kernel-x86_64`;
-- INITRAMFS: `/path/of/fedora-coreos-31.20191217.2.0-installer-initramfs.x86_64.img`;
-- BOOT ARGS: `ip=dhcp rd.neednet=1 coreos.inst=yes coreos.inst.install_dev=vda coreos.inst.image_url=http://WEB_SERVER_IP:PORT/fedora-coreos-31.20191217.2.0-metal.x86_64.raw.xz coreos.inst.ignition_url=http://WEB_SERVER_IP:PORT/SERVER_ROLE.ign`.
+- KERNEL: `/path/of/fedora-coreos-40.20240616.3.0-live-kernel-x86_64`;
+- INITRAMFS: `/path/of/fedora-coreos-40.20240616.3.0-live-initramfs.x86_64.img`;
+- BOOT ARGS: `ip=dhcp rd.neednet=1 coreos.inst=yes coreos.inst.install_dev=vda coreos.inst.image_url=http://WEB_SERVER_IP:PORT/fedora-coreos-40.20240616.3.0-metal.x86_64.raw.xz coreos.inst.ignition_url=http://WEB_SERVER_IP:PORT/SERVER_ROLE.ign coreos.live.rootfs_url=http://WEB_SERVER_IP:PORT/fedora-coreos-40.20240616.3.0-live-rootfs.x86_64.img coreos.inst.insecure`.
 Replace `SERVER_ROLE` with `bootstrap` for the bootstrap server, with `master` for control plane servers, and with `worker` for worker servers.
 Replace `WEB_SERVER_IP:PORT` with the endpoint of the webserver you previously configured.
 
