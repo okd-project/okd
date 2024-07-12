@@ -2,12 +2,7 @@
 
 ## [Some optional operators from OCP are not available in OKD](https://github.com/openshift/okd/issues/456)
   **Affected Versions:** All
-
-  **Description:** OCP users can install Logging/Serverless/GPU and other operators from Red Hat OperatorHub. This requires redhat.io pull secret, which may not be available for OKD users.
-
-  **Workaround:** Start installation with a pull secret from cloud.redhat.com, enable new source in operatorhub settings.
-
-  OKD-specific catalog with community versions of mentioned operators is in progress.
+   Please see [this explanation of Operator availability on OKD](https://www.okd.io/okd_tech_docs/operators/). An OKD-specific catalog with community versions of mentioned operators is in progress.
 
 ## [CephFS mounts get invalid permissions](https://github.com/openshift/okd/issues/1160)
   **Effected Versions:** 4.10.0-0.okd-2022-03-07-131213
