@@ -1,0 +1,10 @@
+name: Feature Request
+description: Please use Discussions or community spaces to build a consensus for your Feature Request
+projects: [""]
+labels: [""]
+type: Request
+body:
+    - type: markdown
+      attributes:
+        value: |
+        

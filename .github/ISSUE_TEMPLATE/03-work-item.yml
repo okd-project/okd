@@ -1,0 +1,5 @@
+name: Work Item
+description: A task to be done in an OKD project
+projects: [""]
+type: Task
+body: 

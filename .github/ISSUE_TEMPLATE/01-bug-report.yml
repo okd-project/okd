@@ -1,0 +1,45 @@
+name: Bug Report
+description: Report a bug in OKD
+projects: ["okd-project/5"]
+labels: ["kind/bug"]
+type: Bug
+body:
+    - type: markdown
+      attributes:
+        value: |
+          Before reporting an issue, check our backlog of
+          [open issues](https://github.com/okd-project/okd/issues)
+          to see if someone else has already reported it. If so, feel free to add
+          your scenario, or additional information, to the discussion. Or simply
+          "subscribe" to it to be notified when it is updated.
+
+          If you suspect your issue is a bug, please edit your issue description to
+          include the BUG REPORT INFORMATION shown below. If you fail to provide this
+          information within 14 days, we cannot debug your issue and will close it. We
+          will, however, reopen it if you later provide the information.
+    - type: textarea
+      attributes:
+        label: "Describe the bug"
+        description: "Briefly describe the problem you are having in a few paragraphs."
+        #placeholder: ""
+      validations:
+        required: true
+    - type: input
+      attributes:
+        label: "Version"
+        description: |
+          Please specify OKD version release: e.g. 4.4.0-0.okd-2020-04-17-201241
+          Please specify if its IPI or UPI install method and the cloud platform (if applicable) used
+    - type: input
+      attributes:
+        label: "Reproducibility"  
+        description: "Please specify how often the issue is reproducible - 100%, rare, 50% of requests etc."
+    
+    - type: textarea
+      attributes:
+        label: "Log Bundle"
+        description: |
+          A link to bootstrap log bundle or `oc adm must-gather` archive.
+          See https://docs.okd.io/latest/installing/installing-troubleshooting.html for installation
+          issues and https://docs.okd.io/latest/support/gathering-cluster-data.html to gather info
+          about installed cluster.

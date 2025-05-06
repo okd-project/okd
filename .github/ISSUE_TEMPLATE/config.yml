@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Openshift Enhancements
-    url: https://github.com/openshift/enhancements/
-    about: Please request new features here.
+  - name: Troubleshooting & Feature Proposals
+    url: https://github.com/orgs/okd-project/discussions
+    about: Please use Discussions to troubleshoot issues and propose features
   - name: Security Team
     url: https://access.redhat.com/site/security/team/contact/
     about: Please report security vulnerabilities here.
