@@ -32,7 +32,7 @@ For a cloud-based installation using installer provisioned resources, you can ru
  $ openshift-install create cluster
  ```
 
-Depending on your configuration, you may be prompted for a pull-secret that will be made available to all of of your machines. For OKD4 you should either paste the pull-secret you use for your registry, or paste `{"auths":{"fake":{"auth":"aWQ6cGFzcwo="}}}` to bypass the required value check (see [bug #182](https://github.com/openshift/okd/issues/182)).
+Depending on your configuration, you may be prompted for a pull-secret that will be made available to all of your machines. For OKD4 you should either paste the pull-secret you use for your registry, or paste `{"auths":{"fake":{"auth":"aWQ6cGFzcwo="}}}` to bypass the required value check (see [bug #182](https://github.com/openshift/okd/issues/182)).
 
 Once the install completes successfully (usually 30m on AWS) the console URL and an admin username and password will be printed. If your DNS records were correct, you should be able to log in to your new OKD4 cluster!
 

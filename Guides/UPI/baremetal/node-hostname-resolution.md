@@ -73,7 +73,7 @@ The script must create a file at `/run/okd-node-hostname` which is the FQDN for 
 
 The exact details of what this script needs to contain will vary depending on your setup. You may want to call an inventory API, perform a PTR lookup based off an IP or whatever suits your needs.
 
-This is an example `okd-resolve-node.hostname.sh` which uses the publically accessible IP of the node to perform a PTR lookup and save the result to the file.
+This is an example `okd-resolve-node.hostname.sh` which uses the publicly accessible IP of the node to perform a PTR lookup and save the result to the file.
 
 ```bash
 #!/bin/bash

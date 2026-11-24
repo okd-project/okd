@@ -3,7 +3,7 @@ Nodes with dual interfaces
 
 The generic K8s model is that nodes are on a secured private network and traffic is routed from a *magical* load balancer provided by, usually, a cloud provider or perhaps if you are deploying in your own datacentre - dedicated hardware which is managed outside your cluster. 
 
-When deploying onto commodity bare metal servers from most mainstream providers, this is likely to not be the case. You are likely to have a single NIC which has a publically routable address or, perhaps, you have two NICs: one for public traffic and one for an internal network.
+When deploying onto commodity bare metal servers from most mainstream providers, this is likely to not be the case. You are likely to have a single NIC which has a publicly routable address or, perhaps, you have two NICs: one for public traffic and one for an internal network.
 
 This document provides a few gotchas which you may come across and potential work arounds
 
